@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Thomas Publishing House</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="texture-overlay"></div>
+    <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor-ring"></div>
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-bg"></div>
+      <div class="container">
+        <a href="index.html" class="logo">
+          <div class="logo-img">
+            <img src="_image000000_.png" alt="Thomas Publishing House logo">
+          </div>
+          <div class="logo-text">
+            <h1>Thomas Publishing House</h1>
+            <p>Digital Marketing</p>
+          </div>
+        </a>
+        <nav class="desktop-nav">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="services.html" class="nav-link">Services</a>
+          <a href="portfolio.html" class="nav-link">Portfolio</a>
+          <a href="pricing.html" class="nav-link">Pricing</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="faq.html" class="nav-link">FAQ</a>
+          <button class="theme-toggle" aria-label="Toggle theme">
+            <div class="theme-toggle-bg"></div>
+            <div class="theme-toggle-inner"></div>
+            <i data-lucide="moon" class="icon-moon"></i>
+            <i data-lucide="sun" class="icon-sun"></i>
+          </button>
+          <a href="contact.html" class="nav-cta">
+            <div class="btn-gradient"></div>
+            <div class="btn-inner"></div>
+            <span>Contact Us</span>
+          </a>
+        </nav>
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+          <i data-lucide="menu" class="menu-icon-open"></i>
+          <i data-lucide="x" class="menu-icon-close" style="display:none"></i>
+        </button>
+      </div>
+      <div class="container">
+        <nav class="mobile-nav">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="faq.html">FAQ</a>
+          <div style="padding:0.5rem 1rem;">
+            <button class="theme-toggle" aria-label="Toggle theme">
+              <div class="theme-toggle-bg"></div>
+              <div class="theme-toggle-inner"></div>
+              <i data-lucide="moon" class="icon-moon"></i>
+              <i data-lucide="sun" class="icon-sun"></i>
+            </button>
+          </div>
+          <a href="contact.html" class="mobile-nav-cta">Contact Us</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main-content" style="padding-top:9rem;">
+      <!-- Hero -->
+      <section class="section section-dark" style="padding:5rem 0;">
+        <div class="hero-grid-bg"></div>
+        <div class="container" style="position:relative;">
+          <div class="text-center fade-in">
+            <div class="section-header-icon">
+              <i data-lucide="award" style="color:var(--accent);"></i>
+              <span style="color:var(--accent);">Our Published Works</span>
+            </div>
+            <h1 style="font-family:var(--font-serif);font-weight:700;font-size:3.25rem;color:white;margin-bottom:1.5rem;">
+              Portfolio &amp; Case Studies
+            </h1>
+            <p style="color:#e5e7eb;font-size:1.125rem;max-width:48rem;margin:0 auto;font-weight:300;line-height:1.7;">
+              Each project is a chapter in our story of digital excellence. Explore the transformative work we've crafted for clients across diverse industries.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Case Studies -->
+      <section class="section section-bg">
+        <div class="container">
+
+          <!-- Case Study 1 -->
+          <div class="case-study fade-in">
+            <div class="case-study-preview">
+              <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=450&fit=crop" alt="Artisan Coffee Co. project preview">
+            </div>
+            <div class="case-study-grid">
+              <div class="case-study-content">
+                <div class="case-study-header">
+                  <div class="case-study-meta">
+                    <span class="case-study-num">Case Study 01</span>
+                    <span class="case-study-year">2025</span>
+                  </div>
+                  <h2>Artisan Coffee Co.</h2>
+                  <p class="case-study-project">E-commerce Platform &amp; Brand Redesign</p>
+                  <p class="case-study-industry">Food &amp; Beverage</p>
+                </div>
+                <p class="case-study-desc">A comprehensive digital transformation for a local coffee roaster expanding into online sales.</p>
+                <div class="challenge-solution">
+                  <div class="challenge">
+                    <h3>The Challenge</h3>
+                    <p>Legacy website with poor mobile experience and no e-commerce capabilities limiting growth potential.</p>
+                  </div>
+                  <div class="solution">
+                    <h3>Our Solution</h3>
+                    <p>Built custom Shopify platform with subscription management, integrated blog, and mobile-first design system.</p>
+                  </div>
+                </div>
+                <div class="case-study-tags">
+                  <span class="tag">E-commerce</span>
+                  <span class="tag">Brand Strategy</span>
+                  <span class="tag">Content Marketing</span>
+                </div>
+              </div>
+              <div class="results-card">
+                <div class="results-card-bg"></div>
+                <div class="results-card-inner">
+                  <div class="results-header">
+                    <i data-lucide="trending-up"></i>
+                    <h3>Results</h3>
+                  </div>
+                  <div class="results-grid">
+                    <div class="result-item">
+                      <div class="result-value">+245%</div>
+                      <div class="result-label">Online Revenue</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">+180%</div>
+                      <div class="result-label">Mobile Conversions</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">+65%</div>
+                      <div class="result-label">Average Order Value</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">+92%</div>
+                      <div class="result-label">Customer Retention</div>
+                    </div>
+                  </div>
+                  <div class="results-glow results-glow-top"></div>
+                  <div class="results-glow results-glow-bottom"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-divider"><div class="case-divider-line"></div><div class="case-divider-dot"><span></span></div></div>
+
+          <!-- Case Study 2 -->
+          <div class="case-study fade-in">
+            <div class="case-study-preview">
+              <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=450&fit=crop" alt="BlueLake Wellness project preview">
+            </div>
+            <div class="case-study-grid">
+              <div class="case-study-content" style="order:2;">
+                <div class="case-study-header">
+                  <div class="case-study-meta">
+                    <span class="case-study-num">Case Study 02</span>
+                    <span class="case-study-year">2025</span>
+                  </div>
+                  <h2>BlueLake Wellness</h2>
+                  <p class="case-study-project">Patient Portal &amp; Digital Marketing Campaign</p>
+                  <p class="case-study-industry">Healthcare</p>
+                </div>
+                <p class="case-study-desc">Modern healthcare platform connecting patients with holistic wellness services.</p>
+                <div class="challenge-solution">
+                  <div class="challenge">
+                    <h3>The Challenge</h3>
+                    <p>Low online visibility and inefficient patient booking system causing administrative burden.</p>
+                  </div>
+                  <div class="solution">
+                    <h3>Our Solution</h3>
+                    <p>Developed secure patient portal with automated scheduling, launched targeted SEO campaign, and created educational content library.</p>
+                  </div>
+                </div>
+                <div class="case-study-tags">
+                  <span class="tag">Web Development</span>
+                  <span class="tag">SEO</span>
+                  <span class="tag">Healthcare</span>
+                </div>
+              </div>
+              <div class="results-card" style="order:1;">
+                <div class="results-card-bg"></div>
+                <div class="results-card-inner">
+                  <div class="results-header">
+                    <i data-lucide="trending-up"></i>
+                    <h3>Results</h3>
+                  </div>
+                  <div class="results-grid">
+                    <div class="result-item">
+                      <div class="result-value">+320%</div>
+                      <div class="result-label">Organic Traffic</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">+156%</div>
+                      <div class="result-label">Online Bookings</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">+89%</div>
+                      <div class="result-label">Patient Engagement</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">Top 3</div>
+                      <div class="result-label">Search Rankings</div>
+                    </div>
+                  </div>
+                  <div class="results-glow results-glow-top"></div>
+                  <div class="results-glow results-glow-bottom"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-divider"><div class="case-divider-line"></div><div class="case-divider-dot"><span></span></div></div>
+
+          <!-- Case Study 3 -->
+          <div class="case-study fade-in">
+            <div class="case-study-preview">
+              <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=450&fit=crop" alt="Heritage Construction project preview">
+            </div>
+            <div class="case-study-grid">
+              <div class="case-study-content">
+                <div class="case-study-header">
+                  <div class="case-study-meta">
+                    <span class="case-study-num">Case Study 03</span>
+                    <span class="case-study-year">2024</span>
+                  </div>
+                  <h2>Heritage Construction</h2>
+                  <p class="case-study-project">Corporate Website &amp; Lead Generation</p>
+                  <p class="case-study-industry">Construction</p>
+                </div>
+                <p class="case-study-desc">Professional web presence for established construction firm targeting commercial projects.</p>
+                <div class="challenge-solution">
+                  <div class="challenge">
+                    <h3>The Challenge</h3>
+                    <p>Outdated website failing to attract high-value commercial clients or showcase portfolio effectively.</p>
+                  </div>
+                  <div class="solution">
+                    <h3>Our Solution</h3>
+                    <p>Designed immersive project showcase with interactive galleries, implemented lead scoring system, and launched LinkedIn campaign.</p>
+                  </div>
+                </div>
+                <div class="case-study-tags">
+                  <span class="tag">Web Design</span>
+                  <span class="tag">Lead Generation</span>
+                  <span class="tag">B2B Marketing</span>
+                </div>
+              </div>
+              <div class="results-card">
+                <div class="results-card-bg"></div>
+                <div class="results-card-inner">
+                  <div class="results-header">
+                    <i data-lucide="trending-up"></i>
+                    <h3>Results</h3>
+                  </div>
+                  <div class="results-grid">
+                    <div class="result-item">
+                      <div class="result-value">+210%</div>
+                      <div class="result-label">Qualified Leads</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">+175%</div>
+                      <div class="result-label">Project Inquiries</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">+140%</div>
+                      <div class="result-label">Site Engagement</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">340%</div>
+                      <div class="result-label">ROI</div>
+                    </div>
+                  </div>
+                  <div class="results-glow results-glow-top"></div>
+                  <div class="results-glow results-glow-bottom"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-divider"><div class="case-divider-line"></div><div class="case-divider-dot"><span></span></div></div>
+
+          <!-- Case Study 4 -->
+          <div class="case-study fade-in">
+            <div class="case-study-preview">
+              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=450&fit=crop" alt="TechStart Academy project preview">
+            </div>
+            <div class="case-study-grid">
+              <div class="case-study-content" style="order:2;">
+                <div class="case-study-header">
+                  <div class="case-study-meta">
+                    <span class="case-study-num">Case Study 04</span>
+                    <span class="case-study-year">2024</span>
+                  </div>
+                  <h2>TechStart Academy</h2>
+                  <p class="case-study-project">Learning Platform &amp; Social Media Strategy</p>
+                  <p class="case-study-industry">Education</p>
+                </div>
+                <p class="case-study-desc">Full-stack platform for coding bootcamp with integrated course management and community features.</p>
+                <div class="challenge-solution">
+                  <div class="challenge">
+                    <h3>The Challenge</h3>
+                    <p>Manual course delivery and poor student engagement affecting completion rates and referrals.</p>
+                  </div>
+                  <div class="solution">
+                    <h3>Our Solution</h3>
+                    <p>Built LMS with progress tracking, peer collaboration tools, and gamification. Launched student success campaign on social media.</p>
+                  </div>
+                </div>
+                <div class="case-study-tags">
+                  <span class="tag">Platform Development</span>
+                  <span class="tag">Social Media</span>
+                  <span class="tag">EdTech</span>
+                </div>
+              </div>
+              <div class="results-card" style="order:1;">
+                <div class="results-card-bg"></div>
+                <div class="results-card-inner">
+                  <div class="results-header">
+                    <i data-lucide="trending-up"></i>
+                    <h3>Results</h3>
+                  </div>
+                  <div class="results-grid">
+                    <div class="result-item">
+                      <div class="result-value">+98%</div>
+                      <div class="result-label">Course Completion</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">+225%</div>
+                      <div class="result-label">Student Referrals</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">+410%</div>
+                      <div class="result-label">Social Engagement</div>
+                    </div>
+                    <div class="result-item">
+                      <div class="result-value">+167%</div>
+                      <div class="result-label">Enrollment Growth</div>
+                    </div>
+                  </div>
+                  <div class="results-glow results-glow-top"></div>
+                  <div class="results-glow results-glow-bottom"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="section section-dark" style="padding:5rem 0;">
+        <div class="pattern-overlay"></div>
+        <div class="container" style="position:relative;">
+          <div class="section-header fade-in" style="margin-bottom:3rem;">
+            <h2 style="color:white;font-size:2.5rem;">Our Impact By The Numbers</h2>
+            <p style="color:#e5e7eb;">Collective results across all client engagements</p>
+          </div>
+          <div class="stats-grid stagger-children">
+            <div class="stat-item">
+              <div class="stat-icon"><i data-lucide="users"></i></div>
+              <div class="stat-value">50+</div>
+              <div class="stat-label">Clients Served</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i data-lucide="award"></i></div>
+              <div class="stat-value">200+</div>
+              <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i data-lucide="trending-up"></i></div>
+              <div class="stat-value">285%</div>
+              <div class="stat-label">Avg. ROI Increase</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon"><i data-lucide="external-link"></i></div>
+              <div class="stat-value">98%</div>
+              <div class="stat-label">Client Retention</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section section-bg">
+        <div class="container" style="max-width:56rem;">
+          <div class="text-center fade-in">
+            <h2 style="font-family:var(--font-serif);font-weight:700;font-size:2.5rem;color:var(--primary);margin-bottom:1.5rem;">
+              Ready to Write Your Success Story?
+            </h2>
+            <p style="color:var(--muted-foreground);font-size:1.125rem;margin-bottom:2.5rem;max-width:42rem;margin-left:auto;margin-right:auto;line-height:1.7;font-weight:300;">
+              Let's create the next chapter together. Schedule a consultation to discuss your project.
+            </p>
+            <a href="contact.html" class="btn btn-primary">
+              <span>Start Your Project</span>
+              <i data-lucide="arrow-up-right"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="pattern-overlay"></div>
+      <div class="container footer-inner">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="logo">
+              <div class="logo-img">
+                <img src="_image000000_.png" alt="Thomas Publishing House logo">
+              </div>
+              <div class="logo-text">
+                <h3>Thomas Publishing House</h3>
+                <p>Digital Marketing</p>
+              </div>
+            </div>
+            <p>Crafting digital narratives with the precision of traditional publishing and the innovation of modern web development.</p>
+          </div>
+          <div class="footer-links">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="about.html">About</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-contact">
+            <h4>Contact</h4>
+            <p>Port Huron, Michigan</p>
+            <p>info@thomaspublishinghouse.com</p>
+            <p>(810) 555-0123</p>
+            <div class="footer-social">
+              <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+              <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+              <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+              <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; <span id="current-year"></span> Thomas Publishing House. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
