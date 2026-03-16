@@ -13,8 +13,8 @@
     <div class="texture-overlay"></div>
 
     <!-- Custom Cursor -->
-    <div class="custom-cursor-dot"></div>
-    <div class="custom-cursor-ring"></div>
+    <!-- <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor-ring"></div> -->
 
     <!-- Header -->
     <header class="header">
@@ -83,6 +83,10 @@
       <!-- Hero Section -->
       <section class="hero hero-home">
         <div class="hero-grid-bg"></div>
+        <!-- Spectral Bridge Hologram -->
+        <div class="bridge-hologram" id="bridge-hologram" aria-hidden="true">
+          <img src="bridge.png" alt="" />
+        </div>
         <div class="container">
           <div class="hero-content fade-in-left">
             <div class="hero-label">
@@ -94,7 +98,7 @@
               <span class="gradient-text">Digital Space</span>
             </h1>
             <p class="hero-subtitle">
-              Where the precision of traditional publishing meets the innovation of modern web development.
+              Comprehensive web, app, SEO, marketing, and UX solutions for every stage of your digital journey.
             </p>
             <div class="hero-buttons">
               <a href="services.html" class="btn btn-accent">
@@ -126,6 +130,17 @@
                 <div class="code-line"><span class="code-num">8</span><span class="code-blue code-indent-1">location:</span> <span class="code-green">"Port Huron, MI"</span></div>
                 <div class="code-line"><span class="code-num">9</span><span class="code-yellow">}</span></div>
               </div>
+              <!-- Easter Egg Terminal -->
+              <div class="terminal-overlay" id="terminal-overlay">
+                <div class="terminal-output" id="terminal-output">
+                  <div class="terminal-line terminal-green">TPH Terminal v1.0 — Type "help" for commands</div>
+                  <div class="terminal-line terminal-dim">----------------------------------------------</div>
+                </div>
+                <div class="terminal-input-row">
+                  <span class="terminal-prompt">tph@studio:~$</span>
+                  <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal command input" />
+                </div>
+              </div>
               <div class="code-card-glow-top"></div>
               <div class="code-card-glow-bottom"></div>
             </div>
@@ -155,7 +170,7 @@
             <a href="services.html" class="ledger-item">
               <div class="ledger-left">
                 <span class="ledger-num">01</span>
-                <h3 class="ledger-name">Brand Storytelling &amp; Strategy</h3>
+                <h3 class="ledger-name">Web Design &amp; Development</h3>
               </div>
               <div class="ledger-right">
                 <span class="ledger-chapter">Chapter I</span>
@@ -165,7 +180,7 @@
             <a href="services.html" class="ledger-item">
               <div class="ledger-left">
                 <span class="ledger-num">02</span>
-                <h3 class="ledger-name">Web Development &amp; Design</h3>
+                <h3 class="ledger-name">App Design &amp; Development</h3>
               </div>
               <div class="ledger-right">
                 <span class="ledger-chapter">Chapter II</span>
@@ -175,7 +190,7 @@
             <a href="services.html" class="ledger-item">
               <div class="ledger-left">
                 <span class="ledger-num">03</span>
-                <h3 class="ledger-name">Content Creation &amp; SEO</h3>
+                <h3 class="ledger-name">SEO &amp; Digital Marketing</h3>
               </div>
               <div class="ledger-right">
                 <span class="ledger-chapter">Chapter III</span>
@@ -185,7 +200,7 @@
             <a href="services.html" class="ledger-item">
               <div class="ledger-left">
                 <span class="ledger-num">04</span>
-                <h3 class="ledger-name">Social Media Marketing</h3>
+                <h3 class="ledger-name">UX Design &amp; Research</h3>
               </div>
               <div class="ledger-right">
                 <span class="ledger-chapter">Chapter IV</span>
@@ -195,7 +210,7 @@
             <a href="services.html" class="ledger-item">
               <div class="ledger-left">
                 <span class="ledger-num">05</span>
-                <h3 class="ledger-name">Digital Analytics &amp; Reporting</h3>
+                <h3 class="ledger-name">Content Creation &amp; Strategy</h3>
               </div>
               <div class="ledger-right">
                 <span class="ledger-chapter">Chapter V</span>
@@ -205,7 +220,7 @@
             <a href="services.html" class="ledger-item">
               <div class="ledger-left">
                 <span class="ledger-num">06</span>
-                <h3 class="ledger-name">Email Marketing Campaigns</h3>
+                <h3 class="ledger-name">Maintenance &amp; Optimization</h3>
               </div>
               <div class="ledger-right">
                 <span class="ledger-chapter">Chapter VI</span>
@@ -230,8 +245,8 @@
             <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=500&fit=crop" alt="Creative team collaborating on digital projects">
             <div class="showcase-banner-overlay">
               <div class="showcase-banner-text">
-                <h3>Collaborative by Nature</h3>
-                <p>Our team works closely with every client to bring their vision to life</p>
+                <h3>Turning Visions into Reality</h3>
+                <p>Customized and affordable strategies that deliver tangible results for our clients</p>
               </div>
             </div>
           </div>
@@ -250,26 +265,26 @@
           <div class="grid grid-3 stagger-children">
             <div class="glass-card">
               <div class="icon-box icon-box-gradient">
-                <i data-lucide="code-2"></i>
+                <i data-lucide="sliders"></i>
               </div>
-              <h3 class="card-title">Modern Technology</h3>
-              <p class="card-desc">Cutting-edge web development with the latest frameworks and best practices</p>
+              <h3 class="card-title">Tailored Solutions</h3>
+              <p class="card-desc">Custom strategies aligned with your unique business goals, whether launching a new product or optimizing an existing platform</p>
               <div class="card-glow"></div>
             </div>
             <div class="glass-card">
               <div class="icon-box icon-box-gradient">
-                <i data-lucide="sparkles"></i>
+                <i data-lucide="trending-up"></i>
               </div>
-              <h3 class="card-title">Artisan Quality</h3>
-              <p class="card-desc">Every pixel, every word crafted with the precision of a master publisher</p>
+              <h3 class="card-title">Proven Results</h3>
+              <p class="card-desc">From design and development to targeted marketing, our full-service approach delivers tangible outcomes and real business growth</p>
               <div class="card-glow"></div>
             </div>
             <div class="glass-card">
               <div class="icon-box icon-box-gradient">
-                <i data-lucide="mouse-pointer-click"></i>
+                <i data-lucide="users"></i>
               </div>
-              <h3 class="card-title">Interactive Excellence</h3>
-              <p class="card-desc">Engaging experiences that convert visitors into devoted readers</p>
+              <h3 class="card-title">User-Centered Design</h3>
+              <p class="card-desc">Research-driven digital experiences grounded in empathy, usability testing, and strong technical execution</p>
               <div class="card-glow"></div>
             </div>
           </div>
@@ -292,12 +307,12 @@
               <div class="testimonial-stars">
                 <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
               </div>
-              <p class="testimonial-text">"Thomas Publishing House completely transformed our online presence. Within 3 months, our organic traffic tripled and we saw a measurable increase in leads."</p>
+              <p class="testimonial-text">"Thomas Publishing House transformed our online presence and helped us reach more customers effectively. The results spoke for themselves."</p>
               <div class="testimonial-author">
-                <div class="testimonial-avatar">JM</div>
+                <div class="testimonial-avatar">JS</div>
                 <div>
-                  <h4>James Mitchell</h4>
-                  <p>Owner, Artisan Coffee Co.</p>
+                  <h4>John Schneider</h4>
+                  <p>Business Owner</p>
                 </div>
               </div>
             </div>
@@ -305,12 +320,12 @@
               <div class="testimonial-stars">
                 <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
               </div>
-              <p class="testimonial-text">"Their approach feels like having a true creative partner, not just a vendor. The team's attention to detail and storytelling instinct is unmatched."</p>
+              <p class="testimonial-text">"The team's dedication and expertise have significantly boosted our website's performance and visibility. A true partner in digital growth."</p>
               <div class="testimonial-author">
-                <div class="testimonial-avatar">SP</div>
+                <div class="testimonial-avatar">JT</div>
                 <div>
-                  <h4>Sarah Patel</h4>
-                  <p>Director, BlueLake Wellness</p>
+                  <h4>Josh Taylor</h4>
+                  <p>Business Owner</p>
                 </div>
               </div>
             </div>
@@ -318,12 +333,12 @@
               <div class="testimonial-stars">
                 <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
               </div>
-              <p class="testimonial-text">"Professional, creative, and incredibly responsive. They delivered our website ahead of schedule and the results have exceeded every expectation."</p>
+              <p class="testimonial-text">"Their full-service approach covers everything from innovative design to strategic marketing. They truly understand how to drive results for growing businesses."</p>
               <div class="testimonial-author">
-                <div class="testimonial-avatar">DW</div>
+                <div class="testimonial-avatar">KM</div>
                 <div>
-                  <h4>David Warren</h4>
-                  <p>CEO, Heritage Construction</p>
+                  <h4>Satisfied Client</h4>
+                  <p>Small Business Owner</p>
                 </div>
               </div>
             </div>
@@ -366,7 +381,7 @@
                 <p>Digital Marketing</p>
               </div>
             </div>
-            <p>Crafting digital narratives with the precision of traditional publishing and the innovation of modern web development.</p>
+            <p>Empowering online success with tailored digital solutions — from innovative design and development to strategic marketing that drives real results.</p>
           </div>
           <div class="footer-links">
             <h4>Quick Links</h4>
@@ -382,12 +397,10 @@
             <h4>Contact</h4>
             <p>Port Huron, Michigan</p>
             <p>info@thomaspublishinghouse.com</p>
-            <p>(810) 555-0123</p>
+            <p>(810) 689-9762</p>
             <div class="footer-social">
-              <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
-              <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
-              <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-              <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+              <a href="https://facebook.com/ThomasPublishingHouse" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i data-lucide="facebook"></i></a>
+              <a href="https://linkedin.com/company/thomaspublishinghouse" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i data-lucide="linkedin"></i></a>
             </div>
           </div>
         </div>

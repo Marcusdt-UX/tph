@@ -290,6 +290,201 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
   }
 
+  // ========== Easter Egg Terminal ==========
+  (function () {
+    var greenDot = document.querySelector('.code-card .window-dot-green');
+    var cardInner = document.querySelector('.code-card .code-card-inner');
+    var overlay = document.getElementById('terminal-overlay');
+    var output = document.getElementById('terminal-output');
+    var input = document.getElementById('terminal-input');
+    if (!greenDot || !cardInner || !overlay || !output || !input) return;
+
+    var terminalOpen = false;
+    var history = [];
+    var historyIndex = -1;
+
+    greenDot.addEventListener('click', function () {
+      terminalOpen = !terminalOpen;
+      if (terminalOpen) {
+        cardInner.classList.add('terminal-active');
+        greenDot.classList.add('active');
+        input.focus();
+      } else {
+        cardInner.classList.remove('terminal-active');
+        greenDot.classList.remove('active');
+      }
+    });
+
+    function addLine(text, cls) {
+      var line = document.createElement('div');
+      line.className = 'terminal-line' + (cls ? ' ' + cls : '');
+      line.textContent = text;
+      output.appendChild(line);
+      output.scrollTop = output.scrollHeight;
+    }
+
+    function addHTML(html) {
+      var line = document.createElement('div');
+      line.className = 'terminal-line';
+      line.innerHTML = html;
+      output.appendChild(line);
+      output.scrollTop = output.scrollHeight;
+    }
+
+    var commands = {
+      help: function () {
+        addLine('');
+        addLine('Available commands:', 'terminal-cyan');
+        addLine('  help      — Show this list');
+        addLine('  about     — About Thomas Publishing House');
+        addLine('  skills    — What we do');
+        addLine('  hello     — Say hi');
+        addLine('  time      — Current time');
+        addLine('  coffee    — Brew some coffee');
+        addLine('  matrix    — Take the red pill');
+        addLine('  secret    — ???');
+        addLine('  flip      — Flip a coin');
+        addLine('  magic8    — Ask the magic 8-ball');
+        addLine('  clear     — Clear terminal');
+        addLine('  exit      — Close terminal');
+      },
+      about: function () {
+        addLine('');
+        addLine('Thomas Publishing House', 'terminal-cyan');
+        addLine('Port Huron, Michigan');
+        addLine('Mission: Digital Incunabula');
+        addLine('Where traditional publishing precision');
+        addLine('meets modern web innovation.');
+      },
+      skills: function () {
+        addLine('');
+        var skills = [
+          ['Web Development', 95],
+          ['Brand Storytelling', 90],
+          ['Digital Strategy', 88],
+          ['Content & SEO', 92],
+          ['Social Media', 85]
+        ];
+        skills.forEach(function (s) {
+          var bar = '';
+          var filled = Math.round(s[1] / 5);
+          for (var i = 0; i < 20; i++) bar += i < filled ? '█' : '░';
+          addHTML('<span class="terminal-cyan">' + s[0].padEnd(20) + '</span> <span class="terminal-green">' + bar + '</span> <span class="terminal-yellow">' + s[1] + '%</span>');
+        });
+      },
+      hello: function () {
+        var greetings = [
+          'Hey there! 👋 Welcome to the hidden terminal.',
+          'Oh hello! You found the secret. Impressive.',
+          'Greetings, curious human. You have good instincts.',
+          'Hi! Fun fact: you\'re one of the few who found this.'
+        ];
+        addLine(greetings[Math.floor(Math.random() * greetings.length)], 'terminal-green');
+      },
+      hi: function () { commands.hello(); },
+      time: function () {
+        addLine('🕐 ' + new Date().toLocaleString(), 'terminal-yellow');
+      },
+      coffee: function () {
+        addLine('');
+        addLine('    ( (', 'terminal-yellow');
+        addLine('     ) )', 'terminal-yellow');
+        addLine('  ........', 'terminal-dim');
+        addLine('  |      |]', 'terminal-white');
+        addLine('  \\      /', 'terminal-white');
+        addLine('   `----\'', 'terminal-white');
+        addLine('');
+        addLine('Brewing... ☕ Done! Fresh code fuel.', 'terminal-green');
+      },
+      matrix: function () {
+        addLine('');
+        var chars = 'ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ012345789Z';
+        for (var r = 0; r < 5; r++) {
+          var row = '';
+          for (var c = 0; c < 40; c++) {
+            row += chars.charAt(Math.floor(Math.random() * chars.length));
+          }
+          addLine(row, 'terminal-green');
+        }
+        addLine('');
+        addLine('Wake up, Neo...', 'terminal-green');
+        addLine('The Matrix has you.', 'terminal-green');
+      },
+      secret: function () {
+        addLine('');
+        addLine('🔓 SECRET UNLOCKED', 'terminal-accent');
+        addLine('');
+        addLine('"Every great story begins with a blank page.');
+        addLine(' Every great website begins with a blinking');
+        addLine(' cursor. We just happen to love both."');
+        addLine('');
+        addLine('   — The Founders, Thomas Publishing House', 'terminal-purple');
+      },
+      flip: function () {
+        var result = Math.random() < 0.5 ? 'Heads! 🪙' : 'Tails! 🪙';
+        addLine(result, 'terminal-yellow');
+      },
+      magic8: function () {
+        var answers = [
+          'It is certain.', 'Without a doubt.', 'Yes, definitely.',
+          'Reply hazy, try again.', 'Ask again later.',
+          'Don\'t count on it.', 'My sources say no.',
+          'Outlook good.', 'Signs point to yes.',
+          'Better not tell you now.'
+        ];
+        addLine('🎱 ' + answers[Math.floor(Math.random() * answers.length)], 'terminal-purple');
+      },
+      clear: function () {
+        output.innerHTML = '';
+        addLine('TPH Terminal v1.0 — Type "help" for commands', 'terminal-green');
+        addLine('----------------------------------------------', 'terminal-dim');
+      },
+      exit: function () {
+        cardInner.classList.remove('terminal-active');
+        greenDot.classList.remove('active');
+        terminalOpen = false;
+      }
+    };
+
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        var cmd = input.value.trim().toLowerCase();
+        input.value = '';
+        if (!cmd) return;
+
+        history.push(cmd);
+        historyIndex = history.length;
+        addLine('tph@studio:~$ ' + cmd, 'terminal-dim');
+
+        if (commands[cmd]) {
+          commands[cmd]();
+        } else {
+          addLine('Command not found: ' + cmd + '. Try "help".', 'terminal-yellow');
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (historyIndex > 0) {
+          historyIndex--;
+          input.value = history[historyIndex];
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (historyIndex < history.length - 1) {
+          historyIndex++;
+          input.value = history[historyIndex];
+        } else {
+          historyIndex = history.length;
+          input.value = '';
+        }
+      }
+    });
+
+    // Click anywhere on terminal to focus input
+    overlay.addEventListener('click', function () {
+      input.focus();
+    });
+  })();
+
   // ========== Lucide Icons ==========
   if (typeof lucide !== 'undefined') {
     lucide.createIcons();

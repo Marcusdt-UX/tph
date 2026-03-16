@@ -768,6 +768,93 @@ input, textarea, select {
 .code-indent-1 { margin-left: 1.5rem; }
 .code-indent-2 { margin-left: 3rem; }
 
+/* Green dot easter egg hint */
+.window-dot-green {
+  cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.window-dot-green:hover {
+  box-shadow: 0 0 8px 2px rgba(74, 222, 128, 0.6);
+  transform: scale(1.3);
+}
+.window-dot-green.active {
+  box-shadow: 0 0 6px 2px rgba(74, 222, 128, 0.5);
+}
+
+/* Terminal overlay */
+.terminal-overlay {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: #d1d5db;
+}
+.code-card-inner.terminal-active .code-content {
+  display: none;
+}
+.code-card-inner.terminal-active .terminal-overlay {
+  display: flex;
+}
+
+.terminal-output {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 200px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+}
+.terminal-output::-webkit-scrollbar { width: 4px; }
+.terminal-output::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+.terminal-line {
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.terminal-green { color: #86efac; }
+.terminal-cyan { color: #67e8f9; }
+.terminal-yellow { color: #fde047; }
+.terminal-purple { color: #c084fc; }
+.terminal-dim { color: #4b5563; }
+.terminal-white { color: #f5f5f7; }
+.terminal-accent { color: var(--accent); }
+
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 0.5rem;
+}
+.terminal-prompt {
+  color: #86efac;
+  white-space: nowrap;
+  user-select: none;
+}
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f5f5f7;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  caret-color: var(--accent);
+}
+
+/* Matrix rain animation */
+@keyframes matrixFade {
+  0% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(8px); }
+}
+.matrix-char {
+  display: inline-block;
+  animation: matrixFade 1.2s ease-out forwards;
+  color: #86efac;
+}
+
 .code-card-glow-top {
   position: absolute;
   top: -1rem;
@@ -3160,5 +3247,125 @@ a.ledger-item {
 
   .pricing-card.highlighted {
     margin-top: -2rem;
+  }
+}
+
+/* ========== Spectral Bridge Hologram ========== */
+.bridge-hologram {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: screen;
+}
+
+.bridge-hologram img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.12;
+  filter:
+    brightness(2.0)
+    contrast(0.5)
+    saturate(0.4)
+    hue-rotate(170deg)
+    drop-shadow(0 0 40px rgba(0, 217, 255, 0.4))
+    drop-shadow(0 0 80px rgba(0, 217, 255, 0.2));
+  /* Mask hides the image — the animated mask-position reveals it as the shine passes */
+  -webkit-mask-image: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.4) 42%,
+    black 50%,
+    rgba(0, 0, 0, 0.4) 58%,
+    transparent 65%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.4) 42%,
+    black 50%,
+    rgba(0, 0, 0, 0.4) 58%,
+    transparent 65%,
+    transparent 100%
+  );
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: bridgeReveal 6s ease-in-out infinite;
+}
+
+/* Shine line overlay — sweeps in sync with the mask */
+.bridge-hologram::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 217, 255, 0.06) 44%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(0, 217, 255, 0.06) 56%,
+    transparent 60%,
+    transparent 100%
+  );
+  animation: shineSweep 6s ease-in-out infinite;
+}
+
+/* Scanlines */
+.bridge-hologram::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 217, 255, 0.015) 2px,
+    rgba(0, 217, 255, 0.015) 4px
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Mask slides from left to right, revealing bridge only at the shine point */
+@keyframes bridgeReveal {
+  0% {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  100% {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+
+/* Shine line sweeps in sync */
+@keyframes shineSweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bridge-hologram {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .bridge-hologram img {
+    opacity: 0.08;
   }
 }
