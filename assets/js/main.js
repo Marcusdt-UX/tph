@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // ========== FAQ Accordion ==========
   document.querySelectorAll('.faq-question').forEach(function (btn) {
+    btn.setAttribute('aria-expanded', 'false');
     btn.addEventListener('click', function () {
       var item = btn.closest('.faq-item');
       var wasOpen = item.classList.contains('open');
@@ -133,11 +134,13 @@ document.addEventListener('DOMContentLoaded', function () {
       // Close all items
       document.querySelectorAll('.faq-item').forEach(function (faq) {
         faq.classList.remove('open');
+        faq.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
       });
 
       // Toggle current
       if (!wasOpen) {
         item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
       }
     });
   });
@@ -171,20 +174,39 @@ document.addEventListener('DOMContentLoaded', function () {
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      // Show success message
-      contactForm.style.display = 'none';
-      if (formSuccess) {
-        formSuccess.classList.add('show');
+      var formData = new FormData(contactForm);
+      var submitBtn = contactForm.querySelector('.btn-send');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('sending');
       }
 
-      // Reset after 3 seconds
-      setTimeout(function () {
-        contactForm.reset();
-        contactForm.style.display = '';
-        if (formSuccess) {
-          formSuccess.classList.remove('show');
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(function (response) {
+        if (response.ok) {
+          setTimeout(function () {
+            contactForm.style.display = 'none';
+            if (formSuccess) formSuccess.classList.add('show');
+            contactForm.reset();
+          }, 800);
+        } else {
+          alert('Something went wrong. Please try again or email us directly.');
+          resetBtn();
         }
-      }, 3000);
+      }).catch(function () {
+        alert('Network error. Please try again or email us directly.');
+        resetBtn();
+      });
+
+      function resetBtn() {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('sending');
+        }
+      }
     });
   }
 
@@ -494,5 +516,59 @@ document.addEventListener('DOMContentLoaded', function () {
   var yearEl = document.getElementById('current-year');
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
+  }
+
+  // ========== Cookie Consent ==========
+  if (!localStorage.getItem('cookieConsent')) {
+    var banner = document.createElement('div');
+    banner.className = 'cookie-consent';
+    banner.innerHTML =
+      '<p>We use cookies to enhance your experience and analyze site traffic. ' +
+      '<a href="privacy.html">Privacy Policy</a></p>' +
+      '<div class="cookie-consent-actions">' +
+      '<button class="cookie-btn cookie-btn-accept">Accept</button>' +
+      '<button class="cookie-btn cookie-btn-decline">Decline</button>' +
+      '</div>';
+    document.body.appendChild(banner);
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        banner.classList.add('show');
+      });
+    });
+
+    banner.querySelector('.cookie-btn-accept').addEventListener('click', function () {
+      localStorage.setItem('cookieConsent', 'accepted');
+      banner.classList.remove('show');
+      setTimeout(function () { banner.remove(); }, 400);
+      loadAnalytics();
+    });
+
+    banner.querySelector('.cookie-btn-decline').addEventListener('click', function () {
+      localStorage.setItem('cookieConsent', 'declined');
+      banner.classList.remove('show');
+      setTimeout(function () { banner.remove(); }, 400);
+    });
+  } else if (localStorage.getItem('cookieConsent') === 'accepted') {
+    loadAnalytics();
+  }
+
+  // ========== Google Analytics (consent-aware) ==========
+  function loadAnalytics() {
+    var GA_ID = 'G-XXXXXXXXXX'; // Replace with your GA4 Measurement ID
+    if (GA_ID === 'G-XXXXXXXXXX') return; // Skip if not configured
+    if (document.querySelector('script[src*=\"googletagmanager\"]')) return; // Already loaded
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(script);
+
+    script.onload = function () {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    };
   }
 });
