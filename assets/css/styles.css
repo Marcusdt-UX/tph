@@ -512,14 +512,14 @@ input, textarea, select {
 }
 
 .gradient-text {
-  background: linear-gradient(to right, var(--accent), white);
+  background-image: linear-gradient(to right, var(--accent), white);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-primary {
-  background: linear-gradient(to right, var(--primary), var(--accent));
+  background-image: linear-gradient(to right, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
