@@ -3527,7 +3527,7 @@ a.ledger-item {
   }
 
   .footer-grid {
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
   }
 
   .footer-brand {
