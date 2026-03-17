@@ -21,6 +21,7 @@
 </head>
 <body>
   <noscript><div style="padding:2rem;text-align:center;font-family:sans-serif;background:#1a1a2e;color:#fff;">This site works best with JavaScript enabled. <a href="contact.html" style="color:#00d9ff;">Contact us</a> directly if needed.</div></noscript>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="page-wrapper">
     <div class="texture-overlay"></div>
     <div class="custom-cursor-dot"></div>
@@ -82,7 +83,7 @@
       </nav>
     </header>
 
-    <main class="main-content" style="padding-top:9rem;">
+    <main id="main-content" class="main-content" style="padding-top:9rem;">
       <!-- Hero -->
       <section class="section section-dark" style="padding:5rem 0;">
         <div class="hero-grid-bg"></div>
@@ -98,9 +99,9 @@
             <p style="color:#e5e7eb;font-size:1.125rem;max-width:48rem;margin:0 auto;font-weight:300;line-height:1.7;">
               Transparent pricing for exceptional results. Choose the package that aligns with your ambitions.
             </p>
-            <div class="billing-toggle">
-              <button data-billing="project" class="active">Project-Based</button>
-              <button data-billing="monthly">Monthly Retainer</button>
+            <div class="billing-toggle" role="group" aria-label="Billing type">
+              <button data-billing="project" class="active" aria-pressed="true">Project-Based</button>
+              <button data-billing="monthly" aria-pressed="false">Monthly Retainer</button>
             </div>
           </div>
         </div>

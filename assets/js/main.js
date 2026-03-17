@@ -148,11 +148,12 @@ document.addEventListener('DOMContentLoaded', function () {
   // ========== FAQ Category Filter ==========
   document.querySelectorAll('.faq-filter-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      // Update active button
       document.querySelectorAll('.faq-filter-btn').forEach(function (b) {
         b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
       });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
 
       var category = btn.getAttribute('data-category');
 
@@ -171,8 +172,36 @@ document.addEventListener('DOMContentLoaded', function () {
   var formSuccess = document.querySelector('.form-success');
 
   if (contactForm) {
+    // Inline validation helper
+    function validateField(field) {
+      var errorEl = document.getElementById(field.id + '-error');
+      var isValid = field.validity.valid;
+      if (!isValid) {
+        field.classList.add('invalid');
+        if (errorEl) errorEl.classList.add('visible');
+      } else {
+        field.classList.remove('invalid');
+        if (errorEl) errorEl.classList.remove('visible');
+      }
+      return isValid;
+    }
+
+    contactForm.querySelectorAll('[required]').forEach(function (field) {
+      field.addEventListener('blur', function () { validateField(field); });
+      field.addEventListener('input', function () {
+        if (field.classList.contains('invalid')) validateField(field);
+      });
+    });
+
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      // Validate all required fields
+      var allValid = true;
+      contactForm.querySelectorAll('[required]').forEach(function (field) {
+        if (!validateField(field)) allValid = false;
+      });
+      if (!allValid) return;
 
       var formData = new FormData(contactForm);
       var submitBtn = contactForm.querySelector('.btn-send');
@@ -216,8 +245,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   billingBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      billingBtns.forEach(function (b) { b.classList.remove('active'); });
+      billingBtns.forEach(function (b) {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
       btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
 
       var cycle = btn.getAttribute('data-billing');
 

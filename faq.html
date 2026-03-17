@@ -85,6 +85,7 @@
 </head>
 <body>
   <noscript><div style="padding:2rem;text-align:center;font-family:sans-serif;background:#1a1a2e;color:#fff;">This site works best with JavaScript enabled. <a href="contact.html" style="color:#00d9ff;">Contact us</a> directly if needed.</div></noscript>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <div class="page-wrapper">
     <div class="texture-overlay"></div>
     <div class="custom-cursor-dot"></div>
@@ -146,7 +147,7 @@
       </nav>
     </header>
 
-    <main class="main-content" style="padding-top:9rem;">
+    <main id="main-content" class="main-content" style="padding-top:9rem;">
       <!-- Hero -->
       <section class="section section-dark" style="padding:5rem 0;">
         <div class="hero-grid-bg"></div>
@@ -169,13 +170,13 @@
       <!-- Category Filter -->
       <section class="section-bg" style="border-bottom:1px solid var(--border);">
         <div class="container">
-          <div class="faq-filters">
-            <button class="faq-filter-btn active" data-category="All">All Questions</button>
-            <button class="faq-filter-btn" data-category="Getting Started">Getting Started</button>
-            <button class="faq-filter-btn" data-category="Services & Process">Services &amp; Process</button>
-            <button class="faq-filter-btn" data-category="Pricing & Packages">Pricing &amp; Packages</button>
-            <button class="faq-filter-btn" data-category="Technical Questions">Technical Questions</button>
-            <button class="faq-filter-btn" data-category="Results & Performance">Results &amp; Performance</button>
+          <div class="faq-filters" role="group" aria-label="Filter questions by category">
+            <button class="faq-filter-btn active" data-category="All" aria-pressed="true">All Questions</button>
+            <button class="faq-filter-btn" data-category="Getting Started" aria-pressed="false">Getting Started</button>
+            <button class="faq-filter-btn" data-category="Services & Process" aria-pressed="false">Services &amp; Process</button>
+            <button class="faq-filter-btn" data-category="Pricing & Packages" aria-pressed="false">Pricing &amp; Packages</button>
+            <button class="faq-filter-btn" data-category="Technical Questions" aria-pressed="false">Technical Questions</button>
+            <button class="faq-filter-btn" data-category="Results & Performance" aria-pressed="false">Results &amp; Performance</button>
           </div>
         </div>
       </section>

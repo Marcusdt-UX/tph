@@ -13,7 +13,7 @@
   --secondary-foreground: #ffffff;
   --muted: #e8e6e3;
   --muted-foreground: #6b7280;
-  --accent: #00d9ff;
+  --accent: #0096b8;
   --accent-foreground: #1a1a2e;
   --border: rgba(45, 62, 95, 0.15);
   --radius: 0.625rem;
@@ -34,7 +34,40 @@
   --muted-foreground: #a0a0b0;
   --accent: #00d9ff;
   --accent-foreground: #0d0d17;
+  /* Dark theme keeps brighter accent — sufficient contrast on dark bg */
   --border: rgba(255, 255, 255, 0.1);
+}
+
+/* ========== Skip Link ========== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 10000;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ========== Focus Visible ========== */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
 }
 
 /* ========== Reset & Base ========== */
@@ -176,7 +209,7 @@ input, textarea, select {
 .logo-text h1 {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.35rem;
   line-height: 1.2;
   color: var(--foreground);
 }
@@ -1660,7 +1693,25 @@ a.ledger-item {
 .form-group textarea:focus,
 .form-group select:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(0, 150, 184, 0.2);
+}
+
+.form-group input.invalid,
+.form-group textarea.invalid {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15);
+}
+
+.form-error {
+  display: none;
+  color: #e53e3e;
+  font-size: 0.8125rem;
+  margin-top: 0.35rem;
+  font-weight: 400;
+}
+
+.form-error.visible {
+  display: block;
 }
 
 .form-group textarea {
