@@ -19,8 +19,8 @@
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="alternate" type="application/atom+xml" title="{{ site.name }} Blog" href="/feed.xml">
   <link rel="stylesheet" href="/assets/css/styles.min.css">
-  <script src="/assets/js/main.min.js"></script>
-  <script src="/assets/js/lucide.min.js"></script>
+  <script src="/assets/js/main.min.js" defer></script>
+  <script src="/assets/js/lucide.min.js" defer></script>
   {% if schema %}
   <script type="application/ld+json">
   {{ schema | safe }}
@@ -99,7 +99,7 @@
             <img src="/assets/images/logo.png" alt="Thomas Publishing House logo">
           </div>
           <div class="logo-text">
-            <h1>Thomas Publishing House</h1>
+            <span class="logo-title">Thomas Publishing House</span>
             <p>Digital Marketing</p>
           </div>
         </a>

@@ -206,6 +206,7 @@ input, textarea, select {
   display: block;
 }
 
+.logo-text .logo-title,
 .logo-text h1 {
   font-family: var(--font-serif);
   font-weight: 700;
@@ -3227,6 +3228,7 @@ a.ledger-item {
   }
 }
 
+.testimonial-author .testimonial-name,
 .testimonial-author h4 {
   font-family: var(--font-serif);
   font-weight: 600;
@@ -3563,6 +3565,7 @@ a.ledger-item {
     min-height: 5rem;
   }
 
+  .logo-text .logo-title,
   .logo-text h1 {
     font-size: 1.25rem;
   }
