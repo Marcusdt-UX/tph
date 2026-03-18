@@ -1,0 +1,51 @@
+---
+layout: base.njk
+mainStyle: "padding-top:9rem;"
+---
+
+<section class="section section-dark" style="padding:5rem 0;">
+  <div class="hero-grid-bg"></div>
+  <div class="container" style="position:relative;">
+    <div class="text-center fade-in">
+      <div class="section-header-icon">
+        <i data-lucide="book-open" style="color:var(--accent);"></i>
+        <span style="color:var(--accent);">{{ category }}</span>
+      </div>
+      <h1 style="font-family:var(--font-serif);font-weight:700;font-size:3.25rem;color:white;margin-bottom:1rem;">
+        {{ title }}
+      </h1>
+      <p style="color:#9ca3af;font-size:0.9375rem;">{{ date | dateFormat }}{% if author %} &bull; {{ author }}{% endif %}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container" style="max-width:48rem;">
+    {% if thumbnail %}
+    <div class="fade-in" style="margin-bottom:2.5rem;border-radius:0.75rem;overflow:hidden;">
+      <img src="/assets/images/{{ thumbnail }}" alt="{{ title }}" loading="lazy" style="width:100%;display:block;">
+    </div>
+    {% endif %}
+    <article class="blog-post fade-in" style="font-size:1.0625rem;line-height:1.85;color:var(--foreground);">
+      {{ content | safe }}
+    </article>
+  </div>
+</section>
+
+<section class="section section-dark" style="padding:5rem 0;">
+  <div class="pattern-overlay"></div>
+  <div class="container" style="max-width:56rem;position:relative;">
+    <div class="text-center fade-in">
+      <h2 style="font-family:var(--font-serif);font-weight:700;font-size:2.5rem;color:white;margin-bottom:1.5rem;">
+        Need Help With Your Website or Marketing?
+      </h2>
+      <p style="color:#e5e7eb;font-size:1.125rem;margin-bottom:2.5rem;max-width:42rem;margin-left:auto;margin-right:auto;line-height:1.7;font-weight:300;">
+        Don't DIY everything. Get expert help from a local agency that understands your market.
+      </p>
+      <a href="/contact.html" class="btn btn-white">
+        <span>Get a Free Consultation</span>
+        <i data-lucide="arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>

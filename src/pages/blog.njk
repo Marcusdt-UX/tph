@@ -1,0 +1,118 @@
+---
+title: Web Design & Marketing Blog | Port Huron, MI | Thomas Publishing House
+description: Web design tips, SEO guides, and digital marketing insights for small businesses in Port Huron, Southeast Michigan, and Sarnia-Lambton. Practical advice from a local agency.
+canonical: https://thomaspublishinghouse.com/blog.html
+ogTitle: Web Design & Marketing Blog | Port Huron, MI
+ogDescription: Practical web design, SEO, and marketing tips for local businesses in Southeast Michigan.
+ogUrl: https://thomaspublishinghouse.com/blog.html
+mainStyle: "padding-top:9rem;"
+schema: |
+  {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Thomas Publishing House Blog",
+      "url": "https://thomaspublishinghouse.com/blog.html",
+      "description": "Web design, SEO, and digital marketing insights for small businesses in Southeast Michigan.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Thomas Publishing House",
+        "url": "https://thomaspublishinghouse.com"
+      }
+    }
+---
+
+      <!-- Hero -->
+      <section class="section section-dark" style="padding:5rem 0;">
+        <div class="hero-grid-bg"></div>
+        <div class="container" style="position:relative;">
+          <div class="text-center fade-in">
+            <div class="section-header-icon">
+              <i data-lucide="book-open" style="color:var(--accent);"></i>
+              <span style="color:var(--accent);">Insights &amp; Resources</span>
+            </div>
+            <h1 style="font-family:var(--font-serif);font-weight:700;font-size:3.25rem;color:white;margin-bottom:1.5rem;">
+              The TPH Blog
+            </h1>
+            <p style="color:#e5e7eb;font-size:1.125rem;max-width:48rem;margin:0 auto;font-weight:300;line-height:1.7;">
+              Practical tips on web design, SEO, and digital marketing — written for small business owners in Port Huron, Southeast Michigan, and beyond.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Topics -->
+      <section class="section section-light">
+        <div class="container">
+          <div class="section-header fade-in">
+            <h2>What We Write About</h2>
+            <p>Actionable insights to help your business grow online</p>
+          </div>
+          <div class="grid grid-3 stagger-children">
+            <div class="card">
+              <div class="icon-box icon-box-primary" style="margin-bottom:1.5rem;"><i data-lucide="search"></i></div>
+              <h3 class="card-title">Local SEO</h3>
+              <p class="card-desc">How to rank in Google Maps, optimize your Google Business Profile, and get found by customers in your area.</p>
+            </div>
+            <div class="card">
+              <div class="icon-box icon-box-primary" style="margin-bottom:1.5rem;"><i data-lucide="layout"></i></div>
+              <h3 class="card-title">Web Design Tips</h3>
+              <p class="card-desc">Best practices for small business websites — speed, mobile-friendliness, conversions, and user experience.</p>
+            </div>
+            <div class="card">
+              <div class="icon-box icon-box-primary" style="margin-bottom:1.5rem;"><i data-lucide="trending-up"></i></div>
+              <h3 class="card-title">Marketing Strategy</h3>
+              <p class="card-desc">Social media, content marketing, email campaigns, and paid ads — what actually works for local businesses.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Latest Articles -->
+      <section class="section section-bg">
+        <div class="container">
+          <div class="section-header fade-in">
+            <h2>Latest Articles</h2>
+            <p>Practical insights for growing your business online</p>
+          </div>
+          <div class="grid grid-3 stagger-children">
+            {% for post in collections.posts %}
+            <article class="card fade-in" style="overflow:hidden;">
+              <a href="{{ post.url }}" style="text-decoration:none;color:inherit;display:block;">
+                {% if post.data.thumbnail %}
+                <div style="margin:-1.5rem -1.5rem 1.5rem;border-radius:0.75rem 0.75rem 0 0;overflow:hidden;">
+                  <img src="/assets/images/{{ post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy" style="width:100%;display:block;">
+                </div>
+                {% endif %}
+                <div style="display:flex;gap:0.75rem;margin-bottom:0.75rem;font-size:0.8125rem;color:var(--muted-foreground);">
+                  <span>{{ post.data.category }}</span>
+                  <span>&bull;</span>
+                  <span>{{ post.date | dateFormat }}</span>
+                </div>
+                <h3 style="font-family:var(--font-serif);font-weight:700;font-size:1.25rem;color:var(--primary);margin-bottom:0.75rem;">{{ post.data.title }}</h3>
+                <p style="color:var(--muted-foreground);font-size:0.95rem;line-height:1.7;font-weight:300;">{{ post.data.excerpt }}</p>
+              </a>
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section section-dark" style="padding:5rem 0;">
+        <div class="pattern-overlay"></div>
+        <div class="container" style="max-width:56rem;position:relative;">
+          <div class="text-center fade-in">
+            <h2 style="font-family:var(--font-serif);font-weight:700;font-size:2.5rem;color:white;margin-bottom:1.5rem;">
+              Need Help With Your Website or Marketing?
+            </h2>
+            <p style="color:#e5e7eb;font-size:1.125rem;margin-bottom:2.5rem;max-width:42rem;margin-left:auto;margin-right:auto;line-height:1.7;font-weight:300;">
+              Don't DIY everything. Get expert help from a local agency that understands your market.
+            </p>
+            <a href="/contact.html" class="btn btn-white">
+              <span>Get a Free Consultation</span>
+              <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    
