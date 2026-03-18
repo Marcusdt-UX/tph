@@ -1,4 +1,9 @@
+const { HtmlBasePlugin } = require("@11ty/eleventy");
+
 module.exports = function (eleventyConfig) {
+  // Automatically rewrite all URLs to include pathPrefix
+  eleventyConfig.addPlugin(HtmlBasePlugin);
+
   // Passthrough copy static assets
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
