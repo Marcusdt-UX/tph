@@ -2,7 +2,6 @@ module.exports = function (eleventyConfig) {
   // Passthrough copy static assets
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
-  eleventyConfig.addPassthroughCopy("src/sitemap.xml");
 
   // Blog post collection sorted by date (newest first)
   eleventyConfig.addCollection("posts", function (collectionApi) {
@@ -16,6 +15,16 @@ module.exports = function (eleventyConfig) {
       month: "long",
       day: "numeric",
     });
+  });
+
+  // ISO date filter for sitemaps and feeds
+  eleventyConfig.addFilter("isoDate", function (date) {
+    return new Date(date).toISOString().split("T")[0];
+  });
+
+  // String startsWith filter for breadcrumbs
+  eleventyConfig.addFilter("startsWith", function (str, prefix) {
+    return str && str.startsWith(prefix);
   });
 
   // Excerpt filter — first paragraph of content

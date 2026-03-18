@@ -497,7 +497,7 @@ input, textarea, select {
   font-family: var(--font-serif);
   font-weight: 700;
   font-size: 3.25rem;
-  line-height: 0.95;
+  line-height: 1.2;
   color: white;
   margin-bottom: 2rem;
 }
@@ -512,7 +512,8 @@ input, textarea, select {
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, var(--accent), white, var(--accent));
+  display: inline-block;
+  background-image: linear-gradient(90deg, var(--accent), white, var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -520,7 +521,8 @@ input, textarea, select {
 }
 
 .gradient-text-primary {
-  background: linear-gradient(to right, var(--primary), var(--accent));
+  display: inline-block;
+  background-image: linear-gradient(to right, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
