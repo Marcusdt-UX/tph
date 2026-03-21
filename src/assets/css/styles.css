@@ -2798,6 +2798,7 @@ a.ledger-item {
   font-family: var(--font-serif);
   font-weight: 600;
   margin-bottom: 1rem;
+  padding-top: 1rem;
 }
 
 .footer-links a {
@@ -3551,7 +3552,7 @@ a.ledger-item {
   }
 
   .footer-grid {
-    grid-template-columns: 2fr 1fr 2fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
   }
 
   .footer-brand {
