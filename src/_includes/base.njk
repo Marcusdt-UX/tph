@@ -16,8 +16,10 @@
   <meta name="twitter:title" content="{{ twitterTitle or ogTitle or title }}">
   <meta name="twitter:description" content="{{ twitterDescription or ogDescription or description }}">
   <meta name="twitter:image" content="{{ twitterImage or ogImage or (site.url + '/assets/images/logo.png') }}">
+  <meta name="theme-color" content="#1a1a2e">
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="alternate" type="application/atom+xml" title="{{ site.name }} Blog" href="/feed.xml">
+  <link rel="preload" href="/assets/css/styles.min.css" as="style">
   <link rel="stylesheet" href="/assets/css/styles.min.css">
   <script src="/assets/js/main.min.js" defer></script>
   <script src="/assets/js/lucide.min.js" defer></script>
@@ -96,7 +98,7 @@
       <div class="container">
         <a href="/index.html" class="logo">
           <div class="logo-img">
-            <img src="/assets/images/logo.png" alt="Thomas Publishing House logo">
+            <img src="/assets/images/logo.png" alt="Thomas Publishing House logo" width="64" height="64">
           </div>
           <div class="logo-text">
             <span class="logo-title">Thomas Publishing House</span>
@@ -109,6 +111,7 @@
           <a href="/portfolio.html" class="nav-link">Portfolio</a>
           <a href="/pricing.html" class="nav-link">Pricing</a>
           <a href="/about.html" class="nav-link">About</a>
+          <a href="/blog.html" class="nav-link">Blog</a>
           <a href="/faq.html" class="nav-link">FAQ</a>
           <button class="theme-toggle" aria-label="Toggle theme">
             <div class="theme-toggle-bg"></div>
@@ -133,6 +136,7 @@
           <a href="/portfolio.html">Portfolio</a>
           <a href="/pricing.html">Pricing</a>
           <a href="/about.html">About</a>
+          <a href="/blog.html">Blog</a>
           <a href="/faq.html">FAQ</a>
           <div style="padding:0.5rem 1rem;">
             <button class="theme-toggle" aria-label="Toggle theme">
@@ -159,7 +163,7 @@
           <div class="footer-brand">
             <div class="logo">
               <div class="logo-img">
-                <img src="/assets/images/logo.png" alt="Thomas Publishing House logo">
+                <img src="/assets/images/logo.png" alt="Thomas Publishing House logo" width="64" height="64">
               </div>
               <div class="logo-text">
                 <h3>Thomas Publishing House</h3>
@@ -176,6 +180,7 @@
             <a href="/pricing.html">Pricing</a>
             <a href="/about.html">About</a>
             <a href="/faq.html">FAQ</a>
+            <a href="/blog.html">Blog</a>
             <a href="/contact.html">Contact</a>
           </div>
           <div class="footer-links">
