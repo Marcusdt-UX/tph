@@ -2813,6 +2813,25 @@ a.ledger-item {
   color: var(--accent);
 }
 
+.footer-areas-grid {
+  columns: 2;
+  column-gap: 2rem;
+}
+
+.footer-areas-grid a {
+  display: block;
+  color: #d1d5db;
+  font-size: 0.875rem;
+  font-weight: 300;
+  padding: 0.25rem 0;
+  transition: color 0.3s;
+  break-inside: avoid;
+}
+
+.footer-areas-grid a:hover {
+  color: var(--accent);
+}
+
 .footer-contact p {
   color: #d1d5db;
   font-size: 0.875rem;
@@ -3532,7 +3551,7 @@ a.ledger-item {
   }
 
   .footer-grid {
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 2fr 1fr;
   }
 
   .footer-brand {
