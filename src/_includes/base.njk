@@ -7,6 +7,9 @@
   <meta name="description" content="{{ description }}">
   {% if canonical %}<link rel="canonical" href="{{ canonical }}">{% elif page.url %}<link rel="canonical" href="{{ site.url }}{{ page.url }}">{% endif %}
   {% if robots %}<meta name="robots" content="{{ robots }}">{% endif %}
+  {% if hreflang_en_ca %}<link rel="alternate" hreflang="en-CA" href="{{ hreflang_en_ca }}">{% endif %}
+  {% if hreflang_en_us %}<link rel="alternate" hreflang="en-US" href="{{ hreflang_en_us }}">{% endif %}
+  {% if hreflang_en_ca or hreflang_en_us %}<link rel="alternate" hreflang="x-default" href="{{ hreflang_en_us or canonical or (site.url + page.url) }}">{% endif %}
   <meta property="og:title" content="{{ ogTitle or title }}">
   <meta property="og:description" content="{{ ogDescription or description }}">
   <meta property="og:type" content="{{ ogType or 'website' }}">
@@ -163,7 +166,7 @@
           <div class="footer-brand">
             <div class="logo">
               <div class="logo-img">
-                <img src="/assets/images/logo.png" alt="Thomas Publishing House logo" width="64" height="64">
+                <img src="/assets/images/logo.png" alt="Thomas Publishing House logo" width="64" height="64" loading="lazy">
               </div>
               <div class="logo-text">
                 <h3>Thomas Publishing House</h3>
