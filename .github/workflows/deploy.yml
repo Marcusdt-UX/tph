@@ -38,6 +38,10 @@ jobs:
           server-dir: /public_html/
           protocol: ftps
           timeout: 60000
+          exclude: |
+            **/.htaccess
+            **/.git*
+            **/.git*/**
 
       - name: Verify deployment
         run: |
