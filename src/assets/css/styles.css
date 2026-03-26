@@ -246,14 +246,14 @@ input, textarea, select {
 }
 
 .logo-text {
-  padding: 0.25rem 0;
+  padding: 0.75rem 0;
 }
 
 .logo-text .logo-title,
 .logo-text h1 {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   line-height: 1.2;
   color: var(--foreground);
 }
