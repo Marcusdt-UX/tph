@@ -3786,9 +3786,9 @@ a.ledger-item {
   mask-size: 500% 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-  /* Start fully off-screen right so bridge is completely hidden */
-  -webkit-mask-position: 120% 0;
-  mask-position: 120% 0;
+  /* Start fully off-screen -- bridge completely hidden */
+  -webkit-mask-position: 83% 0;
+  mask-position: 83% 0;
   /* Force GPU layer so Firefox does not stutter on mask-position */
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
@@ -3846,19 +3846,19 @@ a.ledger-item {
    mask-position 0%   = spotlight off-screen right. */
 @keyframes bridgeReveal {
   from {
-    -webkit-mask-position: 120% 0;
-    mask-position: 120% 0;
+    -webkit-mask-position: 83% 0;
+    mask-position: 83% 0;
   }
   to {
-    -webkit-mask-position: -20% 0;
-    mask-position: -20% 0;
+    -webkit-mask-position: 17% 0;
+    mask-position: 17% 0;
   }
 }
 
 /* Shine line sweeps in sync */
 @keyframes shineSweep {
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(100%); }
+  from { transform: translateX(-130%); }
+  to   { transform: translateX(130%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
