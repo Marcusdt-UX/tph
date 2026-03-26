@@ -74,16 +74,17 @@ document.addEventListener('DOMContentLoaded', function () {
   // Each function runs as a separate browser task, preventing long-task jank
   runChunked([
 
-  // --- Chunk 1: Lucide icons (above-fold UI) ---
+  // --- Chunk 1: (icons inlined at build time — no runtime work needed) ---
   function initIcons() {
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
+    // Lucide icons are now inlined by 11ty build transform.
+    // This chunk is kept as a no-op placeholder for chunk ordering.
   },
 
-  // --- Chunk 2: Scroll animations ---
+  // --- Chunk 2: Scroll animations + deferred CSS animations ---
   function initScrollAnimations() {
     var animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale, .stagger-children');
+    // Elements with paused CSS animations that should play when visible
+    var deferredAnims = document.querySelectorAll('.gradient-text, .gradient-text-primary, .bridge-hologram, .code-card');
     if ('IntersectionObserver' in window) {
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -94,8 +95,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
       animatedElements.forEach(function (el) { observer.observe(el); });
+
+      // Separate observer for deferred animations — unpauses them on view
+      var animObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('anim-play');
+            animObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      deferredAnims.forEach(function (el) { animObserver.observe(el); });
     } else {
       animatedElements.forEach(function (el) { el.classList.add('visible'); });
+      deferredAnims.forEach(function (el) { el.classList.add('anim-play'); });
     }
   },
 

@@ -3342,11 +3342,20 @@ a.ledger-item {
 .gradient-text {
   background-size: 200% auto;
   animation: gradientShimmer 6s ease-in-out infinite alternate;
+  animation-play-state: paused;
 }
 
 .gradient-text-primary {
   background-size: 200% auto;
   animation: gradientShimmer 6s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.visible .gradient-text,
+.visible .gradient-text-primary,
+.gradient-text.anim-play,
+.gradient-text-primary.anim-play {
+  animation-play-state: running;
 }
 
 /* Floating glow animation */
@@ -3415,7 +3424,13 @@ a.ledger-item {
   content: '▎';
   color: var(--accent);
   animation: cursorBlink 1s step-end infinite;
+  animation-play-state: paused;
   margin-left: 2px;
+}
+
+.visible .code-content .code-line:last-child::after,
+.code-card.anim-play .code-content .code-line:last-child::after {
+  animation-play-state: running;
 }
 
 /* Scroll indicator enhanced */
@@ -3772,6 +3787,8 @@ a.ledger-item {
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   animation: bridgeReveal 60s ease-in-out infinite;
+  animation-play-state: paused;
+  will-change: mask-position, -webkit-mask-position;
 }
 
 /* Shine line overlay — sweeps in sync with the mask */
@@ -3791,6 +3808,16 @@ a.ledger-item {
     transparent 100%
   );
   animation: shineSweep 60s ease-in-out infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+
+.bridge-hologram.anim-play {
+  animation-play-state: running;
+}
+
+.bridge-hologram.anim-play::before {
+  animation-play-state: running;
 }
 
 /* Scanlines */
@@ -3843,6 +3870,11 @@ a.ledger-item {
   .bridge-hologram {
     display: none;
   }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -3850,3 +3882,38 @@ a.ledger-item {
     opacity: 0.12;
   }
 }
+
+/* ========== GPU Compositing Hints ========== */
+/* Promote animated elements to their own compositor layers to
+   avoid triggering main-thread layout/paint recalculations. */
+.gradient-text,
+.gradient-text-primary {
+  will-change: background-position;
+  contain: layout style;
+}
+
+.bridge-hologram {
+  contain: strict;
+}
+
+.bridge-hologram::before {
+  will-change: transform;
+}
+
+.code-card-inner {
+  contain: layout style;
+}
+
+.service-card,
+.team-card,
+.addon-card,
+.testimonial-card {
+  contain: layout style;
+  will-change: transform;
+}
+
+.hero-grid-bg {
+  will-change: transform;
+  contain: strict;
+}
+

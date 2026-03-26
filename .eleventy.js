@@ -1,8 +1,12 @@
 const { HtmlBasePlugin } = require("@11ty/eleventy");
+const inlineIcons = require("./scripts/inline-icons");
 
 module.exports = function (eleventyConfig) {
   // Automatically rewrite all URLs to include pathPrefix
   eleventyConfig.addPlugin(HtmlBasePlugin);
+
+  // Inline Lucide icons at build time (replaces <i data-lucide="..."> with <svg>)
+  eleventyConfig.addTransform("inline-icons", inlineIcons);
 
   // Passthrough copy static assets
   eleventyConfig.addPassthroughCopy("src/assets");
