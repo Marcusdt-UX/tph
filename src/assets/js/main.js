@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ========== Custom Cursor ==========
-  const cursorDot = document.querySelector('.custom-cursor-dot');
+  // ========== Custom Cursor (disabled) ==========
+  /* const cursorDot = document.querySelector('.custom-cursor-dot');
   const cursorRing = document.querySelector('.custom-cursor-ring');
 
   if (cursorDot && cursorRing && window.matchMedia('(hover: hover)').matches) {
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.classList.remove('cursor-hover');
       }
     });
-  }
+  } */
 
   // ========== Scroll Animations ==========
   var animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale, .stagger-children');
