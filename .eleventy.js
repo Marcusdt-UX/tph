@@ -7,6 +7,7 @@ module.exports = function (eleventyConfig) {
   // Passthrough copy static assets
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
+  eleventyConfig.addPassthroughCopy("src/.htaccess");
 
   // Blog post collection sorted by date (newest first)
   eleventyConfig.addCollection("posts", function (collectionApi) {
