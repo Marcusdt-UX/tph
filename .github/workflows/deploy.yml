@@ -35,27 +35,16 @@ jobs:
           username: tph-deploy@thomaspublishinghouse.com
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./_site/
-          server-dir: /
+          server-dir: /public_html/
           protocol: ftps
           timeout: 60000
 
-      - name: FTP path diagnostic
+      - name: Verify deployment
         run: |
-          sudo apt-get install -y -qq lftp > /dev/null 2>&1
-          lftp -e "
-            set ssl:verify-certificate no;
-            set ftp:ssl-force true;
-            set ftp:ssl-protect-data true;
-            open business42.web-hosting.com;
-            user tph-deploy@thomaspublishinghouse.com ${{ secrets.FTP_PASSWORD }};
-            echo '=== PWD (FTP home) ===';
-            pwd;
-            echo '=== LS / (root listing) ===';
-            ls /;
-            echo '=== Check /index.html ===';
-            cat /index.html | head -3;
-            echo '=== Check /public_html/ ===';
-            ls /public_html/ 2>/dev/null || echo 'No /public_html/ directory';
-            echo '=== DONE ===';
-            bye;
-          "
+          sleep 5
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://thomaspublishinghouse.com)
+          if [ "$STATUS" != "200" ]; then
+            echo "::warning::Site returned HTTP $STATUS"
+          else
+            echo "Site is live — HTTP 200"
+          fi
