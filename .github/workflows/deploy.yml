@@ -1,44 +1,50 @@
-name: Deploy to GitHub Pages
+name: Deploy TPH
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+  workflow_dispatch: # manual trigger from GitHub UI
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: deploy
+  cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npm run build:ghpages
+      - name: Build site
+        run: npm run build
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          path: _site
+          server: business42.web-hosting.com
+          username: tph-deploy@thomaspublishinghouse.com
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./_site/
+          server-dir: /public_html/thomaspublishinghouse.com/
+          protocol: ftps
+          timeout: 60000
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Verify deployment
+        run: |
+          sleep 5
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://thomaspublishinghouse.com)
+          if [ "$STATUS" != "200" ]; then
+            echo "::warning::Site returned HTTP $STATUS"
+          else
+            echo "Site is live — HTTP 200"
+          fi
