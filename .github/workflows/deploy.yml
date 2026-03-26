@@ -35,10 +35,36 @@ jobs:
           username: tph-deploy@thomaspublishinghouse.com
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./_site/
-          server-dir: /
+          server-dir: /public_html/thomaspublishinghouse.com/
           protocol: ftps
           timeout: 60000
-          dangerous-clean-slate: true
+          dangerous-clean-slate: false
+
+      - name: Debug FTP directory structure
+        run: |
+          echo "=== FTP root listing ==="
+          curl -s --ftp-ssl --list-only \
+            "ftps://business42.web-hosting.com/" \
+            --user "tph-deploy@thomaspublishinghouse.com:${{ secrets.FTP_PASSWORD }}" \
+            --insecure || echo "Root listing failed"
+          echo ""
+          echo "=== /public_html/ listing ==="
+          curl -s --ftp-ssl --list-only \
+            "ftps://business42.web-hosting.com/public_html/" \
+            --user "tph-deploy@thomaspublishinghouse.com:${{ secrets.FTP_PASSWORD }}" \
+            --insecure || echo "/public_html/ listing failed"
+          echo ""
+          echo "=== /public_html/thomaspublishinghouse.com/ listing ==="
+          curl -s --ftp-ssl --list-only \
+            "ftps://business42.web-hosting.com/public_html/thomaspublishinghouse.com/" \
+            --user "tph-deploy@thomaspublishinghouse.com:${{ secrets.FTP_PASSWORD }}" \
+            --insecure || echo "/public_html/thomaspublishinghouse.com/ listing failed"
+          echo ""
+          echo "=== Check if index.html has MARKER ==="
+          curl -s --ftp-ssl \
+            "ftps://business42.web-hosting.com/public_html/thomaspublishinghouse.com/index.html" \
+            --user "tph-deploy@thomaspublishinghouse.com:${{ secrets.FTP_PASSWORD }}" \
+            --insecure | head -5
 
       - name: Verify deployment
         run: |
