@@ -38,6 +38,7 @@ jobs:
           server-dir: /public_html/thomaspublishinghouse.com/
           protocol: ftps
           timeout: 60000
+          dangerous-clean-slate: true
 
       - name: Verify deployment
         run: |
