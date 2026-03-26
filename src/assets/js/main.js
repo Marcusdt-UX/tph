@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function initScrollAnimations() {
     var animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale, .stagger-children');
     // Elements with paused CSS animations that should play when visible
-    var deferredAnims = document.querySelectorAll('.gradient-text, .gradient-text-primary, .bridge-hologram, .code-card');
+    var deferredAnims = document.querySelectorAll('.gradient-text, .gradient-text-primary, .code-card');
     if ('IntersectionObserver' in window) {
       var observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {

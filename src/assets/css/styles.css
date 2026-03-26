@@ -3787,7 +3787,6 @@ a.ledger-item {
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   animation: bridgeReveal 60s ease-in-out infinite;
-  animation-play-state: paused;
 }
 
 /* Shine line overlay — sweeps in sync with the mask */
@@ -3807,16 +3806,7 @@ a.ledger-item {
     transparent 100%
   );
   animation: shineSweep 60s ease-in-out infinite;
-  animation-play-state: paused;
   will-change: transform;
-}
-
-.bridge-hologram.anim-play {
-  animation-play-state: running;
-}
-
-.bridge-hologram.anim-play::before {
-  animation-play-state: running;
 }
 
 /* Scanlines */
