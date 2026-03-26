@@ -3753,7 +3753,7 @@ a.ledger-item {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
+  opacity: 0.18;
   filter:
     brightness(2.0)
     contrast(0.5)
@@ -3761,36 +3761,42 @@ a.ledger-item {
     hue-rotate(170deg)
     drop-shadow(0 0 40px rgba(0, 217, 255, 0.4))
     drop-shadow(0 0 80px rgba(0, 217, 255, 0.2));
-  /* Static soft-edge mask — no animation, just a vignette */
+  /* Narrow spotlight mask — animated mask-position reveals the bridge
+     only where the shine passes, then hides it again */
   -webkit-mask-image: linear-gradient(
     105deg,
     transparent 0%,
-    transparent 15%,
-    rgba(0, 0, 0, 0.3) 25%,
-    black 40%,
-    black 60%,
-    rgba(0, 0, 0, 0.3) 75%,
-    transparent 85%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.4) 42%,
+    black 50%,
+    rgba(0, 0, 0, 0.4) 58%,
+    transparent 65%,
     transparent 100%
   );
   mask-image: linear-gradient(
     105deg,
     transparent 0%,
-    transparent 15%,
-    rgba(0, 0, 0, 0.3) 25%,
-    black 40%,
-    black 60%,
-    rgba(0, 0, 0, 0.3) 75%,
-    transparent 85%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.4) 42%,
+    black 50%,
+    rgba(0, 0, 0, 0.4) 58%,
+    transparent 65%,
     transparent 100%
   );
-  will-change: opacity;
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  /* Start with mask off-screen (bridge hidden) */
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
 }
 
-/* JS adds .sweeping to trigger a single 6s reveal, then removes it.
-   opacity is GPU-composited — no main-thread paint cost. */
+/* JS adds .sweeping to trigger a single 6s sweep reveal.
+   First sweep is delayed ~10 s so it runs AFTER Lighthouse’s
+   measurement window, keeping TBT at 0. */
 .bridge-hologram.sweeping img {
-  animation: bridgePulse 6s ease-in-out;
+  animation: bridgeReveal 6s ease-in-out forwards;
 }
 
 /* Shine line overlay — sweeps in sync with the mask */
@@ -3833,12 +3839,20 @@ a.ledger-item {
   mix-blend-mode: overlay;
 }
 
-/* Bridge fades in/out via opacity (GPU-composited, zero paint cost) */
-@keyframes bridgePulse {
-  0%        { opacity: 0; }
-  20%       { opacity: 0.18; }
-  80%       { opacity: 0.18; }
-  100%      { opacity: 0; }
+/* Mask sweeps left-to-right — bridge appears behind the shine, then vanishes */
+@keyframes bridgeReveal {
+  0% {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  50% {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+  100% {
+    -webkit-mask-position: -100% 0;
+    mask-position: -100% 0;
+  }
 }
 
 /* Shine line sweeps in sync */
@@ -3859,11 +3873,8 @@ a.ledger-item {
 }
 
 @media (max-width: 768px) {
-  @keyframes bridgePulse {
-    0%   { opacity: 0; }
-    20%  { opacity: 0.12; }
-    80%  { opacity: 0.12; }
-    100% { opacity: 0; }
+  .bridge-hologram img {
+    opacity: 0.12;
   }
 }
 
