@@ -26,7 +26,7 @@
   --foreground: #f5f5f7;
   --card: #1a1a2e;
   --card-foreground: #f5f5f7;
-  --primary: #5a7ba8;
+  --primary: #7a9bc8;
   --primary-foreground: #ffffff;
   --secondary: #4a5f7f;
   --secondary-foreground: #ffffff;
@@ -1010,6 +1010,10 @@ a.ledger-item {
   font-weight: 300;
 }
 
+.dark .ledger-chapter {
+  color: var(--muted-foreground);
+}
+
 .ledger-arrow {
   opacity: 0;
   transform: translateX(0);
@@ -1058,6 +1062,10 @@ a.ledger-item {
 .dark .glass-card-light {
   background: rgba(26, 26, 46, 0.7);
   border-color: var(--border);
+}
+
+.dark .glass-card-light .card-desc {
+  color: var(--muted-foreground);
 }
 
 .glass-card-light:hover {
@@ -1201,6 +1209,10 @@ a.ledger-item {
 .section-dark .cta-section p,
 .section-dark.cta-section p {
   color: #d1d5db;
+}
+
+.dark .cta-section p {
+  color: var(--muted-foreground);
 }
 
 /* ========== About: Story Section ========== */
@@ -1426,6 +1438,11 @@ a.ledger-item {
   color: #6b7280;
   font-style: italic;
   font-weight: 300;
+}
+
+.dark .team-expertise,
+.dark .team-bio {
+  color: var(--muted-foreground);
 }
 
 /* ========== Services: Service Cards ========== */
@@ -1798,6 +1815,10 @@ a.ledger-item {
 .form-success p {
   color: #374151;
   font-weight: 300;
+}
+
+.dark .form-success p {
+  color: var(--muted-foreground);
 }
 
 .form-success.show h3 {
