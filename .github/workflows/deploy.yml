@@ -35,10 +35,10 @@ jobs:
           username: tph-deploy@thomaspublishinghouse.com
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./_site/
-          server-dir: /public_html/thomaspublishinghouse.com/
+          server-dir: /
           protocol: ftps
           timeout: 60000
-          dangerous-clean-slate: false
+          dangerous-clean-slate: true
 
       - name: Verify deployment
         run: |
