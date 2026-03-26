@@ -20,11 +20,10 @@
   <meta name="twitter:description" content="{{ twitterDescription or ogDescription or description }}">
   <meta name="twitter:image" content="{{ twitterImage or ogImage or (site.url + '/assets/images/logo.webp') }}">
   <meta name="theme-color" content="#1a1a2e">
-  <link rel="icon" type="image/png" href="/assets/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
   <link rel="alternate" type="application/atom+xml" title="{{ site.name }} Blog" href="/feed.xml">
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/css/styles.min.css" as="style">
   <link rel="stylesheet" href="/assets/css/styles.min.css">
   <script data-cfasync="false" src="/assets/js/main.min.js" defer></script>
   <script data-cfasync="false" src="/assets/js/lucide.min.js" defer></script>
@@ -106,7 +105,7 @@
       <div class="container">
         <a href="/index.html" class="logo">
           <div class="logo-img">
-            <img src="/assets/images/logo.webp" alt="Thomas Publishing House logo" width="64" height="64">
+            <img src="/assets/images/logo-sm.webp" alt="Thomas Publishing House logo" width="64" height="64">
           </div>
           <div class="logo-text">
             <span class="logo-title">Thomas Publishing House</span>
