@@ -39,20 +39,23 @@ jobs:
           protocol: ftps
           timeout: 60000
 
-      - name: Verify deployment
+      - name: FTP path diagnostic
         run: |
-          sleep 10
-          echo "=== Checking for deploy marker ==="
-          BODY=$(curl -s https://thomaspublishinghouse.com/)
-          if echo "$BODY" | grep -q "TPH-DEPLOY-MARKER"; then
-            echo "Deploy verified — marker found in HTML"
-          else
-            echo "::warning::Deploy marker NOT found — possible caching issue"
-          fi
-          echo "=== Checking JS for runChunked ==="
-          JS=$(curl -s https://thomaspublishinghouse.com/assets/js/main.min.js?v=3)
-          if echo "$JS" | grep -q "runChunked"; then
-            echo "JS verified — runChunked present"
-          else
-            echo "::warning::JS still has old code — runChunked NOT found"
-          fi
+          sudo apt-get install -y -qq lftp > /dev/null 2>&1
+          lftp -e "
+            set ssl:verify-certificate no;
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            open business42.web-hosting.com;
+            user tph-deploy@thomaspublishinghouse.com ${{ secrets.FTP_PASSWORD }};
+            echo '=== PWD (FTP home) ===';
+            pwd;
+            echo '=== LS / (root listing) ===';
+            ls /;
+            echo '=== Check /index.html ===';
+            cat /index.html | head -3;
+            echo '=== Check /public_html/ ===';
+            ls /public_html/ 2>/dev/null || echo 'No /public_html/ directory';
+            echo '=== DONE ===';
+            bye;
+          "
