@@ -19,7 +19,7 @@ schema: |
     "datePublished": "2025-01-14",
     "dateModified": "2025-01-14",
     "author": { "@type": "Organization", "name": "Thomas Publishing House", "url": "https://thomaspublishinghouse.com" },
-    "publisher": { "@type": "Organization", "name": "Thomas Publishing House", "logo": { "@type": "ImageObject", "url": "https://thomaspublishinghouse.com/assets/images/logo.png" } },
+    "publisher": { "@type": "Organization", "name": "Thomas Publishing House", "logo": { "@type": "ImageObject", "url": "https://thomaspublishinghouse.com/assets/images/logo.webp" } },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://thomaspublishinghouse.com/blog/small-business-google-ads-guide/" }
   }
 ---

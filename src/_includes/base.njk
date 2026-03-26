@@ -14,18 +14,21 @@
   <meta property="og:description" content="{{ ogDescription or description }}">
   <meta property="og:type" content="{{ ogType or 'website' }}">
   {% if ogUrl %}<meta property="og:url" content="{{ ogUrl }}">{% elif page.url %}<meta property="og:url" content="{{ site.url }}{{ page.url }}">{% endif %}
-  <meta property="og:image" content="{{ ogImage or (site.url + '/assets/images/logo.png') }}">
+  <meta property="og:image" content="{{ ogImage or (site.url + '/assets/images/logo.webp') }}">
   <meta name="twitter:card" content="{{ twitterCard or 'summary_large_image' }}">
   <meta name="twitter:title" content="{{ twitterTitle or ogTitle or title }}">
   <meta name="twitter:description" content="{{ twitterDescription or ogDescription or description }}">
-  <meta name="twitter:image" content="{{ twitterImage or ogImage or (site.url + '/assets/images/logo.png') }}">
+  <meta name="twitter:image" content="{{ twitterImage or ogImage or (site.url + '/assets/images/logo.webp') }}">
   <meta name="theme-color" content="#1a1a2e">
   <link rel="icon" type="image/png" href="/assets/images/logo.png">
   <link rel="alternate" type="application/atom+xml" title="{{ site.name }} Blog" href="/feed.xml">
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/css/styles.min.css" as="style">
   <link rel="stylesheet" href="/assets/css/styles.min.css">
-  <script src="/assets/js/main.min.js" defer></script>
-  <script src="/assets/js/lucide.min.js" defer></script>
+  <script data-cfasync="false" src="/assets/js/main.min.js" defer></script>
+  <script data-cfasync="false" src="/assets/js/lucide.min.js" defer></script>
+  <style>:root{--background:#faf9f7;--foreground:#1a1a2e;--font-sans:'Inter',sans-serif}.dark{--background:#0d0d17;--foreground:#f5f5f7}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:var(--font-sans);background-color:var(--background);color:var(--foreground);line-height:1.6}.header{position:fixed;top:0;left:0;right:0;z-index:50;height:6rem}.container{max-width:80rem;margin:0 auto;padding:0 1rem}</style>
   {% if schema %}
   <script type="application/ld+json">
   {{ schema | safe }}
@@ -101,7 +104,7 @@
       <div class="container">
         <a href="/index.html" class="logo">
           <div class="logo-img">
-            <img src="/assets/images/logo.png" alt="Thomas Publishing House logo" width="64" height="64">
+            <img src="/assets/images/logo.webp" alt="Thomas Publishing House logo" width="64" height="64">
           </div>
           <div class="logo-text">
             <span class="logo-title">Thomas Publishing House</span>
@@ -166,7 +169,7 @@
           <div class="footer-brand">
             <div class="logo">
               <div class="logo-img">
-                <img src="/assets/images/logo.png" alt="Thomas Publishing House logo" width="64" height="64" loading="lazy">
+                <img src="/assets/images/logo.webp" alt="Thomas Publishing House logo" width="64" height="64" loading="lazy">
               </div>
               <div class="logo-text">
                 <h3>Thomas Publishing House</h3>

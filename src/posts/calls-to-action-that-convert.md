@@ -19,7 +19,7 @@ schema: |
     "datePublished": "2024-02-27",
     "dateModified": "2024-02-27",
     "author": { "@type": "Organization", "name": "Thomas Publishing House", "url": "https://thomaspublishinghouse.com" },
-    "publisher": { "@type": "Organization", "name": "Thomas Publishing House", "logo": { "@type": "ImageObject", "url": "https://thomaspublishinghouse.com/assets/images/logo.png" } },
+    "publisher": { "@type": "Organization", "name": "Thomas Publishing House", "logo": { "@type": "ImageObject", "url": "https://thomaspublishinghouse.com/assets/images/logo.webp" } },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://thomaspublishinghouse.com/blog/calls-to-action-that-convert/" }
   }
 ---
