@@ -245,6 +245,10 @@ input, textarea, select {
   display: block;
 }
 
+.logo-text {
+  padding: 0.25rem 0;
+}
+
 .logo-text .logo-title,
 .logo-text h1 {
   font-family: var(--font-serif);
