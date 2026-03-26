@@ -18,7 +18,18 @@ function toggleTheme() {
 // Initialize theme before page renders
 initTheme();
 
+// Schedule non-critical work off the main thread
+function deferTask(fn) {
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(fn);
+  } else {
+    setTimeout(fn, 200);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+  // === CRITICAL PATH (above-fold interactivity) ===
+
   // Theme toggle buttons
   document.querySelectorAll('.theme-toggle').forEach(function (btn) {
     btn.addEventListener('click', toggleTheme);
@@ -123,6 +134,30 @@ document.addEventListener('DOMContentLoaded', function () {
       el.classList.add('visible');
     });
   }
+
+  // ========== Active Nav Link ==========
+  var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-link, .mobile-nav a:not(.mobile-nav-cta)').forEach(function (link) {
+    var href = link.getAttribute('href');
+    if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
+      link.classList.add('active');
+    }
+  });
+
+  // ========== Lucide Icons ==========
+  // Render icons early so above-fold UI (nav, hero) renders correctly
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
+
+  // ========== Copyright Year ==========
+  var yearEl = document.getElementById('current-year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+
+  // === DEFERRED: non-critical below-fold interactivity ===
+  deferTask(function () {
 
   // ========== FAQ Accordion ==========
   document.querySelectorAll('.faq-question').forEach(function (btn) {
@@ -270,15 +305,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     });
-  });
-
-  // ========== Active Nav Link ==========
-  var currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-link, .mobile-nav a:not(.mobile-nav-cta)').forEach(function (link) {
-    var href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
-      link.classList.add('active');
-    }
   });
 
   // ========== Animated Stat Counters ==========
@@ -540,17 +566,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 
-  // ========== Lucide Icons ==========
-  if (typeof lucide !== 'undefined') {
-    lucide.createIcons();
-  }
-
-  // ========== Copyright Year ==========
-  var yearEl = document.getElementById('current-year');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
-
   // ========== Cookie Consent ==========
   if (!localStorage.getItem('cookieConsent')) {
     var banner = document.createElement('div');
@@ -604,4 +619,6 @@ document.addEventListener('DOMContentLoaded', function () {
       gtag('config', GA_ID);
     };
   }
-});
+
+  }); // end deferTask
+}); // end DOMContentLoaded
