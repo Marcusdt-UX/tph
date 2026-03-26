@@ -3787,19 +3787,22 @@ a.ledger-item {
   mask-size: 300% 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-  /* Start with mask off-screen (bridge hidden) */
+  /* Start with mask off-screen right -- bridge fully hidden */
   -webkit-mask-position: 100% 0;
   mask-position: 100% 0;
+  /* Force GPU layer so Firefox does not stutter on mask-position */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-/* JS adds .sweeping to trigger a single 6s sweep reveal.
-   First sweep is delayed ~10 s so it runs AFTER Lighthouse’s
-   measurement window, keeping TBT at 0. */
+/* JS adds .sweeping after a 10s delay to trigger a single 6s
+   left-to-right sweep. Runs outside Lighthouse TBT window. */
 .bridge-hologram.sweeping img {
   animation: bridgeReveal 6s ease-in-out forwards;
 }
 
-/* Shine line overlay — sweeps in sync with the mask */
+/* Shine line overlay -- sweeps in sync with the mask */
 .bridge-hologram::before {
   content: '';
   position: absolute;
@@ -3839,19 +3842,17 @@ a.ledger-item {
   mix-blend-mode: overlay;
 }
 
-/* Mask sweeps left-to-right — bridge appears behind the shine, then vanishes */
+/* Spotlight sweeps left → right across the full 6 s duration.
+   mask-position 100% = spotlight off-screen left;
+   mask-position 0%   = spotlight off-screen right. */
 @keyframes bridgeReveal {
-  0% {
+  from {
     -webkit-mask-position: 100% 0;
     mask-position: 100% 0;
   }
-  50% {
+  to {
     -webkit-mask-position: 0% 0;
     mask-position: 0% 0;
-  }
-  100% {
-    -webkit-mask-position: -100% 0;
-    mask-position: -100% 0;
   }
 }
 

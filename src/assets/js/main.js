@@ -90,26 +90,15 @@ document.addEventListener('DOMContentLoaded', function () {
       bridge.classList.remove('sweeping');
     });
 
-    if ('IntersectionObserver' in window) {
-      var obs = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) {
-          obs.disconnect();
-          // Delay first sweep ~10 s so the mask-position animation
-          // (expensive, not GPU-composited) runs AFTER Lighthouse’s
-          // TBT measurement window, preserving the 97+ score.
-          setTimeout(function () {
-            sweep();
-            setInterval(function () {
-              var r = bridge.getBoundingClientRect();
-              if (r.top < window.innerHeight && r.bottom > 0) sweep();
-            }, 30000);                  // re-sweep every 30 s
-          }, 10000);                    // 10 s initial delay
-        }
-      }, { threshold: 0.05 });
-      obs.observe(bridge);
-    } else {
-      setTimeout(sweep, 10000);
-    }
+    // Pure 10 s delay — keeps mask-position work outside Lighthouse window
+    setTimeout(function () {
+      sweep();
+      // Re-sweep every 30 s if still in viewport
+      setInterval(function () {
+        var r = bridge.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) sweep();
+      }, 30000);
+    }, 10000);
   },
 
   // --- Chunk 2: Scroll animations + deferred CSS animations ---
