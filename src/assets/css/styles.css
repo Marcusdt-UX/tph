@@ -684,6 +684,8 @@ input, textarea, select {
 /* ========== Sections ========== */
 .section {
   padding: 8rem 0;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
 }
 
 .section-light {
@@ -952,6 +954,8 @@ input, textarea, select {
   border-radius: 50%;
   filter: blur(3rem);
   opacity: 0.3;
+  contain: strict;
+  will-change: filter;
 }
 
 .code-card-glow-bottom {
@@ -964,6 +968,8 @@ input, textarea, select {
   border-radius: 50%;
   filter: blur(3rem);
   opacity: 0.2;
+  contain: strict;
+  will-change: filter;
 }
 
 /* Scroll indicator */
@@ -2813,6 +2819,8 @@ a.ledger-item {
   margin-top: 5rem;
   position: relative;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
 }
 
 .footer .pattern-overlay {

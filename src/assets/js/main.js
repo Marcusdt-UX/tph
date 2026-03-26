@@ -18,12 +18,20 @@ function toggleTheme() {
 // Initialize theme before page renders
 initTheme();
 
-// Schedule non-critical work off the main thread
-function deferTask(fn) {
+// Schedule an array of functions, yielding to the browser between each one
+function runChunked(fns) {
+  var i = 0;
+  function next() {
+    if (i < fns.length) {
+      fns[i]();
+      i++;
+      setTimeout(next, 0);
+    }
+  }
   if ('requestIdleCallback' in window) {
-    requestIdleCallback(fn);
+    requestIdleCallback(next);
   } else {
-    setTimeout(fn, 200);
+    setTimeout(next, 50);
   }
 }
 
@@ -62,152 +70,91 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ========== Custom Cursor (disabled) ==========
-  /* const cursorDot = document.querySelector('.custom-cursor-dot');
-  const cursorRing = document.querySelector('.custom-cursor-ring');
+  // ===== Schedule all remaining work in yielding chunks =====
+  // Each function runs as a separate browser task, preventing long-task jank
+  runChunked([
 
-  if (cursorDot && cursorRing && window.matchMedia('(hover: hover)').matches) {
-    let mouseX = 0, mouseY = 0;
-    let dotX = 0, dotY = 0;
-    let ringX = 0, ringY = 0;
-
-    document.addEventListener('mousemove', function (e) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animateCursor() {
-      // Dot follows closely
-      dotX += (mouseX - dotX) * 0.3;
-      dotY += (mouseY - dotY) * 0.3;
-      cursorDot.style.transform = 'translate(' + (dotX - 4) + 'px, ' + (dotY - 4) + 'px)';
-
-      // Ring follows with lag
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
-      cursorRing.style.transform = 'translate(' + (ringX - 16) + 'px, ' + (ringY - 16) + 'px)';
-
-      requestAnimationFrame(animateCursor);
+  // --- Chunk 1: Lucide icons (above-fold UI) ---
+  function initIcons() {
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
     }
+  },
 
-    animateCursor();
+  // --- Chunk 2: Scroll animations ---
+  function initScrollAnimations() {
+    var animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale, .stagger-children');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      animatedElements.forEach(function (el) { observer.observe(el); });
+    } else {
+      animatedElements.forEach(function (el) { el.classList.add('visible'); });
+    }
+  },
 
-    // Hover detection
-    document.addEventListener('mouseover', function (e) {
-      var target = e.target;
-      if (
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        target.closest('a') ||
-        target.closest('button') ||
-        target.classList.contains('cursor-highlight')
-      ) {
-        document.body.classList.add('cursor-hover');
-      } else {
-        document.body.classList.remove('cursor-hover');
+  // --- Chunk 3: Active nav link + copyright year ---
+  function initNavAndYear() {
+    var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-link, .mobile-nav a:not(.mobile-nav-cta)').forEach(function (link) {
+      var href = link.getAttribute('href');
+      if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
+        link.classList.add('active');
       }
     });
-  } */
+    var yearEl = document.getElementById('current-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  },
 
-  // ========== Scroll Animations ==========
-  var animatedElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-scale, .stagger-children');
-
-  if ('IntersectionObserver' in window) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
-
-    animatedElements.forEach(function (el) {
-      observer.observe(el);
-    });
-  } else {
-    // Fallback: show everything
-    animatedElements.forEach(function (el) {
-      el.classList.add('visible');
-    });
-  }
-
-  // ========== Active Nav Link ==========
-  var currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-link, .mobile-nav a:not(.mobile-nav-cta)').forEach(function (link) {
-    var href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
-      link.classList.add('active');
-    }
-  });
-
-  // ========== Lucide Icons ==========
-  // Render icons early so above-fold UI (nav, hero) renders correctly
-  if (typeof lucide !== 'undefined') {
-    lucide.createIcons();
-  }
-
-  // ========== Copyright Year ==========
-  var yearEl = document.getElementById('current-year');
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
-
-  // === DEFERRED: non-critical below-fold interactivity ===
-  deferTask(function () {
-
-  // ========== FAQ Accordion ==========
-  document.querySelectorAll('.faq-question').forEach(function (btn) {
-    btn.setAttribute('aria-expanded', 'false');
-    btn.addEventListener('click', function () {
-      var item = btn.closest('.faq-item');
-      var wasOpen = item.classList.contains('open');
-
-      // Close all items
-      document.querySelectorAll('.faq-item').forEach(function (faq) {
-        faq.classList.remove('open');
-        faq.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-      });
-
-      // Toggle current
-      if (!wasOpen) {
-        item.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-
-  // ========== FAQ Category Filter ==========
-  document.querySelectorAll('.faq-filter-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      document.querySelectorAll('.faq-filter-btn').forEach(function (b) {
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-pressed', 'true');
-
-      var category = btn.getAttribute('data-category');
-
-      document.querySelectorAll('.faq-item').forEach(function (item) {
-        if (category === 'All' || item.getAttribute('data-category') === category) {
-          item.style.display = '';
-        } else {
-          item.style.display = 'none';
+  // --- Chunk 4: FAQ accordion ---
+  function initFAQ() {
+    document.querySelectorAll('.faq-question').forEach(function (btn) {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.faq-item');
+        var wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function (faq) {
+          faq.classList.remove('open');
+          faq.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!wasOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
         }
       });
     });
-  });
+  },
 
-  // ========== Contact Form ==========
-  var contactForm = document.getElementById('contact-form');
-  var formSuccess = document.querySelector('.form-success');
+  // --- Chunk 5: FAQ category filter ---
+  function initFAQFilter() {
+    document.querySelectorAll('.faq-filter-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.faq-filter-btn').forEach(function (b) {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        var category = btn.getAttribute('data-category');
+        document.querySelectorAll('.faq-item').forEach(function (item) {
+          item.style.display = (category === 'All' || item.getAttribute('data-category') === category) ? '' : 'none';
+        });
+      });
+    });
+  },
 
-  if (contactForm) {
-    // Inline validation helper
+  // --- Chunk 6: Contact form ---
+  function initContactForm() {
+    var contactForm = document.getElementById('contact-form');
+    var formSuccess = document.querySelector('.form-success');
+    if (!contactForm) return;
+
     function validateField(field) {
       var errorEl = document.getElementById(field.id + '-error');
       var isValid = field.validity.valid;
@@ -230,8 +177,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
-
-      // Validate all required fields
       var allValid = true;
       contactForm.querySelectorAll('[required]').forEach(function (field) {
         if (!validateField(field)) allValid = false;
@@ -240,15 +185,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
       var formData = new FormData(contactForm);
       var submitBtn = contactForm.querySelector('.btn-send');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.classList.add('sending');
-      }
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.classList.add('sending'); }
 
       fetch(contactForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
+        method: 'POST', body: formData, headers: { 'Accept': 'application/json' }
       }).then(function (response) {
         if (response.ok) {
           setTimeout(function () {
@@ -258,94 +198,62 @@ document.addEventListener('DOMContentLoaded', function () {
           }, 800);
         } else {
           alert('Something went wrong. Please try again or email us directly.');
-          resetBtn();
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.classList.remove('sending'); }
         }
       }).catch(function () {
         alert('Network error. Please try again or email us directly.');
-        resetBtn();
-      });
-
-      function resetBtn() {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.classList.remove('sending');
-        }
-      }
-    });
-  }
-
-  // ========== Pricing Billing Toggle ==========
-  var billingBtns = document.querySelectorAll('.billing-toggle button');
-  var priceElements = document.querySelectorAll('[data-price-project]');
-
-  billingBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      billingBtns.forEach(function (b) {
-        b.classList.remove('active');
-        b.setAttribute('aria-pressed', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-pressed', 'true');
-
-      var cycle = btn.getAttribute('data-billing');
-
-      priceElements.forEach(function (el) {
-        if (cycle === 'monthly') {
-          el.textContent = el.getAttribute('data-price-monthly');
-          var note = el.nextElementSibling;
-          if (note && note.classList.contains('pricing-price-note')) {
-            note.style.display = 'none';
-          }
-        } else {
-          el.textContent = el.getAttribute('data-price-project');
-          var note = el.nextElementSibling;
-          if (note && note.classList.contains('pricing-price-note')) {
-            note.style.display = '';
-          }
-        }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.classList.remove('sending'); }
       });
     });
-  });
+  },
 
-  // ========== Animated Stat Counters ==========
-  var statValues = document.querySelectorAll('.stat-value, .result-value');
+  // --- Chunk 7: Pricing billing toggle ---
+  function initPricing() {
+    var billingBtns = document.querySelectorAll('.billing-toggle button');
+    var priceElements = document.querySelectorAll('[data-price-project]');
+    billingBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        billingBtns.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        var cycle = btn.getAttribute('data-billing');
+        priceElements.forEach(function (el) {
+          if (cycle === 'monthly') {
+            el.textContent = el.getAttribute('data-price-monthly');
+            var note = el.nextElementSibling;
+            if (note && note.classList.contains('pricing-price-note')) note.style.display = 'none';
+          } else {
+            el.textContent = el.getAttribute('data-price-project');
+            var note = el.nextElementSibling;
+            if (note && note.classList.contains('pricing-price-note')) note.style.display = '';
+          }
+        });
+      });
+    });
+  },
 
-  function animateCounter(el) {
-    var text = el.textContent.trim();
-    var prefix = '';
-    var suffix = '';
-    var num = parseFloat(text.replace(/[^0-9.]/g, ''));
+  // --- Chunk 8: Animated stat counters ---
+  function initCounters() {
+    var statValues = document.querySelectorAll('.stat-value, .result-value');
+    if (!('IntersectionObserver' in window) || statValues.length === 0) return;
 
-    if (isNaN(num)) return;
-
-    // Extract prefix/suffix (e.g., "+", "%", "+" and "%")
-    var match = text.match(/^([^0-9]*)([\d.]+)(.*)$/);
-    if (match) {
-      prefix = match[1];
-      num = parseFloat(match[2]);
-      suffix = match[3];
-    }
-
-    var duration = 1500;
-    var startTime = null;
-    var startVal = 0;
-
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      var progress = Math.min((timestamp - startTime) / duration, 1);
-      // Ease out cubic
-      var eased = 1 - Math.pow(1 - progress, 3);
-      var current = Math.round(startVal + (num - startVal) * eased);
-      el.textContent = prefix + current + suffix;
-      if (progress < 1) {
-        requestAnimationFrame(step);
+    function animateCounter(el) {
+      var text = el.textContent.trim();
+      var match = text.match(/^([^0-9]*)([\d.]+)(.*)$/);
+      if (!match) return;
+      var prefix = match[1], num = parseFloat(match[2]), suffix = match[3];
+      if (isNaN(num)) return;
+      var duration = 1500, startTime = null;
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = prefix + Math.round(num * eased) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
       }
+      requestAnimationFrame(step);
     }
 
-    requestAnimationFrame(step);
-  }
-
-  if ('IntersectionObserver' in window && statValues.length > 0) {
     var counterObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -354,25 +262,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     }, { threshold: 0.3 });
+    statValues.forEach(function (el) { counterObserver.observe(el); });
+  },
 
-    statValues.forEach(function (el) {
-      counterObserver.observe(el);
-    });
-  }
-
-  // ========== Hero Parallax on Scroll ==========
-  var heroGridBgs = document.querySelectorAll('.hero-grid-bg');
-  if (heroGridBgs.length > 0) {
+  // --- Chunk 9: Hero parallax ---
+  function initParallax() {
+    var heroGridBgs = document.querySelectorAll('.hero-grid-bg');
+    if (heroGridBgs.length === 0) return;
     window.addEventListener('scroll', function () {
       var scrollY = window.scrollY;
       heroGridBgs.forEach(function (bg) {
         bg.style.transform = 'translate(' + (scrollY * 0.02) + 'px, ' + (scrollY * 0.05) + 'px)';
       });
     }, { passive: true });
-  }
+  },
 
-  // ========== Easter Egg Terminal ==========
-  (function () {
+  // --- Chunk 10: Easter egg terminal (lazy — only binds click handler) ---
+  function initTerminal() {
     var greenDot = document.querySelector('.code-card .window-dot-green');
     var cardInner = document.querySelector('.code-card .code-card-inner');
     var overlay = document.getElementById('terminal-overlay');
@@ -403,7 +309,6 @@ document.addEventListener('DOMContentLoaded', function () {
       output.appendChild(line);
       output.scrollTop = output.scrollHeight;
     }
-
     function addHTML(html) {
       var line = document.createElement('div');
       line.className = 'terminal-line';
@@ -416,18 +321,18 @@ document.addEventListener('DOMContentLoaded', function () {
       help: function () {
         addLine('');
         addLine('Available commands:', 'terminal-cyan');
-        addLine('  help      — Show this list');
-        addLine('  about     — About Thomas Publishing House');
-        addLine('  skills    — What we do');
-        addLine('  hello     — Say hi');
-        addLine('  time      — Current time');
-        addLine('  coffee    — Brew some coffee');
-        addLine('  matrix    — Take the red pill');
-        addLine('  secret    — ???');
-        addLine('  flip      — Flip a coin');
-        addLine('  magic8    — Ask the magic 8-ball');
-        addLine('  clear     — Clear terminal');
-        addLine('  exit      — Close terminal');
+        addLine('  help      \u2014 Show this list');
+        addLine('  about     \u2014 About Thomas Publishing House');
+        addLine('  skills    \u2014 What we do');
+        addLine('  hello     \u2014 Say hi');
+        addLine('  time      \u2014 Current time');
+        addLine('  coffee    \u2014 Brew some coffee');
+        addLine('  matrix    \u2014 Take the red pill');
+        addLine('  secret    \u2014 ???');
+        addLine('  flip      \u2014 Flip a coin');
+        addLine('  magic8    \u2014 Ask the magic 8-ball');
+        addLine('  clear     \u2014 Clear terminal');
+        addLine('  exit      \u2014 Close terminal');
       },
       about: function () {
         addLine('');
@@ -439,186 +344,115 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       skills: function () {
         addLine('');
-        var skills = [
-          ['Web Development', 95],
-          ['Brand Storytelling', 90],
-          ['Digital Strategy', 88],
-          ['Content & SEO', 92],
-          ['Social Media', 85]
-        ];
+        var skills = [['Web Development',95],['Brand Storytelling',90],['Digital Strategy',88],['Content & SEO',92],['Social Media',85]];
         skills.forEach(function (s) {
           var bar = '';
           var filled = Math.round(s[1] / 5);
-          for (var i = 0; i < 20; i++) bar += i < filled ? '█' : '░';
+          for (var i = 0; i < 20; i++) bar += i < filled ? '\u2588' : '\u2591';
           addHTML('<span class="terminal-cyan">' + s[0].padEnd(20) + '</span> <span class="terminal-green">' + bar + '</span> <span class="terminal-yellow">' + s[1] + '%</span>');
         });
       },
       hello: function () {
-        var greetings = [
-          'Hey there! 👋 Welcome to the hidden terminal.',
-          'Oh hello! You found the secret. Impressive.',
-          'Greetings, curious human. You have good instincts.',
-          'Hi! Fun fact: you\'re one of the few who found this.'
-        ];
-        addLine(greetings[Math.floor(Math.random() * greetings.length)], 'terminal-green');
+        var g = ['Hey there! \ud83d\udc4b Welcome to the hidden terminal.','Oh hello! You found the secret. Impressive.','Greetings, curious human. You have good instincts.','Hi! Fun fact: you\'re one of the few who found this.'];
+        addLine(g[Math.floor(Math.random() * g.length)], 'terminal-green');
       },
       hi: function () { commands.hello(); },
-      time: function () {
-        addLine('🕐 ' + new Date().toLocaleString(), 'terminal-yellow');
-      },
+      time: function () { addLine('\ud83d\udd50 ' + new Date().toLocaleString(), 'terminal-yellow'); },
       coffee: function () {
-        addLine('');
-        addLine('    ( (', 'terminal-yellow');
-        addLine('     ) )', 'terminal-yellow');
-        addLine('  ........', 'terminal-dim');
-        addLine('  |      |]', 'terminal-white');
-        addLine('  \\      /', 'terminal-white');
-        addLine('   `----\'', 'terminal-white');
-        addLine('');
-        addLine('Brewing... ☕ Done! Fresh code fuel.', 'terminal-green');
+        addLine(''); addLine('    ( (', 'terminal-yellow'); addLine('     ) )', 'terminal-yellow');
+        addLine('  ........', 'terminal-dim'); addLine('  |      |]', 'terminal-white');
+        addLine('  \\      /', 'terminal-white'); addLine('   `----\'', 'terminal-white');
+        addLine(''); addLine('Brewing... \u2615 Done! Fresh code fuel.', 'terminal-green');
       },
       matrix: function () {
         addLine('');
-        var chars = 'ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ012345789Z';
+        var chars = '\uff8a\uff90\uff8b\uff70\uff73\uff7c\uff85\uff93\uff86\uff7b\uff9c\uff82\uff75\uff98\uff71\uff8e\uff83\uff8f\uff79\uff92\uff74\uff76\uff77\uff91\uff95\uff97\uff7e\uff88\uff7d\uff80\uff87\uff8d012345789Z';
         for (var r = 0; r < 5; r++) {
           var row = '';
-          for (var c = 0; c < 40; c++) {
-            row += chars.charAt(Math.floor(Math.random() * chars.length));
-          }
+          for (var c = 0; c < 40; c++) row += chars.charAt(Math.floor(Math.random() * chars.length));
           addLine(row, 'terminal-green');
         }
-        addLine('');
-        addLine('Wake up, Neo...', 'terminal-green');
-        addLine('The Matrix has you.', 'terminal-green');
+        addLine(''); addLine('Wake up, Neo...', 'terminal-green'); addLine('The Matrix has you.', 'terminal-green');
       },
       secret: function () {
-        addLine('');
-        addLine('🔓 SECRET UNLOCKED', 'terminal-accent');
-        addLine('');
+        addLine(''); addLine('\ud83d\udd13 SECRET UNLOCKED', 'terminal-accent'); addLine('');
         addLine('"Every great story begins with a blank page.');
         addLine(' Every great website begins with a blinking');
         addLine(' cursor. We just happen to love both."');
-        addLine('');
-        addLine('   — The Founders, Thomas Publishing House', 'terminal-purple');
+        addLine(''); addLine('   \u2014 The Founders, Thomas Publishing House', 'terminal-purple');
       },
-      flip: function () {
-        var result = Math.random() < 0.5 ? 'Heads! 🪙' : 'Tails! 🪙';
-        addLine(result, 'terminal-yellow');
-      },
+      flip: function () { addLine(Math.random() < 0.5 ? 'Heads! \ud83e\ude99' : 'Tails! \ud83e\ude99', 'terminal-yellow'); },
       magic8: function () {
-        var answers = [
-          'It is certain.', 'Without a doubt.', 'Yes, definitely.',
-          'Reply hazy, try again.', 'Ask again later.',
-          'Don\'t count on it.', 'My sources say no.',
-          'Outlook good.', 'Signs point to yes.',
-          'Better not tell you now.'
-        ];
-        addLine('🎱 ' + answers[Math.floor(Math.random() * answers.length)], 'terminal-purple');
+        var a = ['It is certain.','Without a doubt.','Yes, definitely.','Reply hazy, try again.','Ask again later.','Don\'t count on it.','My sources say no.','Outlook good.','Signs point to yes.','Better not tell you now.'];
+        addLine('\ud83c\udfb1 ' + a[Math.floor(Math.random() * a.length)], 'terminal-purple');
       },
-      clear: function () {
-        output.innerHTML = '';
-        addLine('TPH Terminal v1.0 — Type "help" for commands', 'terminal-green');
-        addLine('----------------------------------------------', 'terminal-dim');
-      },
-      exit: function () {
-        cardInner.classList.remove('terminal-active');
-        greenDot.classList.remove('active');
-        terminalOpen = false;
-      }
+      clear: function () { output.innerHTML = ''; addLine('TPH Terminal v1.0 \u2014 Type "help" for commands', 'terminal-green'); addLine('----------------------------------------------', 'terminal-dim'); },
+      exit: function () { cardInner.classList.remove('terminal-active'); greenDot.classList.remove('active'); terminalOpen = false; }
     };
 
     input.addEventListener('keydown', function (e) {
       if (e.key === 'Enter') {
-        var cmd = input.value.trim().toLowerCase();
-        input.value = '';
+        var cmd = input.value.trim().toLowerCase(); input.value = '';
         if (!cmd) return;
-
-        history.push(cmd);
-        historyIndex = history.length;
+        history.push(cmd); historyIndex = history.length;
         addLine('tph@studio:~$ ' + cmd, 'terminal-dim');
-
-        if (commands[cmd]) {
-          commands[cmd]();
-        } else {
-          addLine('Command not found: ' + cmd + '. Try "help".', 'terminal-yellow');
-        }
+        if (commands[cmd]) { commands[cmd](); } else { addLine('Command not found: ' + cmd + '. Try "help".', 'terminal-yellow'); }
       } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (historyIndex > 0) {
-          historyIndex--;
-          input.value = history[historyIndex];
-        }
+        e.preventDefault(); if (historyIndex > 0) { historyIndex--; input.value = history[historyIndex]; }
       } else if (e.key === 'ArrowDown') {
         e.preventDefault();
-        if (historyIndex < history.length - 1) {
-          historyIndex++;
-          input.value = history[historyIndex];
-        } else {
-          historyIndex = history.length;
-          input.value = '';
-        }
+        if (historyIndex < history.length - 1) { historyIndex++; input.value = history[historyIndex]; }
+        else { historyIndex = history.length; input.value = ''; }
       }
     });
+    overlay.addEventListener('click', function () { input.focus(); });
+  },
 
-    // Click anywhere on terminal to focus input
-    overlay.addEventListener('click', function () {
-      input.focus();
-    });
-  })();
+  // --- Chunk 11: Cookie consent + analytics ---
+  function initCookieConsent() {
+    function loadAnalytics() {
+      var GA_ID = 'G-XXXXXXXXXX';
+      if (GA_ID === 'G-XXXXXXXXXX') return;
+      if (document.querySelector('script[src*="googletagmanager"]')) return;
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(script);
+      script.onload = function () {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { window.dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      };
+    }
 
-  // ========== Cookie Consent ==========
-  if (!localStorage.getItem('cookieConsent')) {
-    var banner = document.createElement('div');
-    banner.className = 'cookie-consent';
-    banner.innerHTML =
-      '<p>We use cookies to enhance your experience and analyze site traffic. ' +
-      '<a href="privacy.html">Privacy Policy</a></p>' +
-      '<div class="cookie-consent-actions">' +
-      '<button class="cookie-btn cookie-btn-accept">Accept</button>' +
-      '<button class="cookie-btn cookie-btn-decline">Decline</button>' +
-      '</div>';
-    document.body.appendChild(banner);
-
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        banner.classList.add('show');
+    if (!localStorage.getItem('cookieConsent')) {
+      var banner = document.createElement('div');
+      banner.className = 'cookie-consent';
+      banner.innerHTML =
+        '<p>We use cookies to enhance your experience and analyze site traffic. ' +
+        '<a href="privacy.html">Privacy Policy</a></p>' +
+        '<div class="cookie-consent-actions">' +
+        '<button class="cookie-btn cookie-btn-accept">Accept</button>' +
+        '<button class="cookie-btn cookie-btn-decline">Decline</button>' +
+        '</div>';
+      document.body.appendChild(banner);
+      requestAnimationFrame(function () { requestAnimationFrame(function () { banner.classList.add('show'); }); });
+      banner.querySelector('.cookie-btn-accept').addEventListener('click', function () {
+        localStorage.setItem('cookieConsent', 'accepted');
+        banner.classList.remove('show');
+        setTimeout(function () { banner.remove(); }, 400);
+        loadAnalytics();
       });
-    });
-
-    banner.querySelector('.cookie-btn-accept').addEventListener('click', function () {
-      localStorage.setItem('cookieConsent', 'accepted');
-      banner.classList.remove('show');
-      setTimeout(function () { banner.remove(); }, 400);
+      banner.querySelector('.cookie-btn-decline').addEventListener('click', function () {
+        localStorage.setItem('cookieConsent', 'declined');
+        banner.classList.remove('show');
+        setTimeout(function () { banner.remove(); }, 400);
+      });
+    } else if (localStorage.getItem('cookieConsent') === 'accepted') {
       loadAnalytics();
-    });
-
-    banner.querySelector('.cookie-btn-decline').addEventListener('click', function () {
-      localStorage.setItem('cookieConsent', 'declined');
-      banner.classList.remove('show');
-      setTimeout(function () { banner.remove(); }, 400);
-    });
-  } else if (localStorage.getItem('cookieConsent') === 'accepted') {
-    loadAnalytics();
+    }
   }
 
-  // ========== Google Analytics (consent-aware) ==========
-  function loadAnalytics() {
-    var GA_ID = 'G-XXXXXXXXXX'; // Replace with your GA4 Measurement ID
-    if (GA_ID === 'G-XXXXXXXXXX') return; // Skip if not configured
-    if (document.querySelector('script[src*=\"googletagmanager\"]')) return; // Already loaded
-
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-    document.head.appendChild(script);
-
-    script.onload = function () {
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { window.dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', GA_ID);
-    };
-  }
-
-  }); // end deferTask
+  ]); // end runChunked
 }); // end DOMContentLoaded
