@@ -3786,7 +3786,13 @@ a.ledger-item {
   mask-size: 300% 100%;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-  animation: bridgeReveal 60s ease-in-out infinite;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+}
+
+/* JS adds .sweeping to trigger a single 6s sweep, then removes it */
+.bridge-hologram.sweeping img {
+  animation: bridgeReveal 6s ease-in-out;
 }
 
 /* Shine line overlay — sweeps in sync with the mask */
@@ -3805,8 +3811,11 @@ a.ledger-item {
     transparent 60%,
     transparent 100%
   );
-  animation: shineSweep 60s ease-in-out infinite;
   will-change: transform;
+}
+
+.bridge-hologram.sweeping::before {
+  animation: shineSweep 6s ease-in-out;
 }
 
 /* Scanlines */
@@ -3826,54 +3835,22 @@ a.ledger-item {
   mix-blend-mode: overlay;
 }
 
-/* Mask slides from left to right, revealing bridge only at the shine point */
+/* Single sweep: mask slides right-to-left revealing bridge as shine passes */
 @keyframes bridgeReveal {
-  0% {
+  from {
     -webkit-mask-position: 100% 0;
     mask-position: 100% 0;
-    opacity: 1;
   }
-  10% {
+  to {
     -webkit-mask-position: 0% 0;
     mask-position: 0% 0;
-    opacity: 1;
-  }
-  11% {
-    opacity: 0;
-  }
-  12% {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-    opacity: 0;
-  }
-  13%, 100% {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-    opacity: 1;
   }
 }
 
 /* Shine line sweeps in sync */
 @keyframes shineSweep {
-  0% {
-    transform: translateX(-100%);
-    opacity: 1;
-  }
-  10% {
-    transform: translateX(100%);
-    opacity: 1;
-  }
-  11% {
-    opacity: 0;
-  }
-  12% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  13%, 100% {
-    transform: translateX(-100%);
-    opacity: 1;
-  }
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
 }
 
 @media (prefers-reduced-motion: reduce) {

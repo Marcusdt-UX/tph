@@ -74,10 +74,38 @@ document.addEventListener('DOMContentLoaded', function () {
   // Each function runs as a separate browser task, preventing long-task jank
   runChunked([
 
-  // --- Chunk 1: (icons inlined at build time — no runtime work needed) ---
-  function initIcons() {
-    // Lucide icons are now inlined by 11ty build transform.
-    // This chunk is kept as a no-op placeholder for chunk ordering.
+  // --- Chunk 1: Bridge hologram sweep (JS-driven to avoid constant paint) ---
+  function initBridgeSweep() {
+    var bridge = document.getElementById('bridge-hologram');
+    if (!bridge) return;
+
+    function sweep() {
+      bridge.classList.remove('sweeping');
+      void bridge.offsetWidth;          // force reflow to restart animation
+      bridge.classList.add('sweeping');
+    }
+
+    // Remove .sweeping after animation ends so it can be re-triggered
+    bridge.addEventListener('animationend', function () {
+      bridge.classList.remove('sweeping');
+    });
+
+    if ('IntersectionObserver' in window) {
+      var timer = null;
+      var obs = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          obs.disconnect();
+          sweep();                      // first sweep immediately
+          timer = setInterval(function () {
+            var r = bridge.getBoundingClientRect();
+            if (r.top < window.innerHeight && r.bottom > 0) sweep();
+          }, 30000);                    // re-sweep every 30 s while visible
+        }
+      }, { threshold: 0.05 });
+      obs.observe(bridge);
+    } else {
+      sweep();
+    }
   },
 
   // --- Chunk 2: Scroll animations + deferred CSS animations ---
