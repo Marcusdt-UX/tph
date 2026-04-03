@@ -8,9 +8,6 @@
   <meta name="description" content="{{ description }}">
   {% if canonical %}<link rel="canonical" href="{{ canonical }}">{% elif page.url %}<link rel="canonical" href="{{ site.url }}{{ page.url }}">{% endif %}
   {% if robots %}<meta name="robots" content="{{ robots }}">{% endif %}
-  {% if hreflang_en_ca %}<link rel="alternate" hreflang="en-CA" href="{{ hreflang_en_ca }}">{% endif %}
-  {% if hreflang_en_us %}<link rel="alternate" hreflang="en-US" href="{{ hreflang_en_us }}">{% endif %}
-  {% if hreflang_en_ca or hreflang_en_us %}<link rel="alternate" hreflang="x-default" href="{{ hreflang_en_us or canonical or (site.url + page.url) }}">{% endif %}
   <meta property="og:title" content="{{ ogTitle or title }}">
   <meta property="og:description" content="{{ ogDescription or description }}">
   <meta property="og:type" content="{{ ogType or 'website' }}">
@@ -22,6 +19,7 @@
   <meta name="twitter:image" content="{{ twitterImage or ogImage or (site.url + '/assets/images/logo.webp') }}">
   <meta name="theme-color" content="#1a1a2e">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon-32.png">
   <link rel="alternate" type="application/atom+xml" title="{{ site.name }} Blog" href="/feed.xml">
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>

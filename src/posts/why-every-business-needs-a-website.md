@@ -4,6 +4,7 @@ date: 2022-04-12
 category: Web Design
 author: Thomas Publishing House
 thumbnail: workspace.webp
+imageAlt: "Business owner reviewing website on laptop"
 excerpt: Social media is great, but it's rented land. Here's why your own website is still the foundation of your online presence.
 description: "Why every small business needs a professional website in 2022 — even if you have a Facebook page. Benefits of owning your online presence."
 ogTitle: "Why Every Small Business Still Needs a Website"

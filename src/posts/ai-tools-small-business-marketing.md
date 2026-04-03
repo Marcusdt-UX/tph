@@ -4,6 +4,7 @@ date: 2025-04-08
 category: Marketing
 author: Thomas Publishing House
 thumbnail: workspace.webp
+imageAlt: "Modern workspace with AI marketing tools on laptop screen"
 excerpt: AI has gone from hype to practical tool. Here are the AI tools that actually save small business owners time on marketing.
 description: "Practical AI tools for small business marketing in 2025. From content creation to analytics, these tools save time without replacing your expertise."
 ogTitle: "AI Tools for Small Business Marketing in 2025"

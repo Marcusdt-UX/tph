@@ -4,6 +4,7 @@ date: 2022-10-03
 category: Web Design
 author: Thomas Publishing House
 thumbnail: analytics-dashboard.webp
+imageAlt: "Analytics dashboard highlighting website bounce rate"
 excerpt: Your website might be losing customers without you knowing it. Here are five common mistakes and how to fix them.
 description: "Five common website mistakes that cost small businesses customers — and practical fixes for each one. Improve your site's conversion rate today."
 ogTitle: "5 Website Mistakes That Drive Customers Away"

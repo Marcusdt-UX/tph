@@ -4,6 +4,7 @@ date: 2025-07-29
 category: Web Design
 author: Thomas Publishing House
 thumbnail: security.webp
+imageAlt: "Cybersecurity tools protecting a business website"
 excerpt: An SSL certificate is just the starting line. Here are the website security steps small businesses actually need to take — and why most aren't doing enough.
 description: "Website security essentials for small businesses beyond SSL certificates. Practical guide to backups, updates, access control, and protecting customer data."
 ogTitle: "Website Security: Protecting Your Business Beyond SSL"

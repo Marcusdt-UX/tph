@@ -4,6 +4,7 @@ date: 2023-10-10
 category: Analytics
 author: Thomas Publishing House
 thumbnail: analytics-dashboard.webp
+imageAlt: "Google Analytics dashboard with traffic reports"
 excerpt: Google Analytics can feel overwhelming. Here's what small business owners actually need to look at — and what to ignore.
 description: "A beginner's guide to Google Analytics for small business owners. Which metrics matter, how to read your reports, and what to ignore."
 ogTitle: "Understanding Google Analytics: A Beginner's Guide"

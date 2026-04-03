@@ -4,6 +4,7 @@ date: 2022-02-15
 category: Web Design
 author: Thomas Publishing House
 thumbnail: workspace.webp
+imageAlt: "Laptop showing domain name search interface"
 excerpt: Your domain name is your digital address. Here's how to pick one that's memorable, brandable, and helps your business get found online.
 description: "A practical guide to choosing the right domain name for your small business. Tips on branding, keywords, extensions, and common mistakes to avoid."
 ogTitle: "How to Choose the Perfect Domain Name for Your Business"

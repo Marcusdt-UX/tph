@@ -4,6 +4,7 @@ date: 2024-02-27
 category: Marketing
 author: Thomas Publishing House
 thumbnail: writing.webp
+imageAlt: "Person writing compelling website copy"
 excerpt: Your call to action is where visitors become customers. Most CTAs are too vague, too boring, or too hidden. Here's how to fix yours.
 description: "How to write effective calls to action for your website. Practical guide to CTA copy, placement, design, and testing that drives more conversions."
 ogTitle: "How to Write Calls to Action That Actually Convert"

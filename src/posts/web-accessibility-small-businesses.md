@@ -4,6 +4,7 @@ date: 2024-06-18
 category: Web Design
 author: Thomas Publishing House
 thumbnail: office-modern.webp
+imageAlt: "Accessible website design displayed on monitor"
 excerpt: Web accessibility isn't just about compliance. It's about making sure every potential customer can use your website.
 description: "A practical guide to web accessibility for small businesses. Why it matters, common issues, and how to make your website more accessible."
 ogTitle: "Web Accessibility: What Small Businesses Need to Know"

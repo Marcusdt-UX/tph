@@ -4,6 +4,7 @@ date: 2026-03-05
 category: Web Design
 author: Thomas Publishing House
 thumbnail: website-speed.webp
+imageAlt: "Website speed test showing performance scores"
 excerpt: A one-second delay can cost you 7% of conversions. Learn how to test and improve your site speed without a developer.
 description: "Discover why website speed is critical for conversions, SEO, and user experience. Practical tips to test and improve your site performance."
 ogTitle: "Why Your Website Speed Matters More Than You Think"

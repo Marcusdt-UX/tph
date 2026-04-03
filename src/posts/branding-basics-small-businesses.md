@@ -4,6 +4,7 @@ date: 2025-06-24
 category: Marketing
 author: Thomas Publishing House
 thumbnail: team-editorial.webp
+imageAlt: "Creative team working on brand identity materials"
 excerpt: Your brand isn't just your logo. It's the feeling customers get when they interact with your business. Here's how to get it right.
 description: "A practical guide to branding for small businesses. Logos, colors, messaging, and consistency — what you need to build a recognizable brand."
 ogTitle: "Branding Basics for Small Businesses"

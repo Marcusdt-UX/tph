@@ -4,6 +4,7 @@ date: 2024-04-09
 category: Local SEO
 author: Thomas Publishing House
 thumbnail: analytics-blog.webp
+imageAlt: "Business analytics showing online review growth"
 excerpt: Online reviews are the new word of mouth. Here's how to build a steady stream of reviews without being pushy.
 description: "Practical strategies to get more Google reviews for your local business. Build social proof and improve your local SEO rankings."
 ogTitle: "How to Get More Online Reviews for Your Business"

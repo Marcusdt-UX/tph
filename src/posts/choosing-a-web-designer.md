@@ -4,6 +4,7 @@ date: 2022-08-15
 category: Web Design
 author: Thomas Publishing House
 thumbnail: team-collab.webp
+imageAlt: "Design team collaborating on a website project"
 excerpt: Not all web designers are created equal. Here's what to look for (and what to avoid) when hiring someone to build your website.
 description: "A practical guide to choosing the right web designer for your small business. What to look for, questions to ask, and red flags to avoid."
 ogTitle: "How to Choose the Right Web Designer for Your Business"

@@ -4,6 +4,7 @@ date: 2025-09-16
 category: SEO
 author: Thomas Publishing House
 thumbnail: analytics-blog.webp
+imageAlt: "SEO analytics showing backlink growth chart"
 excerpt: Backlinks are still one of the strongest ranking factors. Here's how local businesses can earn quality links without spamming anyone.
 description: "Practical link building strategies for local businesses. How to earn quality backlinks that improve your SEO without resorting to spam or sketchy tactics."
 ogTitle: "Local Link Building Strategies That Actually Work"

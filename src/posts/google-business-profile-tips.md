@@ -4,6 +4,7 @@ date: 2026-03-10
 category: Local SEO
 author: Thomas Publishing House
 thumbnail: analytics-blog.webp
+imageAlt: "Google Business Profile analytics and local search data"
 excerpt: Your Google Business Profile is often the first thing customers see. Here's how to make it work harder for your local business.
 description: "Learn how to optimize your Google Business Profile for better local search visibility in Port Huron and St. Clair County. Five actionable tips from a local marketing agency."
 ogTitle: "5 Google Business Profile Tips Every Port Huron Business Needs"

@@ -4,6 +4,7 @@ date: 2024-01-23
 category: Marketing
 author: Thomas Publishing House
 thumbnail: social-media.webp
+imageAlt: "Social media marketing platforms on multiple screens"
 excerpt: From AI-powered tools to the continued rise of short-form video, here's what small businesses should pay attention to this year.
 description: "Digital marketing trends for 2024 that matter for small businesses. AI tools, short-form video, local SEO changes, and more."
 ogTitle: "Digital Marketing Trends to Watch in 2024"

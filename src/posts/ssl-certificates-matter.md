@@ -4,6 +4,7 @@ date: 2023-02-07
 category: Web Design
 author: Thomas Publishing House
 thumbnail: security.webp
+imageAlt: "Website security padlock and SSL certificate icon"
 excerpt: That little padlock in your browser bar isn't just decoration. Here's why SSL matters for security, trust, and SEO.
 description: "What SSL certificates are, why they matter for your website's security and SEO, and how to make sure yours is set up correctly."
 ogTitle: "Why SSL Certificates Matter for Your Website"

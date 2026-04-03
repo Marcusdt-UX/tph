@@ -4,6 +4,7 @@ date: 2023-05-16
 category: Web Design
 author: Thomas Publishing House
 thumbnail: office-modern.webp
+imageAlt: "Modern office with color palette examples on screen"
 excerpt: Color isn't just decoration — it influences how visitors feel about your brand within seconds. Here's what you need to know about choosing the right palette.
 description: "How color psychology affects web design and branding. A practical guide to choosing website colors that align with your brand message and connect with your audience."
 ogTitle: "Color Psychology in Web Design: What Your Colors Say About Your Brand"

@@ -4,6 +4,7 @@ date: 2022-06-21
 category: SEO
 author: Thomas Publishing House
 thumbnail: seo-data.webp
+imageAlt: "Search engine optimization data and keyword rankings"
 excerpt: Search engine optimization doesn't have to be complicated. Here's what every local business owner needs to know to get started.
 description: "A beginner-friendly guide to SEO for local businesses. Learn the fundamentals of search engine optimization without the jargon."
 ogTitle: "SEO Basics: A Beginner's Guide for Local Businesses"

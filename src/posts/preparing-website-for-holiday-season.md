@@ -4,6 +4,7 @@ date: 2025-12-02
 category: Web Design
 author: Thomas Publishing House
 thumbnail: cityscape.webp
+imageAlt: "Cityscape during the holiday shopping season"
 excerpt: The holiday rush is coming. Make sure your website is ready with these practical steps for speed, promotions, and seasonal updates.
 description: "How to prepare your small business website for the holiday season. Practical guide covering speed optimization, seasonal content, promotions, and customer experience."
 ogTitle: "Preparing Your Website for the Holiday Season"

@@ -4,6 +4,7 @@ date: 2023-04-11
 category: Web Design
 author: Thomas Publishing House
 thumbnail: mobile-app.webp
+imageAlt: "Responsive website displayed on mobile phone"
 excerpt: More than 60% of web traffic comes from phones. If your site isn't built for mobile first, you're building it wrong.
 description: "Why mobile-first web design is essential for small businesses. How mobile usage has changed and what it means for your website strategy."
 ogTitle: "Mobile-First Design: Why It's No Longer Optional"

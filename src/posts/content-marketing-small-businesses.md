@@ -4,6 +4,7 @@ date: 2023-08-22
 category: Marketing
 author: Thomas Publishing House
 thumbnail: writing.webp
+imageAlt: "Writer creating content marketing blog post"
 excerpt: Content marketing isn't just for big brands. Here's how local businesses can use blog posts, guides, and helpful content to attract customers.
 description: "How small businesses can use content marketing to attract customers. A practical guide to getting started with blogs, guides, and helpful content."
 ogTitle: "Content Marketing for Small Businesses — Getting Started"

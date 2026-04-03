@@ -4,6 +4,7 @@ date: 2024-09-03
 category: Web Design
 author: Thomas Publishing House
 thumbnail: team-collab.webp
+imageAlt: "Professional web designers reviewing a project together"
 excerpt: Wix, Squarespace, or a professional designer? Here's an honest look at when DIY makes sense and when it costs you more than it saves.
 description: "An honest comparison of DIY website builders versus professional web design. When to use Wix or Squarespace and when to hire a designer."
 ogTitle: "DIY vs Professional Web Design: An Honest Comparison"

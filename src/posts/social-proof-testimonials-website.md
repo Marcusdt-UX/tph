@@ -4,6 +4,7 @@ date: 2022-11-08
 category: Marketing
 author: Thomas Publishing House
 thumbnail: team-collab.webp
+imageAlt: "Team reviewing customer testimonials for website"
 excerpt: People trust other people more than they trust businesses. Here's how to use testimonials, reviews, and social proof to win more customers.
 description: "How to use testimonials and social proof on your small business website. Practical guide to collecting, displaying, and maximizing the impact of customer reviews."
 ogTitle: "The Power of Social Proof: Using Testimonials on Your Website"

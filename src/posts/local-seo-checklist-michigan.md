@@ -4,6 +4,7 @@ date: 2023-06-20
 category: Local SEO
 author: Thomas Publishing House
 thumbnail: seo-data.webp
+imageAlt: "Local SEO rankings data for Michigan businesses"
 excerpt: A step-by-step checklist to improve your local search visibility in Michigan. From Google Business Profile to citations and beyond.
 description: "A complete local SEO checklist for Michigan small businesses. Step-by-step guide to improving your visibility in Google Maps and local search results."
 ogTitle: "Local SEO Checklist for Michigan Small Businesses"

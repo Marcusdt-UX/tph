@@ -4,6 +4,7 @@ date: 2025-01-14
 category: Marketing
 author: Thomas Publishing House
 thumbnail: seo-data.webp
+imageAlt: "Google Ads campaign performance dashboard"
 excerpt: Google Ads can be powerful for local businesses — or a money pit. Here's how to run campaigns that actually deliver ROI.
 description: "A practical guide to Google Ads for small businesses. How to set up campaigns, set budgets, and avoid wasting money on paid search."
 ogTitle: "A Small Business Guide to Google Ads"

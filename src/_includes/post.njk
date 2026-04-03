@@ -23,7 +23,7 @@ mainStyle: "padding-top:9rem;"
   <div class="container" style="max-width:48rem;">
     {% if thumbnail %}
     <div class="fade-in" style="margin-bottom:2.5rem;border-radius:0.75rem;overflow:hidden;">
-      <img src="/assets/images/{{ thumbnail }}" alt="{{ title }}" loading="lazy" style="width:100%;display:block;">
+      <img src="/assets/images/{{ thumbnail }}" alt="{{ imageAlt or title }}" width="768" height="432" loading="lazy" style="width:100%;height:auto;display:block;">
     </div>
     {% endif %}
     <article class="blog-post fade-in" style="font-size:1.0625rem;line-height:1.85;color:var(--foreground);">

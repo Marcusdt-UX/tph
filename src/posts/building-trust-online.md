@@ -4,6 +4,7 @@ date: 2024-11-12
 category: Web Design
 author: Thomas Publishing House
 thumbnail: analytics-dashboard.webp
+imageAlt: "Analytics dashboard showing website conversion metrics"
 excerpt: Visitors decide whether to trust your business within seconds. Here are the website elements that build credibility and drive conversions.
 description: "Website trust signals that convert visitors into customers. Testimonials, design quality, contact information, and more — practical tips for small businesses."
 ogTitle: "Building Trust Online: Website Elements That Convert"

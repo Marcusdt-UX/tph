@@ -4,6 +4,7 @@ date: 2026-02-28
 category: Marketing
 author: Thomas Publishing House
 thumbnail: social-media.webp
+imageAlt: "Social media platforms and engagement metrics"
 excerpt: Cut through the noise. A practical look at which platforms and strategies are delivering ROI for local businesses right now.
 description: "A practical guide to social media marketing for small businesses in 2025. Which platforms work, what content performs, and how to measure ROI."
 ogTitle: "Social Media in 2025: What's Working for Small Businesses"

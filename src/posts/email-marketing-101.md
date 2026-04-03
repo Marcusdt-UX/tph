@@ -4,6 +4,7 @@ date: 2022-12-14
 category: Marketing
 author: Thomas Publishing House
 thumbnail: writing.webp
+imageAlt: "Marketer drafting an email campaign"
 excerpt: Email marketing has the highest ROI of any marketing channel. Here's how to get started without a big budget or a marketing degree.
 description: "A beginner's guide to email marketing for small businesses. How to build a list, what to send, and which tools to use."
 ogTitle: "Email Marketing 101 for Small Businesses"

@@ -4,6 +4,7 @@ date: 2024-07-30
 category: Web Design
 author: Thomas Publishing House
 thumbnail: analytics-dashboard.webp
+imageAlt: "Dashboard comparing website platform options"
 excerpt: WordPress powers 40% of the web, but that doesn't mean it's right for everyone. Here's an honest comparison to help you decide.
 description: "An honest comparison of WordPress and custom-built websites for small businesses. Pros, cons, costs, and which option makes sense for different business needs."
 ogTitle: "WordPress vs. Custom Websites: Which Is Right for Your Business?"

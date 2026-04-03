@@ -4,6 +4,7 @@ date: 2023-12-05
 category: Web Design
 author: Thomas Publishing House
 thumbnail: workspace.webp
+imageAlt: "Outdated website open on laptop ready for redesign"
 excerpt: Not sure if your website needs a refresh? Here are seven clear signs that a redesign will pay for itself.
 description: "Seven signs your business website needs a redesign. Know when it's time to invest in a fresh site versus patching the old one."
 ogTitle: "Signs It's Time for a Website Redesign"

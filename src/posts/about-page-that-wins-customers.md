@@ -4,6 +4,7 @@ date: 2025-02-18
 category: Web Design
 author: Thomas Publishing House
 thumbnail: team-editorial.webp
+imageAlt: "Team collaborating on editorial content strategy"
 excerpt: Your About page is one of the most visited pages on your site — and one of the most wasted. Here's how to make it actually work for your business.
 description: "How to write an About page that builds trust and converts visitors. Practical tips for small businesses on storytelling, structure, and what to include."
 ogTitle: "How to Create an About Page That Wins Customers"
