@@ -1,2 +1,10 @@
 ﻿node_modules/
 _site/
+
+# Samsung DeX app
+samsung-dex-app/node_modules/
+samsung-dex-app/dist/
+samsung-dex-app/bin/*.exe
+samsung-dex-app/bin/*.dll
+samsung-dex-app/bin/adb
+samsung-dex-app/bin/scrcpy
