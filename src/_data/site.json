@@ -6,6 +6,8 @@
   "phone": "(810) 689-9762",
   "phoneTel": "+1-810-689-9762",
   "address": "100 McMorran Blvd, Port Huron, MI 48060",
-  "facebook": "https://facebook.com/ThomasPublishingHouse",
+  "addressStreet": "100 McMorran Blvd",
+  "addressCityStateZip": "Port Huron, MI 48060",
+  "facebook": "https://www.facebook.com/ThomasPublishingHousePH",
   "linkedin": "https://linkedin.com/company/thomaspublishinghouse"
 }

@@ -546,6 +546,24 @@ input, textarea, select {
   margin-bottom: 2rem;
 }
 
+/* Homepage H1 carries a longer keyword phrase than other pages — scale it down
+   so the headline block stays roughly the same height as the old short title. */
+.hero-home .hero-title {
+  font-size: 2.25rem;
+}
+
+/* Brand tagline — sits under the keyword H1, keeps "We Author the Digital Space" visible */
+.hero-tagline {
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  margin-top: -1.25rem;
+  margin-bottom: 2rem;
+}
+
 .hero-subtitle {
   font-size: 1.125rem;
   color: #d1d5db;
@@ -3566,6 +3584,10 @@ a.ledger-item {
     font-size: 4.5rem;
   }
 
+  .hero-home .hero-title {
+    font-size: 2.75rem;
+  }
+
   .hero-subtitle {
     font-size: 1.25rem;
   }
@@ -3621,6 +3643,10 @@ a.ledger-item {
   .hero h1,
   .hero-title {
     font-size: 4.5rem;
+  }
+
+  .hero-home .hero-title {
+    font-size: 3.25rem;
   }
 
   .ledger-name {
@@ -3707,7 +3733,7 @@ a.ledger-item {
   }
 
   .hero-home .hero-title {
-    font-size: 6rem;
+    font-size: 4rem;
   }
 
   .story-grid {

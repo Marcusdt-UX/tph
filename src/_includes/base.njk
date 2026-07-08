@@ -101,7 +101,7 @@
     <header class="header">
       <div class="header-bg"></div>
       <div class="container">
-        <a href="/index.html" class="logo">
+        <a href="/" class="logo">
           <div class="logo-img">
             <img src="/assets/images/logo-sm.webp" alt="Thomas Publishing House logo" width="64" height="64">
           </div>
@@ -111,7 +111,7 @@
           </div>
         </a>
         <nav class="desktop-nav">
-          <a href="/index.html" class="nav-link">Home</a>
+          <a href="/" class="nav-link">Home</a>
           <a href="/services.html" class="nav-link">Services</a>
           <a href="/portfolio.html" class="nav-link">Portfolio</a>
           <a href="/pricing.html" class="nav-link">Pricing</a>
@@ -136,7 +136,7 @@
         </button>
       </div>
       <nav class="mobile-nav">
-          <a href="/index.html">Home</a>
+          <a href="/">Home</a>
           <a href="/services.html">Services</a>
           <a href="/portfolio.html">Portfolio</a>
           <a href="/pricing.html">Pricing</a>
@@ -179,7 +179,7 @@
           </div>
           <div class="footer-links">
             <h4>Quick Links</h4>
-            <a href="/index.html">Home</a>
+            <a href="/">Home</a>
             <a href="/services.html">Services</a>
             <a href="/portfolio.html">Portfolio</a>
             <a href="/pricing.html">Pricing</a>
@@ -203,9 +203,13 @@
           </div>
           <div class="footer-contact">
             <h4>Contact</h4>
-            <p>Port Huron, Michigan</p>
-            <p>{{ site.email }}</p>
-            <p>{{ site.phone }}</p>
+            <address>
+              {{ site.name }}<br>
+              {{ site.addressStreet }}<br>
+              {{ site.addressCityStateZip }}<br>
+              <a href="tel:{{ site.phoneTel }}">{{ site.phone }}</a><br>
+              <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+            </address>
             <div class="footer-social">
               <a href="{{ site.facebook }}" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i data-lucide="facebook"></i></a>
               <a href="{{ site.linkedin }}" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i data-lucide="linkedin"></i></a>

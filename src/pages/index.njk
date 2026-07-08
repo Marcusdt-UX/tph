@@ -10,7 +10,7 @@ permalink: /index.html
 schema: |
   {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": "ProfessionalService",
       "name": "Thomas Publishing House",
       "description": "Port Huron, MI web design and digital marketing agency. Custom websites, apps, SEO, and UX solutions for small businesses in St. Clair County and beyond.",
       "url": "https://thomaspublishinghouse.com",
@@ -51,8 +51,22 @@ schema: |
         { "@type": "AdministrativeArea", "name": "Lambton County, Ontario" }
       ],
       "sameAs": [
-        "https://facebook.com/ThomasPublishingHouse",
+        "https://www.facebook.com/ThomasPublishingHousePH",
         "https://linkedin.com/company/thomaspublishinghouse"
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "09:00",
+          "closes": "13:00"
+        }
       ]
     }
 ---
@@ -72,9 +86,10 @@ schema: |
               <span>Port Huron, Michigan</span>
             </div>
             <h1 class="hero-title">
-              We Author the<br>
-              <span class="gradient-text">Digital Space</span>
+              Web Design &amp; Digital Marketing<br>
+              <span class="gradient-text">in Port Huron</span>
             </h1>
+            <p class="hero-tagline">We Author the Digital Space</p>
             <p class="hero-subtitle">
               A full-service web design and digital marketing agency based in Port Huron, Michigan. Custom websites, SEO, app development, and UX solutions for businesses everywhere.
             </p>
