@@ -12,9 +12,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/.htaccess");
-  // anke app privacy policy — standalone page (Google Play requirement),
-  // copied verbatim so it keeps its own styling, not the TPH layout.
-  eleventyConfig.addPassthroughCopy({ "src/anke-privacy.html": "anke/privacy.html" });
+  // anke app privacy policy (Google Play requirement) lives at
+  // src/anke-privacy.html — 11ty renders it as a standalone page (no TPH
+  // layout, since it's outside src/pages/) at /anke-privacy/.
 
   // Blog post collection sorted by date (newest first)
   eleventyConfig.addCollection("posts", function (collectionApi) {
