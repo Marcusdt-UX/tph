@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Repay Your Loan – Anke</title>
+    <style>
+      :root {
+        --gold: #e5a63d;
+        --gold-deep: #c98a1e;
+        --black: #171214;
+        --success: #1e7d51;
+        --success-light: #d9efe3;
+        --danger: #a52a2a;
+        --danger-light: #f7e2e2;
+        --bg: #f5efe6;
+        --card-bg: #ffffff;
+        --text: #241a10;
+        --text-secondary: #6f6252;
+        --text-muted: #9a8d7c;
+        --border: #e6dcc9;
+        --input-bg: #faf6ee;
+        --radius: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #141019;
+          --card-bg: #1f1826;
+          --text: #f5efe6;
+          --text-secondary: #b3a89a;
+          --text-muted: #7d7266;
+          --border: #3a2c42;
+          --input-bg: #171221;
+          --success-light: rgba(30, 125, 81, 0.18);
+          --danger-light: rgba(165, 42, 42, 0.18);
+        }
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg); color: var(--text);
+        min-height: 100vh; display: flex; align-items: center; justify-content: center;
+        padding: 20px;
+      }
+      .container { max-width: 460px; width: 100%; }
+      .kente { height: 8px; border-radius: 4px 4px 0 0; background:
+        repeating-linear-gradient(90deg,
+          var(--gold) 0 34px, var(--black) 34px 40px,
+          #a52a2a 40px 66px, var(--gold) 66px 72px,
+          #1e7d51 72px 98px, var(--black) 98px 104px,
+          #cf5b2e 104px 130px, var(--gold) 130px 136px); }
+      .header { text-align: center; margin-bottom: 20px; }
+      .logo { font-size: 30px; font-weight: 800; color: var(--gold); }
+      .tagline { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+      .card { background: var(--card-bg); border: 1px solid var(--border);
+        border-radius: 0 0 var(--radius) var(--radius); padding: 26px 22px; }
+      h1 { font-size: 20px; text-align: center; margin-bottom: 6px; }
+      .sub { text-align: center; color: var(--text-secondary); font-size: 14px; margin-bottom: 16px; }
+      .stat-row { display: flex; justify-content: space-between; padding: 9px 0;
+        border-bottom: 1px dashed var(--border); font-size: 14px; }
+      .stat-row:last-of-type { border-bottom: none; }
+      .stat-label { color: var(--text-secondary); }
+      .stat-value { font-weight: 700; }
+      .big-remaining { text-align: center; margin: 14px 0 4px; }
+      .big-remaining .amt { font-size: 34px; font-weight: 800; color: var(--gold-deep); }
+      .big-remaining .lbl { font-size: 12px; color: var(--text-muted); }
+      .steps { font-size: 13px; color: var(--text-secondary); line-height: 21px;
+        margin: 14px 0 10px; }
+      .address-box { padding: 12px; border-radius: 10px; background: var(--input-bg);
+        border: 1px dashed var(--border); font-family: monospace; font-size: 12.5px;
+        word-break: break-all; cursor: pointer; }
+      .copy-hint { font-size: 12px; color: var(--gold-deep); margin-top: 6px; text-align: center; }
+      input[type="number"] { width: 100%; padding: 13px; margin-top: 12px;
+        border: 1px solid var(--border); border-radius: 10px; font-size: 16px;
+        background: var(--input-bg); color: var(--text); }
+      button { width: 100%; padding: 14px; border: none; border-radius: 10px; margin-top: 10px;
+        background: var(--gold); color: var(--black); font-size: 16px; font-weight: 700; cursor: pointer; }
+      button:hover { background: var(--gold-deep); }
+      button:disabled { opacity: 0.6; cursor: default; }
+      .banner { padding: 12px 14px; border-radius: 10px; font-size: 14px; margin-top: 14px; display: none; }
+      .banner.success { background: var(--success-light); color: var(--success); display: block; }
+      .banner.error { background: var(--danger-light); color: var(--danger); display: block; }
+      .banner.waiting { background: var(--input-bg); color: var(--text-secondary); display: block; }
+      .paid { text-align: center; padding: 26px 0 10px; }
+      .paid .big { font-size: 52px; }
+      .paid h2 { margin: 10px 0 6px; }
+      .paid p { color: var(--text-secondary); font-size: 14px; }
+      .warn { padding: 11px 13px; border-radius: 10px; margin: 12px 0;
+        background: rgba(207,91,46,0.12); border: 1px solid rgba(207,91,46,0.35);
+        font-size: 12.5px; line-height: 18px; color: var(--text); }
+      .amt-label { display: block; font-size: 12px; color: var(--text-secondary);
+        margin-top: 14px; }
+      .amt-hint { font-size: 12px; color: var(--text-muted); margin-top: 5px; }
+      .amt-hint a { color: var(--gold-deep); cursor: pointer; text-decoration: underline; }
+      .fine { font-size: 12px; color: var(--text-muted); margin-top: 14px; line-height: 18px; }
+      .hidden { display: none !important; }
+      .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid var(--text-muted);
+        border-top-color: transparent; border-radius: 50%; animation: spin 0.9s linear infinite;
+        vertical-align: -2px; margin-right: 6px; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">anke</div>
+        <div class="tagline">Community-powered lending, built on trust</div>
+      </div>
+      <div class="kente"></div>
+      <div class="card">
+        <div id="loading">Loading your loan…</div>
+
+        <div id="main" class="hidden">
+          <h1 id="title">Your Loan</h1>
+          <p class="sub" id="subtitle"></p>
+
+          <div class="big-remaining">
+            <div class="amt" id="remaining"></div>
+            <div class="lbl">remaining</div>
+          </div>
+          <div class="stat-row"><span class="stat-label">Payment plan</span><span class="stat-value" id="plan"></span></div>
+          <div class="stat-row"><span class="stat-label">Progress</span><span class="stat-value" id="progress"></span></div>
+          <div class="stat-row"><span class="stat-label">Next due</span><span class="stat-value" id="nextDue"></span></div>
+
+          <p class="steps">
+            <strong>How to pay — with digital dollars (USDC):</strong><br />
+            1. Copy the circle's payment address below<br />
+            2. Send USDC on the <strong>Base network</strong> to it (from
+            Coinbase or any wallet — in Coinbase tap "Send", pick USDC,
+            network: Base)<br />
+            3. Enter the amount you sent and tap "I sent it"
+          </p>
+          <div class="warn">
+            ⚠ <strong>Send on the Base network only.</strong> USDC sent on
+            Ethereum, Polygon, or any other network will be lost. Double-check
+            the network before you send.
+          </div>
+          <div class="address-box" id="vaultAddress" title="Tap to copy"></div>
+          <div class="copy-hint" id="copyHint">tap address to copy</div>
+
+          <label class="amt-label" for="amount">Amount you're sending (USD)</label>
+          <input type="number" id="amount" min="0.01" step="0.01" placeholder="0.00" />
+          <div class="amt-hint" id="amtHint"></div>
+          <button id="claimBtn">I sent it — watch for my payment</button>
+          <div id="banner" class="banner"></div>
+          <p class="fine">
+            Payments are verified on-chain: once your USDC arrives at the
+            address above it's applied to your loan automatically — this
+            page updates itself. No account needed.
+          </p>
+        </div>
+
+        <div id="paid" class="paid hidden">
+          <div class="big">🎉</div>
+          <h2>Paid in full</h2>
+          <p>This loan is settled. You're all done — thank you!</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API =
+        "https://olgrowbplsclbhpndvhz.supabase.co/functions/v1/external-repay";
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code") || "";
+      const $ = (id) => document.getElementById(id);
+      let vaultAddr = "";
+      let pollTimer = null;
+
+      function showBanner(msg, kind) {
+        const b = $("banner");
+        b.innerHTML = kind === "waiting" ? '<span class="spinner"></span>' + msg : msg;
+        b.className = "banner " + kind;
+      }
+
+      async function api(body) {
+        const res = await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        return res.json();
+      }
+
+      function render(d) {
+        $("loading").classList.add("hidden");
+        if (d.error) {
+          $("main").classList.add("hidden");
+          $("loading").classList.remove("hidden");
+          $("loading").textContent = d.error;
+          return;
+        }
+        if (d.loanStatus === "completed" || d.remaining <= 0) {
+          $("main").classList.add("hidden");
+          $("paid").classList.remove("hidden");
+          if (pollTimer) clearInterval(pollTimer);
+          return;
+        }
+        $("main").classList.remove("hidden");
+        $("title").textContent = "Hi " + (d.borrowerName || "there") + " 👋";
+        $("subtitle").textContent = "Your loan from " + d.circleName;
+        $("remaining").textContent = "$" + Number(d.remaining).toFixed(2);
+        $("plan").textContent = "$" + Number(d.paymentAmount).toFixed(2) + " / " + d.per;
+        $("progress").textContent = d.paymentsMade + " of " + d.totalPayments + " payments";
+        $("nextDue").textContent = d.nextDue || "—";
+        vaultAddr = d.vaultAddress || "";
+        $("vaultAddress").textContent =
+          vaultAddr ||
+          "Payment address not ready — ask the lender to open the app once.";
+        $("claimBtn").disabled = !vaultAddr;
+
+        // Prefill with the per-period payment (never more than remaining)
+        // so a distracted borrower doesn't mistype — the reconciler needs
+        // the typed amount to match the USDC sent within a cent.
+        const suggested = Math.min(
+          Number(d.paymentAmount) || 0,
+          Number(d.remaining) || 0,
+        );
+        if (!$("amount").value && suggested > 0) {
+          $("amount").value = suggested.toFixed(2);
+        }
+        $("amtHint").innerHTML =
+          "Type the EXACT amount of USDC you send, or " +
+          '<a id="payFull">pay the full $' +
+          Number(d.remaining).toFixed(2) +
+          "</a>. It must match what arrives on-chain, to the cent.";
+        const pf = document.getElementById("payFull");
+        if (pf)
+          pf.addEventListener("click", () => {
+            $("amount").value = Number(d.remaining).toFixed(2);
+          });
+        if (d.pendingClaims > 0) {
+          showBanner(
+            "Watching the Base network for your USDC — this page refreshes automatically.",
+            "waiting",
+          );
+          startPolling();
+        }
+      }
+
+      async function load() {
+        render(await api({ action: "get", code }));
+      }
+
+      function startPolling() {
+        if (pollTimer) return;
+        pollTimer = setInterval(load, 12000);
+      }
+
+      $("vaultAddress").addEventListener("click", async () => {
+        if (!vaultAddr) return;
+        try {
+          await navigator.clipboard.writeText(vaultAddr);
+          $("copyHint").textContent = "copied ✓";
+          setTimeout(() => ($("copyHint").textContent = "tap address to copy"), 2000);
+        } catch (_) {
+          $("copyHint").textContent = "long-press the address to copy";
+        }
+      });
+
+      $("claimBtn").addEventListener("click", async () => {
+        const amount = parseFloat($("amount").value);
+        if (!(amount > 0)) {
+          showBanner("Enter the amount you sent first.", "error");
+          return;
+        }
+        $("claimBtn").disabled = true;
+        const d = await api({ action: "claim", code, amount });
+        $("claimBtn").disabled = false;
+        if (d.error) {
+          showBanner(d.error, "error");
+          return;
+        }
+        $("amount").value = "";
+        showBanner(d.message, "waiting");
+        startPolling();
+      });
+
+      if (!code) {
+        $("loading").textContent = "Missing payment code — check your link.";
+      } else {
+        load();
+      }
+    </script>
+  </body>
+</html>

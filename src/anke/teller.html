@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect Your Bank – Anke</title>
+    <script src="https://cdn.teller.io/connect/connect.js"></script>
+    <style>
+      :root {
+        --gold: #e5a63d;
+        --gold-deep: #c98a1e;
+        --black: #171214;
+        --success: #1e7d51;
+        --success-light: #d9efe3;
+        --danger: #a52a2a;
+        --danger-light: #f7e2e2;
+        --bg: #f5efe6;
+        --card-bg: #ffffff;
+        --text: #241a10;
+        --text-secondary: #6f6252;
+        --text-muted: #9a8d7c;
+        --border: #e6dcc9;
+        --input-bg: #faf6ee;
+        --radius: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #141019;
+          --card-bg: #1f1826;
+          --text: #f5efe6;
+          --text-secondary: #b3a89a;
+          --text-muted: #7d7266;
+          --border: #3a2c42;
+          --input-bg: #171221;
+          --success-light: rgba(30, 125, 81, 0.18);
+          --danger-light: rgba(165, 42, 42, 0.18);
+        }
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg); color: var(--text);
+        min-height: 100vh; display: flex; align-items: center; justify-content: center;
+        padding: 20px;
+      }
+      .container { max-width: 440px; width: 100%; }
+      .kente { height: 8px; border-radius: 4px 4px 0 0; background:
+        repeating-linear-gradient(90deg,
+          var(--gold) 0 34px, var(--black) 34px 40px,
+          #a52a2a 40px 66px, var(--gold) 66px 72px,
+          #1e7d51 72px 98px, var(--black) 98px 104px,
+          #cf5b2e 104px 130px, var(--gold) 130px 136px); }
+      .header { text-align: center; margin-bottom: 20px; }
+      .logo { font-size: 30px; font-weight: 800; color: var(--gold); }
+      .tagline { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+      .card { background: var(--card-bg); border: 1px solid var(--border);
+        border-radius: 0 0 var(--radius) var(--radius); padding: 26px 22px; }
+      h1 { font-size: 20px; text-align: center; margin-bottom: 8px; }
+      .sub { text-align: center; color: var(--text-secondary); font-size: 14px; margin-bottom: 18px; }
+      button { width: 100%; padding: 14px; border: none; border-radius: 10px;
+        background: var(--gold); color: var(--black); font-size: 16px; font-weight: 700; cursor: pointer; }
+      button:hover { background: var(--gold-deep); }
+      .token-box { margin-top: 16px; padding: 14px; border-radius: 10px;
+        background: var(--input-bg); border: 1px dashed var(--border);
+        font-family: monospace; font-size: 13px; word-break: break-all; display: none; }
+      .copy-btn { margin-top: 10px; background: var(--success); color: white; display: none; }
+      .banner { padding: 12px 14px; border-radius: 10px; font-size: 14px; margin-top: 14px; display: none; }
+      .banner.success { background: var(--success-light); color: var(--success); display: block; }
+      .banner.error { background: var(--danger-light); color: var(--danger); display: block; }
+      .steps { font-size: 13px; color: var(--text-secondary); line-height: 22px; margin-top: 16px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">anke</div>
+        <div class="tagline">Community-powered lending, built on trust</div>
+      </div>
+      <div class="kente"></div>
+      <div class="card">
+        <h1>Connect Your Bank</h1>
+        <p class="sub">
+          Free, secure bank connection via Teller. Log into your bank, then
+          copy the token back into anke.
+        </p>
+        <button id="connectBtn">Connect a bank</button>
+        <div id="tokenBox" class="token-box"></div>
+        <button id="copyBtn" class="copy-btn">Copy token for anke</button>
+        <div id="banner" class="banner"></div>
+        <p class="steps">
+          1. Tap "Connect a bank" and sign into your bank<br />
+          2. Copy the token that appears<br />
+          3. Paste it in anke → Money → Link Account → Teller
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const appId = params.get("app") || "";
+      const environment = params.get("env") || "sandbox";
+      const $ = (id) => document.getElementById(id);
+      let token = "";
+
+      function showBanner(msg, kind) {
+        const b = $("banner");
+        b.textContent = msg;
+        b.className = "banner " + kind;
+      }
+
+      if (!appId) {
+        $("connectBtn").style.display = "none";
+        showBanner("Missing application id — open this page from anke.", "error");
+      }
+
+      const connect = appId
+        ? TellerConnect.setup({
+            applicationId: appId,
+            environment,
+            products: ["transactions", "balance"],
+            onSuccess(enrollment) {
+              token = enrollment.accessToken;
+              $("tokenBox").textContent = token;
+              $("tokenBox").style.display = "block";
+              $("copyBtn").style.display = "block";
+              showBanner(
+                "Bank connected! Copy the token and paste it in anke.",
+                "success",
+              );
+            },
+            onExit() {},
+          })
+        : null;
+
+      $("connectBtn").addEventListener("click", () => connect && connect.open());
+      $("copyBtn").addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(token);
+          $("copyBtn").textContent = "Copied ✓ — return to anke";
+        } catch (e) {
+          showBanner("Long-press the token above to copy it manually.", "error");
+        }
+      });
+    </script>
+  </body>
+</html>

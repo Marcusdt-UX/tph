@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Circle Invitation – Anke</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <style>
+      :root {
+        --primary: #1a1a2e;
+        --accent: #4361ee;
+        --accent-hover: #3651d4;
+        --accent-light: #e8ecff;
+        --success: #10b981;
+        --success-light: #d1fae5;
+        --danger: #ef4444;
+        --danger-light: #fee2e2;
+        --warning: #f59e0b;
+        --bg: #f8f9fa;
+        --card-bg: #ffffff;
+        --text: #1a1a2e;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --input-bg: #f1f5f9;
+        --radius: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --primary: #e2e8f0;
+          --bg: #0f0f1a;
+          --card-bg: #1a1a2e;
+          --text: #e2e8f0;
+          --text-secondary: #94a3b8;
+          --text-muted: #64748b;
+          --border: #2d2d3f;
+          --input-bg: #16213e;
+          --success-light: rgba(16, 185, 129, 0.15);
+          --danger-light: rgba(239, 68, 68, 0.15);
+        }
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .container {
+        max-width: 440px;
+        width: 100%;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .logo {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: -0.5px;
+      }
+      .tagline {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 28px 24px;
+        margin-bottom: 16px;
+      }
+      .icon-circle {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: var(--accent-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 32px;
+      }
+      @media (prefers-color-scheme: dark) {
+        .icon-circle {
+          background: rgba(67, 97, 238, 0.15);
+        }
+      }
+      h1 {
+        font-size: 22px;
+        text-align: center;
+        margin-bottom: 4px;
+      }
+      h2 {
+        font-size: 18px;
+        margin-bottom: 16px;
+      }
+      .circle-name {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--accent);
+        text-align: center;
+      }
+      .invited-by {
+        font-size: 14px;
+        color: var(--text-secondary);
+        text-align: center;
+        margin: 4px 0 12px;
+      }
+      .message-box {
+        font-style: italic;
+        color: var(--text-secondary);
+        padding: 12px 16px;
+        background: var(--bg);
+        border-radius: 8px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        text-align: center;
+      }
+      .details {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+      }
+      .detail-item {
+        text-align: center;
+      }
+      .detail-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        letter-spacing: 0.5px;
+      }
+      .detail-value {
+        font-size: 16px;
+        font-weight: 600;
+        margin-top: 2px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+      .badge-member {
+        background: var(--accent-light);
+        color: var(--accent);
+      }
+      .badge-admin {
+        background: #fef3c7;
+        color: #b45309;
+      }
+      @media (prefers-color-scheme: dark) {
+        .badge-member {
+          background: rgba(67, 97, 238, 0.15);
+        }
+        .badge-admin {
+          background: rgba(245, 158, 11, 0.15);
+        }
+      }
+      .form-group {
+        margin-bottom: 14px;
+        text-align: left;
+      }
+      .form-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: var(--text-secondary);
+      }
+      .form-group input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 15px;
+        background: var(--input-bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .form-group input:focus {
+        border-color: var(--accent);
+      }
+      .btn {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+        text-decoration: none;
+      }
+      .btn:hover {
+        opacity: 0.9;
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .btn-primary:hover {
+        background: var(--accent-hover);
+      }
+      .btn-success {
+        background: var(--success);
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+        margin-bottom: 10px;
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--text-secondary);
+        font-size: 14px;
+        padding: 10px;
+      }
+      .btn-ghost:hover {
+        color: var(--accent);
+      }
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 16px 0;
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .alert {
+        padding: 12px 16px;
+        border-radius: 10px;
+        font-size: 14px;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      .alert-error {
+        background: var(--danger-light);
+        color: var(--danger);
+      }
+      .alert-success {
+        background: var(--success-light);
+        color: var(--success);
+      }
+      .alert-info {
+        background: var(--accent-light);
+        color: var(--accent);
+      }
+      .footer {
+        text-align: center;
+        margin-top: 24px;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+      .view {
+        display: none;
+      }
+      .view.active {
+        display: block;
+      }
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .success-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: var(--success-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 36px;
+      }
+      .email-note {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 8px;
+        text-align: center;
+      }
+      .loading-dots {
+        text-align: center;
+        padding: 40px 0;
+      }
+      .loading-dots span {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        margin: 0 4px;
+        animation: bounce 1.4s infinite ease-in-out both;
+      }
+      .loading-dots span:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+      .loading-dots span:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+      @keyframes bounce {
+        0%,
+        80%,
+        100% {
+          transform: scale(0);
+        }
+        40% {
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">Anke</div>
+        <div class="tagline">Community Lending Circles</div>
+      </div>
+
+      <!-- Loading state -->
+      <div id="view-loading" class="view active">
+        <div class="card" style="text-align: center">
+          <div class="loading-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <p style="color: var(--text-secondary)">Loading invitation...</p>
+        </div>
+      </div>
+
+      <!-- Invitation wrapper (populated by JS) -->
+      <div id="invite-content"></div>
+
+      <div class="footer" id="footer">
+        &copy; 2026 Anke &middot; Secure group lending
+      </div>
+    </div>
+
+    <script>
+      // ---- Config ----
+      var SUPABASE_URL = "https://olgrowbplsclbhpndvhz.supabase.co";
+      var SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sZ3Jvd2JwbHNjbGJocG5kdmh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzMzk3NDYsImV4cCI6MjA4NjkxNTc0Nn0.ckFnaINiXrmO3GRG3X6KFs3A1q3rZ5DJyx3WC0Fy7xE";
+
+      // Defer Supabase client creation — CDN might not be loaded yet
+      var sb = null;
+      function getSb() {
+        if (sb) return sb;
+        if (typeof supabase === "undefined") {
+          showError(
+            "Connection library failed to load. Please refresh the page.",
+          );
+          throw new Error(
+            "Supabase library not loaded. Please refresh the page.",
+          );
+        }
+        sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        return sb;
+      }
+
+      // ---- State ----
+      var currentUser = null;
+      var inviteData = null; // populated after fetch
+
+      // ---- Helpers ----
+      function esc(s) {
+        var d = document.createElement("div");
+        d.appendChild(document.createTextNode(s));
+        return d.innerHTML;
+      }
+
+      function showView(id) {
+        document.querySelectorAll(".view").forEach(function (v) {
+          v.classList.remove("active");
+        });
+        var el = document.getElementById(id);
+        if (el) el.classList.add("active");
+      }
+
+      function showError(msg) {
+        var el = document.getElementById("error-msg");
+        if (el) {
+          el.textContent = msg;
+          el.style.display = msg ? "block" : "none";
+        }
+      }
+
+      function setLoading(btnId, loading) {
+        var btn = document.getElementById(btnId);
+        if (!btn) return;
+        btn.disabled = loading;
+        if (loading) {
+          btn.setAttribute("data-orig", btn.textContent);
+          btn.innerHTML = '<span class="spinner"></span>Please wait\u2026';
+        } else {
+          btn.textContent = btn.getAttribute("data-orig") || btn.textContent;
+        }
+      }
+
+      // ---- Render invitation card ----
+      function renderInvitation(inv) {
+        var circle = inv.circles || {};
+        var profile = inv.profiles || {};
+        var circleName = esc(circle.name || "A Lending Circle");
+        var inviterName = esc(profile.full_name || "a member");
+        var expires = new Date(inv.expires_at).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+        var roleBadge =
+          inv.role === "admin"
+            ? '<span class="badge badge-admin">Admin</span>'
+            : '<span class="badge badge-member">Member</span>';
+        var messageBlock = inv.message
+          ? '<div class="message-box">\u201C' +
+            esc(inv.message) +
+            "\u201D</div>"
+          : "";
+
+        document.title = "Join " + circleName + " on Anke";
+
+        var html =
+          "" +
+          '<div class="card">' +
+          '<div class="icon-circle">\uD83D\uDC65</div>' +
+          "<h1>You\u2019re Invited!</h1>" +
+          '<p class="circle-name">' +
+          circleName +
+          "</p>" +
+          '<p class="invited-by">Invited by ' +
+          inviterName +
+          " &nbsp;" +
+          roleBadge +
+          "</p>" +
+          messageBlock +
+          '<div class="details">' +
+          '<div class="detail-item"><div class="detail-label">Members</div><div class="detail-value">' +
+          (circle.member_count || "\u2014") +
+          "</div></div>" +
+          '<div class="detail-item"><div class="detail-label">Role</div><div class="detail-value">' +
+          (inv.role === "admin" ? "Admin" : "Member") +
+          "</div></div>" +
+          '<div class="detail-item"><div class="detail-label">Expires</div><div class="detail-value">' +
+          expires +
+          "</div></div>" +
+          "</div>" +
+          "</div>" +
+          '<div id="error-msg" class="alert alert-error" style="display:none;"></div>' +
+          // Sign In view
+          '<div id="view-auth" class="view">' +
+          '<div class="card">' +
+          "<h2>Sign in to accept</h2>" +
+          '<form id="form-signin">' +
+          '<div class="form-group"><label for="auth-email">Email</label>' +
+          '<input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" required /></div>' +
+          '<div class="form-group"><label for="auth-password">Password</label>' +
+          '<input type="password" id="auth-password" placeholder="Your password" autocomplete="current-password" required /></div>' +
+          '<button type="submit" id="btn-signin" class="btn btn-primary">Sign In</button>' +
+          "</form>" +
+          '<div class="divider">or</div>' +
+          '<button class="btn btn-outline" id="btn-show-signup">Create an Account</button>' +
+          "</div>" +
+          "</div>" +
+          // Sign Up view
+          '<div id="view-signup" class="view">' +
+          '<div class="card">' +
+          "<h2>Create your account</h2>" +
+          '<form id="form-signup">' +
+          '<div class="form-group"><label for="signup-name">Full Name</label>' +
+          '<input type="text" id="signup-name" placeholder="Your full name" autocomplete="name" required /></div>' +
+          '<div class="form-group"><label for="signup-email">Email</label>' +
+          '<input type="email" id="signup-email" placeholder="you@example.com" autocomplete="email" required /></div>' +
+          '<div class="form-group"><label for="signup-password">Password</label>' +
+          '<input type="password" id="signup-password" placeholder="At least 6 characters" autocomplete="new-password" required minlength="6" /></div>' +
+          '<button type="submit" id="btn-signup" class="btn btn-primary">Create Account</button>' +
+          "</form>" +
+          '<button class="btn btn-ghost" id="btn-back-signin">\u2190 Back to Sign In</button>' +
+          "</div>" +
+          "</div>" +
+          // Confirm Email view
+          '<div id="view-confirm-email" class="view">' +
+          '<div class="card" style="text-align:center;">' +
+          '<div class="icon-circle">\uD83D\uDCE7</div>' +
+          "<h2>Check your email</h2>" +
+          '<p style="color:var(--text-secondary);margin-bottom:16px;">We sent a confirmation link to your email. Click it to verify your account, then come back here and sign in.</p>' +
+          '<button class="btn btn-outline" id="btn-back-signin2">Back to Sign In</button>' +
+          "</div>" +
+          "</div>" +
+          // Accept / Decline view
+          '<div id="view-accept" class="view">' +
+          '<div class="card" style="text-align:center;">' +
+          '<div class="alert alert-info" style="margin-bottom:16px;">Signed in as <strong id="signed-in-as"></strong></div>' +
+          '<div id="email-warning" class="alert alert-error" style="display:none;margin-bottom:16px;"></div>' +
+          '<p style="color:var(--text-secondary);margin-bottom:20px;">Ready to join <strong>' +
+          circleName +
+          "</strong>?</p>" +
+          '<button id="btn-accept" class="btn btn-success">Accept &amp; Join Circle</button>' +
+          '<button id="btn-decline" class="btn btn-ghost">Decline Invitation</button>' +
+          "</div>" +
+          "</div>" +
+          // Success view
+          '<div id="view-success" class="view">' +
+          '<div class="card" style="text-align:center;">' +
+          '<div class="success-icon">\uD83C\uDF89</div>' +
+          "<h1>You\u2019re In!</h1>" +
+          '<p style="color:var(--text-secondary);margin:8px 0 20px;">You\u2019ve successfully joined <strong>' +
+          circleName +
+          "</strong>.</p>" +
+          '<button class="btn btn-primary" id="btn-open-web">Open Anke Web App</button>' +
+          '<button class="btn btn-outline" id="btn-open-app" style="margin-top:8px;">Open Mobile App</button>' +
+          '<p class="email-note">Use the web app from any browser, or open the mobile app if installed.</p>' +
+          "</div>" +
+          "</div>" +
+          // Declined view
+          '<div id="view-declined" class="view">' +
+          '<div class="card" style="text-align:center;">' +
+          '<div class="icon-circle">\uD83D\uDC4B</div>' +
+          "<h2>Invitation Declined</h2>" +
+          '<p style="color:var(--text-secondary);margin-top:8px;">You\u2019ve declined the invitation. If you change your mind, ask the circle admin to send a new one.</p>' +
+          "</div>" +
+          "</div>";
+
+        document.getElementById("invite-content").innerHTML = html;
+        bindEvents();
+      }
+
+      function renderError(title, message) {
+        document.title = title + " \u2013 Anke";
+        var iconBg =
+          title === "Invitation Expired"
+            ? "var(--danger-light)"
+            : "var(--danger-light)";
+        var icon = title === "Invitation Expired" ? "\u23F0" : "\u26A0\uFE0F";
+        document.getElementById("invite-content").innerHTML =
+          '<div class="card" style="text-align:center;">' +
+          '<div class="icon-circle" style="background:' +
+          iconBg +
+          ';">' +
+          icon +
+          "</div>" +
+          "<h1>" +
+          esc(title) +
+          "</h1>" +
+          '<p style="color:var(--text-secondary);margin-top:8px;">' +
+          esc(message) +
+          "</p>" +
+          "</div>";
+      }
+
+      // ---- Event binding ----
+      function bindEvents() {
+        var formSignin = document.getElementById("form-signin");
+        if (formSignin) formSignin.addEventListener("submit", handleSignIn);
+
+        var formSignup = document.getElementById("form-signup");
+        if (formSignup) formSignup.addEventListener("submit", handleSignUp);
+
+        var btnShowSignup = document.getElementById("btn-show-signup");
+        if (btnShowSignup)
+          btnShowSignup.addEventListener("click", function () {
+            showView("view-signup");
+            showError("");
+            var emailInput = document.getElementById("signup-email");
+            if (emailInput && inviteData)
+              emailInput.value = inviteData.invitee_email || "";
+          });
+
+        ["btn-back-signin", "btn-back-signin2"].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el)
+            el.addEventListener("click", function () {
+              showView("view-auth");
+              showError("");
+            });
+        });
+
+        var btnAccept = document.getElementById("btn-accept");
+        if (btnAccept) btnAccept.addEventListener("click", handleAccept);
+
+        var btnDecline = document.getElementById("btn-decline");
+        if (btnDecline) btnDecline.addEventListener("click", handleDecline);
+
+        var btnOpenWeb = document.getElementById("btn-open-web");
+        if (btnOpenWeb)
+          btnOpenWeb.addEventListener("click", function () {
+            window.location.href =
+              "https://app.marcusdthomas.com/circle/" + inviteData.circle_id;
+          });
+
+        var btnOpenApp = document.getElementById("btn-open-app");
+        if (btnOpenApp)
+          btnOpenApp.addEventListener("click", function () {
+            window.location.href = "anke://circle/" + inviteData.circle_id;
+          });
+      }
+
+      // ---- Auth ----
+      async function checkAuth() {
+        try {
+          var result = await getSb().auth.getSession();
+          if (result.data.session && result.data.session.user) {
+            currentUser = result.data.session.user;
+            onAuthenticated();
+          } else {
+            showView("view-auth");
+            var emailInput = document.getElementById("auth-email");
+            if (emailInput && inviteData)
+              emailInput.value = inviteData.invitee_email || "";
+          }
+        } catch (err) {
+          // Supabase CDN not loaded — just show auth form anyway
+          showView("view-auth");
+          var emailInput = document.getElementById("auth-email");
+          if (emailInput && inviteData)
+            emailInput.value = inviteData.invitee_email || "";
+        }
+      }
+
+      async function handleSignIn(e) {
+        e.preventDefault();
+        showError("");
+        var email = document.getElementById("auth-email").value.trim();
+        var password = document.getElementById("auth-password").value;
+        if (!email || !password) {
+          showError("Please enter email and password");
+          return;
+        }
+
+        setLoading("btn-signin", true);
+        var result = await getSb().auth.signInWithPassword({
+          email: email,
+          password: password,
+        });
+        setLoading("btn-signin", false);
+
+        if (result.error) {
+          showError(result.error.message);
+          return;
+        }
+        currentUser = result.data.user;
+        onAuthenticated();
+      }
+
+      async function handleSignUp(e) {
+        e.preventDefault();
+        showError("");
+        var name = document.getElementById("signup-name").value.trim();
+        var email = document.getElementById("signup-email").value.trim();
+        var password = document.getElementById("signup-password").value;
+
+        if (!name) {
+          showError("Please enter your full name");
+          return;
+        }
+        if (!email) {
+          showError("Please enter your email");
+          return;
+        }
+        if (password.length < 6) {
+          showError("Password must be at least 6 characters");
+          return;
+        }
+
+        setLoading("btn-signup", true);
+        var result = await getSb().auth.signUp({
+          email: email,
+          password: password,
+          options: { data: { full_name: name } },
+        });
+        setLoading("btn-signup", false);
+
+        if (result.error) {
+          showError(result.error.message);
+          return;
+        }
+
+        if (result.data.user && !result.data.session) {
+          showView("view-confirm-email");
+          return;
+        }
+
+        currentUser = result.data.user;
+        onAuthenticated();
+      }
+
+      function onAuthenticated() {
+        showError("");
+        showView("view-accept");
+        var userEl = document.getElementById("signed-in-as");
+        if (userEl) userEl.textContent = currentUser.email;
+
+        var warnEl = document.getElementById("email-warning");
+        if (
+          warnEl &&
+          inviteData &&
+          inviteData.invitee_email &&
+          currentUser.email.toLowerCase() !==
+            inviteData.invitee_email.toLowerCase()
+        ) {
+          warnEl.style.display = "block";
+          warnEl.textContent =
+            "Note: This invitation was sent to " +
+            inviteData.invitee_email +
+            ". You are signed in as " +
+            currentUser.email +
+            ".";
+        }
+      }
+
+      async function handleAccept() {
+        showError("");
+        setLoading("btn-accept", true);
+        try {
+          var result = await getSb().rpc("accept_circle_invitation", {
+            p_invitation_id: inviteData.id,
+            p_user_id: currentUser.id,
+          });
+          setLoading("btn-accept", false);
+          if (result.error) {
+            showError(result.error.message || "Failed to accept invitation");
+            return;
+          }
+          showView("view-success");
+        } catch (err) {
+          setLoading("btn-accept", false);
+          showError(err.message || "Something went wrong");
+        }
+      }
+
+      async function handleDecline() {
+        if (!confirm("Are you sure you want to decline this invitation?"))
+          return;
+        setLoading("btn-decline", true);
+        var result = await getSb()
+          .from("circle_invitations")
+          .update({
+            status: "declined",
+            responded_at: new Date().toISOString(),
+          })
+          .eq("id", inviteData.id);
+        setLoading("btn-decline", false);
+        if (result.error) {
+          showError(result.error.message);
+          return;
+        }
+        showView("view-declined");
+      }
+
+      // ---- Init: fetch invitation data from Edge Function ----
+      async function init() {
+        var params = new URLSearchParams(window.location.search);
+        var code = params.get("code");
+
+        if (!code) {
+          showView("view-loading"); // hide loading
+          renderError(
+            "Invalid Invitation",
+            "No invite code provided. Check your link and try again.",
+          );
+          return;
+        }
+
+        try {
+          var resp = await fetch(
+            SUPABASE_URL +
+              "/functions/v1/invite-page?code=" +
+              encodeURIComponent(code),
+            {
+              headers: { Accept: "application/json" },
+            },
+          );
+          var json = await resp.json();
+
+          if (!resp.ok || json.error) {
+            renderError(
+              json.title || "Invalid Invitation",
+              json.message || "Something went wrong.",
+            );
+            return;
+          }
+
+          inviteData = json.invitation;
+          renderInvitation(inviteData);
+          checkAuth();
+        } catch (err) {
+          renderError(
+            "Error",
+            "Failed to load invitation. Please try again later.",
+          );
+        }
+      }
+
+      init();
+    </script>
+  </body>
+</html>

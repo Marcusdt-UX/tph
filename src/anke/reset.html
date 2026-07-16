@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reset Password – Anke</title>
+    <style>
+      :root {
+        --gold: #e5a63d;
+        --gold-deep: #c98a1e;
+        --black: #171214;
+        --success: #1e7d51;
+        --success-light: #d9efe3;
+        --danger: #a52a2a;
+        --danger-light: #f7e2e2;
+        --bg: #f5efe6;
+        --card-bg: #ffffff;
+        --text: #241a10;
+        --text-secondary: #6f6252;
+        --text-muted: #9a8d7c;
+        --border: #e6dcc9;
+        --input-bg: #faf6ee;
+        --radius: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #141019;
+          --card-bg: #1f1826;
+          --text: #f5efe6;
+          --text-secondary: #b3a89a;
+          --text-muted: #7d7266;
+          --border: #3a2c42;
+          --input-bg: #171221;
+          --success-light: rgba(30, 125, 81, 0.18);
+          --danger-light: rgba(165, 42, 42, 0.18);
+        }
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg); color: var(--text);
+        min-height: 100vh; display: flex; align-items: center; justify-content: center;
+        padding: 20px;
+      }
+      .container { max-width: 420px; width: 100%; }
+      .kente { height: 8px; border-radius: 4px 4px 0 0; background:
+        repeating-linear-gradient(90deg,
+          var(--gold) 0 34px, var(--black) 34px 40px,
+          #a52a2a 40px 66px, var(--gold) 66px 72px,
+          #1e7d51 72px 98px, var(--black) 98px 104px,
+          #cf5b2e 104px 130px, var(--gold) 130px 136px); }
+      .header { text-align: center; margin-bottom: 20px; }
+      .logo { font-size: 30px; font-weight: 800; color: var(--gold); }
+      .tagline { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+      .card { background: var(--card-bg); border: 1px solid var(--border);
+        border-radius: 0 0 var(--radius) var(--radius); padding: 26px 22px; }
+      h1 { font-size: 20px; text-align: center; margin-bottom: 6px; }
+      .sub { text-align: center; color: var(--text-secondary); font-size: 14px; margin-bottom: 18px; }
+      label { display: block; font-size: 13px; color: var(--text-secondary); margin: 12px 0 6px; }
+      input { width: 100%; padding: 13px 14px; font-size: 16px; border-radius: 12px;
+        border: 1px solid var(--border); background: var(--input-bg); color: var(--text); }
+      input:focus { outline: 2px solid var(--gold); border-color: var(--gold); }
+      button { width: 100%; margin-top: 18px; padding: 14px; font-size: 16px; font-weight: 700;
+        border: none; border-radius: 12px; background: var(--gold); color: var(--black); cursor: pointer; }
+      button:disabled { opacity: 0.6; cursor: default; }
+      .msg { margin-top: 14px; padding: 12px; border-radius: 12px; font-size: 14px; text-align: center; display: none; }
+      .msg.error { display: block; background: var(--danger-light); color: var(--danger); }
+      .msg.success { display: block; background: var(--success-light); color: var(--success); }
+      .hint { margin-top: 16px; font-size: 12px; color: var(--text-muted); text-align: center; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">anke</div>
+        <div class="tagline">community lending, made simple</div>
+      </div>
+      <div class="kente"></div>
+      <div class="card">
+        <h1>Choose a new password</h1>
+        <p class="sub" id="subtitle">Enter a new password for your anke account.</p>
+        <div id="form">
+          <label for="pw1">New password</label>
+          <input id="pw1" type="password" autocomplete="new-password" minlength="6" />
+          <label for="pw2">Repeat it</label>
+          <input id="pw2" type="password" autocomplete="new-password" minlength="6" />
+          <button id="save" type="button">Save New Password</button>
+        </div>
+        <div class="msg" id="msg"></div>
+        <p class="hint">When you're done, open the anke app and sign in with your new password.</p>
+      </div>
+    </div>
+    <script>
+      const SUPABASE_URL = "https://olgrowbplsclbhpndvhz.supabase.co";
+      const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sZ3Jvd2JwbHNjbGJocG5kdmh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzMzk3NDYsImV4cCI6MjA4NjkxNTc0Nn0.ckFnaINiXrmO3GRG3X6KFs3A1q3rZ5DJyx3WC0Fy7xE";
+
+      // Supabase appends the recovery session to the URL hash:
+      //   #access_token=…&refresh_token=…&type=recovery
+      const params = new URLSearchParams(location.hash.slice(1));
+      const accessToken = params.get("access_token");
+      const type = params.get("type");
+      const msg = document.getElementById("msg");
+      const form = document.getElementById("form");
+
+      function show(kind, text) {
+        msg.className = "msg " + kind;
+        msg.textContent = text;
+      }
+
+      if (!accessToken || type !== "recovery") {
+        form.style.display = "none";
+        document.getElementById("subtitle").textContent = "";
+        show(
+          "error",
+          "This reset link is invalid or has expired. Open the anke app and tap ‘Forgot password’ to get a fresh one.",
+        );
+      }
+
+      document.getElementById("save").addEventListener("click", async () => {
+        const pw1 = document.getElementById("pw1").value;
+        const pw2 = document.getElementById("pw2").value;
+        if (pw1.length < 6) return show("error", "Use at least 6 characters.");
+        if (pw1 !== pw2) return show("error", "The passwords don't match.");
+
+        const btn = document.getElementById("save");
+        btn.disabled = true;
+        btn.textContent = "Saving…";
+        try {
+          const res = await fetch(SUPABASE_URL + "/auth/v1/user", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              apikey: ANON_KEY,
+              Authorization: "Bearer " + accessToken,
+            },
+            body: JSON.stringify({ password: pw1 }),
+          });
+          const body = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            throw new Error(body.msg || body.error_description || "Could not update the password");
+          }
+          form.style.display = "none";
+          show("success", "Password updated ✓ Open the anke app and sign in.");
+        } catch (e) {
+          show("error", e.message || "Something went wrong — request a fresh link and try again.");
+          btn.disabled = false;
+          btn.textContent = "Save New Password";
+        }
+      });
+    </script>
+  </body>
+</html>
