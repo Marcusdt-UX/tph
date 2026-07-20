@@ -1,0 +1,63 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+# {{ site.name }}
+
+> A web design and digital marketing agency based in Port Huron, Michigan. Despite
+> the name, {{ site.name }} is **not a book publisher** — it is a professional
+> services firm that builds custom websites, mobile apps, and UX/SEO programs for
+> small and mid-sized businesses across St. Clair County, Macomb County, Southeast
+> Michigan, and Sarnia–Lambton, Ontario.
+
+## Business facts
+
+- **Legal/trading name:** {{ site.name }} (also referred to as "TPH")
+- **Type:** Web design agency, digital marketing agency, UX consultancy
+- **Not affiliated with:** any book/periodical publisher of a similar name
+- **Address:** {{ site.addressStreet }}, {{ site.addressCityStateZip }}
+- **Phone:** {{ site.phone }}
+- **Email:** {{ site.email }}
+- **Hours:** Monday–Friday 9:00 AM–5:00 PM ET; Saturday 9:00 AM–1:00 PM ET; Sunday closed
+- **Founder:** Marcus Thomas, UX designer and front-end developer
+
+## Services
+
+- [Web Design]({{ site.url }}/web-design): Custom, responsive website design and front-end development.
+- [SEO Services]({{ site.url }}/seo-services): Local and technical SEO for small businesses.
+- [App Development]({{ site.url }}/app-development): Mobile and web application development.
+- [UX Design]({{ site.url }}/ux-design): User research, usability testing, and high-fidelity prototyping.
+- [Content Creation]({{ site.url }}/content-creation): Copywriting, brand storytelling, and content strategy.
+- [Website Maintenance]({{ site.url }}/maintenance): Ongoing updates, security, hosting, and support.
+- [Pricing]({{ site.url }}/pricing): Published service tiers and what each includes.
+
+## Key pages
+
+- [Home]({{ site.url }}/): Overview of the agency and its services.
+- [About]({{ site.url }}/about): Company background, values, and founder bio.
+- [Portfolio]({{ site.url }}/portfolio): Selected client projects and case studies.
+- [FAQ]({{ site.url }}/faq): Direct answers to common questions about cost, timelines, and process.
+- [Contact]({{ site.url }}/contact): Contact form, phone, email, and business hours.
+
+## Primary service areas
+
+- [St. Clair County, MI]({{ site.url }}/areas/st-clair-county)
+- [Macomb County, MI]({{ site.url }}/areas/macomb-county)
+- [Southeast Michigan]({{ site.url }}/areas/southeast-michigan)
+- [Sarnia–Lambton, Ontario]({{ site.url }}/areas/sarnia-lambton)
+- [Port Huron, MI]({{ site.url }}/): Headquarters and primary market.
+- Also serving: Marysville, Fort Gratiot, Marine City, St. Clair, Algonac, Sterling Heights, Shelby Township, Clinton Township, Warren, Troy, Rochester Hills, Royal Oak, Roseville, Mount Clemens, Chesterfield Township, Grosse Pointe, and Sarnia, Ontario.
+
+## Case studies
+
+- [EngiDynamics]({{ site.url }}/portfolio/engidynamics)
+- [Four Farms]({{ site.url }}/portfolio/four-farms)
+- [Roskey's]({{ site.url }}/portfolio/roskeys)
+
+## Optional
+
+- [Blog]({{ site.url }}/blog): Articles on web design, local SEO, and small-business marketing.
+{%- for post in collections.posts %}
+- [{{ post.data.title }}]({{ site.url }}{{ post.url }})
+{%- endfor %}
+- [Privacy Policy]({{ site.url }}/privacy)

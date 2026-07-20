@@ -1,4 +1,10 @@
+# All crawlers welcome, including AI/LLM crawlers (GPTBot, ClaudeBot,
+# PerplexityBot, Google-Extended, CCBot). Allowing these is what makes the
+# site eligible to be cited in AI-generated answers.
 User-agent: *
 Allow: /
 
 Sitemap: https://thomaspublishinghouse.com/sitemap.xml
+
+# Structured summary for LLMs — see https://llmstxt.org
+# LLM-Content: https://thomaspublishinghouse.com/llms.txt
