@@ -3,20 +3,20 @@ title: "How to Rank in Google's Local Map Pack in Port Huron"
 date: 2026-07-22
 category: Local SEO
 author: Thomas Publishing House
-thumbnail: navigation-app.webp
-imageAlt: "Smartphone showing a local map with business location pins"
+thumbnail: seo-data.webp
+imageAlt: "Local SEO data and search ranking metrics on a screen"
 excerpt: The three businesses that show up in Google's map results get the bulk of the local clicks. Here's how a Port Huron business can earn one of those spots.
 description: "Want your Port Huron business in Google's local map pack? Learn how the 3-pack works and the practical steps you can take to rank in local search results."
 ogTitle: "How to Rank in Google's Local Map Pack in Port Huron"
 ogDescription: "Want your Port Huron business in Google's local map pack? Learn how the 3-pack works and the practical steps you can take to rank in local search results."
-ogImage: https://thomaspublishinghouse.com/assets/images/navigation-app.webp
+ogImage: https://thomaspublishinghouse.com/assets/images/seo-data.webp
 schema: |
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "How to Rank in Google's Local Map Pack in Port Huron",
     "description": "Want your Port Huron business in Google's local map pack? Learn how the 3-pack works and the practical steps you can take to rank in local search results.",
-    "image": "https://thomaspublishinghouse.com/assets/images/navigation-app.webp",
+    "image": "https://thomaspublishinghouse.com/assets/images/seo-data.webp",
     "datePublished": "2026-07-22",
     "dateModified": "2026-07-22",
     "author": { "@type": "Organization", "name": "Thomas Publishing House", "url": "https://thomaspublishinghouse.com" },
