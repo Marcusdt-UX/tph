@@ -31,6 +31,11 @@
   {{ schema | safe }}
   </script>
   {% endif %}
+  {% if faqSchema %}
+  <script type="application/ld+json">
+  {{ faqSchema | safe }}
+  </script>
+  {% endif %}
   {% if page.url != "/" %}
   <script type="application/ld+json">
   {
