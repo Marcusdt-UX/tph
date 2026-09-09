@@ -1,43 +1,49 @@
 ---
 title: Web Design Portfolio & Case Studies | Port Huron, MI
 description: "Web design portfolio and case studies from Port Huron, MI. Real results for businesses across Southeast Michigan, St. Clair County, and Sarnia-Lambton."
-canonical: https://thomaspublishinghouse.com/portfolio.html
+canonical: https://thomaspublishinghouse.com/portfolio
 ogTitle: Web Design Portfolio & Case Studies | Port Huron, MI
 ogDescription: Real results from our Port Huron web design and digital marketing projects across multiple industries.
-ogUrl: https://thomaspublishinghouse.com/portfolio.html
+ogUrl: https://thomaspublishinghouse.com/portfolio
 mainStyle: "padding-top:9rem;"
+
+# NOTE — self-serving review markup removed 2026-09-09.
+#
+# This page previously declared aggregateRating (5.0 / 3) plus three Review
+# blocks for testimonials TPH collected and published about itself. Google
+# disallows self-serving review markup on LocalBusiness and Organization; it is
+# ineligible for rich results and can earn a manual action. The rating also
+# contradicted the Google Business Profile (5.0 from 7).
+#
+# The testimonials still display on the page — they are just no longer claimed
+# as structured review data. Ratings that count come from third-party profiles
+# assistants read directly, reached via sameAs. Do not re-add this block.
 schema: |
   {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Thomas Publishing House",
-      "url": "https://thomaspublishinghouse.com",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "reviewCount": "3",
-        "bestRating": "5"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "John Schneider" },
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-          "reviewBody": "Thomas Publishing House transformed our online presence completely."
+      "@type": "CollectionPage",
+      "name": "Web Design Portfolio & Case Studies",
+      "url": "https://thomaspublishinghouse.com/portfolio",
+      "description": "Web design and digital marketing case studies from Thomas Publishing House, serving Port Huron, St. Clair County, Macomb County and Sarnia-Lambton.",
+      "isPartOf": { "@type": "WebSite", "url": "https://thomaspublishinghouse.com" },
+      "about": {
+        "@type": "ProfessionalService",
+        "name": "Thomas Publishing House",
+        "url": "https://thomaspublishinghouse.com",
+        "telephone": "+1-810-689-9762",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "100 McMorran Blvd",
+          "addressLocality": "Port Huron",
+          "addressRegion": "MI",
+          "postalCode": "48060",
+          "addressCountry": "US"
         },
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Josh Taylor" },
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-          "reviewBody": "Exceptional work on our e-commerce platform. Sales increased significantly."
-        },
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Karen Mitchell" },
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-          "reviewBody": "Professional, creative, and results-driven. Highly recommend their services."
-        }
-      ]
+        "sameAs": [
+          "https://www.facebook.com/ThomasPublishingHousePH",
+          "https://linkedin.com/company/thomaspublishinghouse"
+        ]
+      }
     }
 ---
 
