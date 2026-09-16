@@ -7,17 +7,22 @@ ogDescription: Real results from our Port Huron web design and digital marketing
 ogUrl: https://thomaspublishinghouse.com/portfolio
 mainStyle: "padding-top:9rem;"
 
-# NOTE — self-serving review markup removed 2026-09-09.
+# NOTE — self-serving review markup removed 2026-09-09. Two problems, not one:
 #
-# This page previously declared aggregateRating (5.0 / 3) plus three Review
-# blocks for testimonials TPH collected and published about itself. Google
-# disallows self-serving review markup on LocalBusiness and Organization; it is
-# ineligible for rich results and can earn a manual action. The rating also
-# contradicted the Google Business Profile (5.0 from 7).
+# 1. It declared aggregateRating (5.0 / 3) plus three Review blocks for
+#    testimonials TPH collected and published about itself. Google disallows
+#    self-serving review markup on LocalBusiness and Organization — ineligible
+#    for rich results, and it can earn a manual action. The rating also
+#    contradicted the Google Business Profile (5.0 from 7).
 #
-# The testimonials still display on the page — they are just no longer claimed
-# as structured review data. Ratings that count come from third-party profiles
-# assistants read directly, reached via sameAs. Do not re-add this block.
+# 2. Those three reviews never appeared in this page's visible content at all.
+#    They lived only in the structured data. Marked-up reviews must be present
+#    on the page carrying the markup; invisible review schema is its own
+#    violation, independent of the self-serving problem.
+#
+# The testimonials still display on the HOME page, correctly unmarked. Ratings
+# that actually influence AI assistants come from third-party profiles they read
+# directly (Google Business Profile, BBB), reached via sameAs. Do not re-add this.
 schema: |
   {
       "@context": "https://schema.org",
@@ -79,6 +84,60 @@ schema: |
           </div>
 
           <div class="grid-3 stagger-children" style="gap:2rem;">
+
+            <!-- Poopy Poochy -->
+            <div class="card fade-in" style="overflow:hidden;">
+              <div class="case-study-preview" style="margin:-1.5rem -1.5rem 1.5rem;border-radius:0.75rem 0.75rem 0 0;">
+                <img src="/assets/images/poopy-poochy.jpg" alt="Poopy Poochy dog waste removal website" width="800" height="400" loading="lazy">
+              </div>
+              <div class="case-study-meta" style="margin-bottom:0.75rem;">
+                <span class="case-study-num">Client Project</span>
+                <span class="case-study-year">2026</span>
+              </div>
+              <h3 style="font-family:var(--font-serif);font-weight:700;font-size:1.5rem;color:var(--primary);margin-bottom:0.5rem;">Poopy Poochy</h3>
+              <p class="case-study-industry" style="margin-bottom:1rem;">Dog Waste Removal &bull; St. Clair County, MI</p>
+              <p style="color:var(--muted-foreground);font-size:0.95rem;line-height:1.7;font-weight:300;margin-bottom:1.25rem;">
+                A custom WordPress build for a recurring local service. A guided quote calculator turns genuinely variable pricing into a real number, 22 city landing pages are generated from data rather than hand-written, and a purpose-built plugin tracks QR scans from vehicle and yard signage.
+              </p>
+              <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;">
+                <span class="tag">WordPress</span>
+                <span class="tag">Custom Theme</span>
+                <span class="tag">Local SEO</span>
+                <span class="tag">Plugin Development</span>
+              </div>
+              <a href="https://poopypoochy.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display:inline-flex;gap:0.5rem;align-items:center;font-size:0.875rem;">
+                <span>Visit Live Site</span>
+                <i data-lucide="external-link" style="width:1rem;height:1rem;"></i>
+              </a>
+              <a href="/portfolio/poopy-poochy" style="display:inline-flex;align-items:center;gap:0.5rem;color:var(--accent);font-size:0.875rem;font-weight:600;text-decoration:none;margin-left:1rem;">Case Study <i data-lucide="arrow-right" style="width:1rem;height:1rem;"></i></a>
+            </div>
+
+            <!-- Wickedly Delightful Scents -->
+            <div class="card fade-in" style="overflow:hidden;">
+              <div class="case-study-preview" style="margin:-1.5rem -1.5rem 1.5rem;border-radius:0.75rem 0.75rem 0 0;">
+                <img src="/assets/images/wickedly.jpg" alt="Wickedly Delightful Scents online storefront" width="800" height="400" loading="lazy">
+              </div>
+              <div class="case-study-meta" style="margin-bottom:0.75rem;">
+                <span class="case-study-num">Client Project</span>
+                <span class="case-study-year">2026</span>
+              </div>
+              <h3 style="font-family:var(--font-serif);font-weight:700;font-size:1.5rem;color:var(--primary);margin-bottom:0.5rem;">Wickedly Delightful Scents</h3>
+              <p class="case-study-industry" style="margin-bottom:1rem;">Handcrafted Wax Melts &bull; Port Huron, MI</p>
+              <p style="color:var(--muted-foreground);font-size:0.95rem;line-height:1.7;font-weight:300;margin-bottom:1.25rem;">
+                A custom storefront built on the Square API, so one inventory covers both online orders and farmers-market sales. The site holds no commerce data of its own — stock is validated against Square before any checkout is created.
+              </p>
+              <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;">
+                <span class="tag">Square API</span>
+                <span class="tag">eCommerce</span>
+                <span class="tag">OAuth</span>
+                <span class="tag">Inventory Sync</span>
+              </div>
+              <a href="https://wickedlydelightfulscents.shop/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display:inline-flex;gap:0.5rem;align-items:center;font-size:0.875rem;">
+                <span>Visit Live Store</span>
+                <i data-lucide="external-link" style="width:1rem;height:1rem;"></i>
+              </a>
+              <a href="/portfolio/wickedly-delightful" style="display:inline-flex;align-items:center;gap:0.5rem;color:var(--accent);font-size:0.875rem;font-weight:600;text-decoration:none;margin-left:1rem;">Case Study <i data-lucide="arrow-right" style="width:1rem;height:1rem;"></i></a>
+            </div>
 
             <!-- EngiDynamics -->
             <div class="card fade-in" style="overflow:hidden;">

@@ -1,0 +1,160 @@
+---
+title: Wickedly Delightful Scents Case Study | Square eCommerce | Port Huron, MI
+description: "Custom eCommerce storefront for a Port Huron soy wax melt maker, built on the Square API so online stock and farmers-market sales never disagree."
+canonical: https://thomaspublishinghouse.com/portfolio/wickedly-delightful
+ogTitle: Wickedly Delightful Scents Case Study | Thomas Publishing House
+ogDescription: A custom storefront built on the Square API — one inventory across online orders and in-person market sales.
+ogType: article
+ogUrl: https://thomaspublishinghouse.com/portfolio/wickedly-delightful
+twitterDescription: Custom Square-powered eCommerce for a Port Huron maker selling online and at farmers markets.
+mainStyle: "padding-top:0;"
+schema: |
+  {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Wickedly Delightful Scents — Square eCommerce Case Study",
+      "description": "A custom eCommerce storefront built on the Square API, keeping a single inventory across online orders and in-person farmers-market sales.",
+      "url": "https://thomaspublishinghouse.com/portfolio/wickedly-delightful",
+      "author": {
+        "@type": "ProfessionalService",
+        "name": "Thomas Publishing House",
+        "url": "https://thomaspublishinghouse.com"
+      },
+      "publisher": {
+        "@type": "ProfessionalService",
+        "name": "Thomas Publishing House",
+        "url": "https://thomaspublishinghouse.com"
+      },
+      "about": {
+        "@type": "Organization",
+        "name": "Wickedly Delightful Scents",
+        "url": "https://wickedlydelightfulscents.shop"
+      }
+    }
+---
+
+      <!-- Hero -->
+      <section class="section section-dark" style="padding:5rem 0;">
+        <div class="pattern-overlay"></div>
+        <div class="container" style="position:relative;">
+          <div class="text-center fade-in">
+            <div style="margin-bottom:1.5rem;">
+              <a href="/portfolio" style="color:var(--accent);text-decoration:none;font-size:0.9rem;">
+                <i data-lucide="arrow-left" style="width:1rem;height:1rem;display:inline;vertical-align:middle;"></i>
+                Back to Portfolio
+              </a>
+            </div>
+            <h1 style="font-family:var(--font-serif);font-weight:700;font-size:3.25rem;color:white;margin-bottom:0.75rem;">
+              Wickedly Delightful Scents
+            </h1>
+            <p style="color:var(--accent);font-size:1.125rem;margin-bottom:1.5rem;font-weight:500;">Custom eCommerce &amp; Inventory Sync</p>
+            <p style="color:#e5e7eb;font-size:1.125rem;max-width:48rem;margin:0 auto;font-weight:300;line-height:1.7;">
+              A handcrafted soy wax melt maker wanted to sell online without the website becoming a second inventory to manage — and without selling a jar online that had already left the table at Saturday's market.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Project Overview -->
+      <section class="section section-light">
+        <div class="container">
+          <div class="story-grid">
+            <div class="fade-in-left">
+              <h2 class="story-title">Project Overview</h2>
+              <div class="story-text">
+                <p style="font-size:1.125rem;">Square was already the point of sale at farmers markets. So the design started from a constraint rather than a feature list: Square stays authoritative, and the website is a view onto it — never a second ledger to reconcile.</p>
+                <p style="margin-top:1rem;">That ruled out the conventional answers. A standard platform would want to own the catalog and the stock count, leaving two systems to keep in step. Instead we built a storefront that holds no commerce data of its own.</p>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem;">
+                <span class="tag">Square API</span>
+                <span class="tag">eCommerce</span>
+                <span class="tag">OAuth</span>
+                <span class="tag">Inventory Sync</span>
+              </div>
+            </div>
+            <div class="story-image fade-in-right">
+              <div class="story-image-inner" style="aspect-ratio:4/3;">
+                <img src="/assets/images/wickedly.jpg" alt="Wickedly Delightful Scents online storefront" width="800" height="600" loading="lazy">
+              </div>
+              <div class="story-image-glow story-image-glow-top"></div>
+              <div class="story-image-glow story-image-glow-bottom"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- What We Delivered -->
+      <section class="section section-bg">
+        <div class="container">
+          <div class="section-header fade-in">
+            <h2>What We Delivered</h2>
+            <p>One inventory, two sales channels, no reconciling</p>
+          </div>
+          <div class="grid grid-3 stagger-children">
+            <div class="card">
+              <div class="icon-box icon-box-primary" style="margin-bottom:1.5rem;"><i data-lucide="refresh-cw"></i></div>
+              <h3 class="card-title">Live Catalog from Square</h3>
+              <p class="card-desc">Products, prices, images and stock all come from Square, with caching so the shop stays fast. Add a product in Square and it appears online; sell one at a market and the count drops.</p>
+            </div>
+            <div class="card">
+              <div class="icon-box icon-box-primary" style="margin-bottom:1.5rem;"><i data-lucide="shield-check"></i></div>
+              <h3 class="card-title">Stock-Aware Checkout</h3>
+              <p class="card-desc">The cart won't exceed available stock, and quantities are re-validated against live inventory before checkout is created. Carts left open for a week can't carry quantities that no longer exist.</p>
+            </div>
+            <div class="card">
+              <div class="icon-box icon-box-primary" style="margin-bottom:1.5rem;"><i data-lucide="package"></i></div>
+              <h3 class="card-title">Shipping or Local Pickup</h3>
+              <p class="card-desc">Modelled as distinct Square fulfillments rather than a shipping line item — so pickup orders simply never ask for a shipping address.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Challenge & Solution -->
+      <section class="section section-light">
+        <div class="container" style="max-width:56rem;">
+          <div class="fade-in">
+            <div class="challenge-solution" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;">
+              <div>
+                <h3 style="font-family:var(--font-serif);font-weight:700;font-size:1.5rem;color:var(--primary);margin-bottom:1rem;">
+                  <i data-lucide="alert-circle" style="color:var(--accent);width:1.25rem;height:1.25rem;display:inline;vertical-align:middle;margin-right:0.5rem;"></i>
+                  The Challenge
+                </h3>
+                <p style="color:var(--muted-foreground);line-height:1.7;font-weight:300;">Selling the same handmade stock in two places at once. Every conventional store platform wants to own the inventory, which for a maker already running Square at markets means two counts, two places to update, and eventually an oversold order.</p>
+              </div>
+              <div>
+                <h3 style="font-family:var(--font-serif);font-weight:700;font-size:1.5rem;color:var(--primary);margin-bottom:1rem;">
+                  <i data-lucide="lightbulb" style="color:var(--accent);width:1.25rem;height:1.25rem;display:inline;vertical-align:middle;margin-right:0.5rem;"></i>
+                  Our Solution
+                </h3>
+                <p style="color:var(--muted-foreground);line-height:1.7;font-weight:300;">Make Square the single source of truth and give the website no inventory of its own. Sign-in runs through Square itself, so there's no extra password to manage — and a one-time recovery key handles the thing that actually happens eventually: lost access.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Visit Site CTA -->
+      <section class="section section-dark" style="padding:5rem 0;">
+        <div class="pattern-overlay"></div>
+        <div class="container" style="max-width:56rem;position:relative;">
+          <div class="text-center fade-in">
+            <h2 style="font-family:var(--font-serif);font-weight:700;font-size:2.5rem;color:white;margin-bottom:1.5rem;">
+              See It Live
+            </h2>
+            <p style="color:#e5e7eb;font-size:1.125rem;margin-bottom:2.5rem;max-width:42rem;margin-left:auto;margin-right:auto;line-height:1.7;font-weight:300;">
+              Visit the shop, or talk to us about selling online without doubling your admin.
+            </p>
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+              <a href="https://wickedlydelightfulscents.shop/" target="_blank" rel="noopener noreferrer" class="btn btn-white">
+                <span>Visit Live Store</span>
+                <i data-lucide="external-link"></i>
+              </a>
+              <a href="/contact" class="btn btn-outline" style="border-color:rgba(255,255,255,0.3);color:white;">
+                <span>Start Your Project</span>
+                <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
