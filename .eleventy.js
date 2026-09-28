@@ -1,5 +1,6 @@
 const { HtmlBasePlugin } = require("@11ty/eleventy");
 const inlineIcons = require("./scripts/inline-icons");
+const cleanLinks = require("./scripts/clean-links");
 
 module.exports = function (eleventyConfig) {
   // Automatically rewrite all URLs to include pathPrefix
@@ -7,6 +8,10 @@ module.exports = function (eleventyConfig) {
 
   // Inline Lucide icons at build time (replaces <i data-lucide="..."> with <svg>)
   eleventyConfig.addTransform("inline-icons", inlineIcons);
+
+  // Point internal links at clean URLs (/about, not /about.html) so crawlers
+  // and visitors skip the 301 hop. See scripts/clean-links.js.
+  eleventyConfig.addTransform("clean-links", cleanLinks);
 
   // Passthrough copy static assets
   eleventyConfig.addPassthroughCopy("src/assets");
