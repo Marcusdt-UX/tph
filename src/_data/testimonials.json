@@ -1,0 +1,46 @@
+{
+  "googleRating": "5.0",
+  "googleCount": 7,
+  "googleUrl": "https://maps.google.com/?cid=16073078642708138457",
+  "items": [
+    {
+      "name": "Tanga D.",
+      "role": "Wickedly Delightful Scents",
+      "source": "google",
+      "initials": "TD",
+      "text": "I told him what I was looking for and colors. He put it all together and made it amazing. I had trouble trying to figure out some things on my end and he stepped up and showed and fixed the issue for me. I was able to contact him at any hour of the day or night."
+    },
+    {
+      "name": "John Schneider",
+      "role": "Business Owner",
+      "initials": "JS",
+      "text": "Thomas Publishing House transformed our online presence and helped us reach more customers effectively. The results spoke for themselves."
+    },
+    {
+      "name": "Afaf Saleh",
+      "role": "Website client",
+      "source": "google",
+      "initials": "AS",
+      "text": "He took my vision and brought it to life exactly as I imagined. Marcus was professional, attentive, and always ready to make adjustments to ensure I was completely satisfied. The website looks fantastic, and the entire process was smooth from start to finish."
+    },
+    {
+      "name": "Josh Taylor",
+      "role": "Business Owner",
+      "initials": "JT",
+      "text": "The team's dedication and expertise have significantly boosted our website's performance and visibility. A true partner in digital growth."
+    },
+    {
+      "name": "Alta May",
+      "role": "Client",
+      "source": "google",
+      "initials": "AM",
+      "text": "I was thoroughly impressed with this business! They demonstrated exceptional professionalism, offered highly competitive pricing, and delivered outstanding work. The quality of their work is top-notch, and I highly recommend them to anyone seeking excellent service."
+    },
+    {
+      "name": "Karen Mitchell",
+      "role": "Small Business Owner",
+      "initials": "KM",
+      "text": "Their full-service approach covers everything from innovative design to strategic marketing. They truly understand how to drive results for growing businesses."
+    }
+  ]
+}

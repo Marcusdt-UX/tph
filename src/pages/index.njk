@@ -295,47 +295,69 @@ schema: |
             <h2>What Our Clients Say</h2>
             <p>Real feedback from the businesses we've had the pleasure of working with</p>
           </div>
-          <div class="grid grid-3 stagger-children">
-            <div class="testimonial-card">
+          <div class="grid grid-3 testimonial-rotator" id="testimonialRotator">
+            {%- for t in testimonials.items %}
+            <div class="testimonial-card{% if loop.index0 >= 3 %} is-off{% endif %}" data-slot="{{ loop.index0 }}">
               <div class="testimonial-stars">
                 <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
               </div>
-              <p class="testimonial-text">"Thomas Publishing House transformed our online presence and helped us reach more customers effectively. The results spoke for themselves."</p>
+              <p class="testimonial-text">"{{ t.text }}"</p>
               <div class="testimonial-author">
-                <div class="testimonial-avatar">JS</div>
+                <div class="testimonial-avatar">{{ t.initials }}</div>
                 <div>
-                  <p class="testimonial-name">John Schneider</p>
-                  <p>Business Owner</p>
+                  <p class="testimonial-name">{{ t.name }}</p>
+                  <p>{{ t.role }}{% if t.source == "google" %} · <a href="{{ testimonials.googleUrl }}" target="_blank" rel="noopener" class="testimonial-source">Google review</a>{% endif %}</p>
                 </div>
               </div>
             </div>
-            <div class="testimonial-card">
-              <div class="testimonial-stars">
-                <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
-              </div>
-              <p class="testimonial-text">"The team's dedication and expertise have significantly boosted our website's performance and visibility. A true partner in digital growth."</p>
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">JT</div>
-                <div>
-                  <p class="testimonial-name">Josh Taylor</p>
-                  <p>Business Owner</p>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-stars">
-                <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
-              </div>
-              <p class="testimonial-text">"Their full-service approach covers everything from innovative design to strategic marketing. They truly understand how to drive results for growing businesses."</p>
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">KM</div>
-                <div>
-                  <p class="testimonial-name">Karen Mitchell</p>
-                  <p>Small Business Owner</p>
-                </div>
-              </div>
-            </div>
+            {%- endfor %}
           </div>
+          <p class="testimonial-google fade-in">
+            <a href="{{ testimonials.googleUrl }}" target="_blank" rel="noopener">
+              <span class="tg-stars">★★★★★</span> <strong>{{ testimonials.googleRating }}</strong> on Google · Read all {{ testimonials.googleCount }} reviews
+            </a>
+          </p>
+          <style>
+            .testimonial-rotator .testimonial-card { transition: opacity .6s ease; }
+            .testimonial-rotator .testimonial-card.is-off { display: none; }
+            .testimonial-rotator .testimonial-card.is-fading { opacity: 0; }
+            .testimonial-source { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+            .testimonial-google { text-align: center; margin-top: 2rem; font-size: .95rem; }
+            .testimonial-google a { color: var(--primary); text-decoration: none; }
+            .testimonial-google a:hover { text-decoration: underline; }
+            .testimonial-google .tg-stars { color: #f5b301; letter-spacing: 1px; }
+            @media (prefers-reduced-motion: reduce) { .testimonial-rotator .testimonial-card { transition: none; } }
+          </style>
+          <script>
+            (function () {
+              var wrap = document.getElementById('testimonialRotator');
+              if (!wrap) return;
+              var cards = Array.prototype.slice.call(wrap.querySelectorAll('.testimonial-card'));
+              var per = 3, start = 0, paused = false;
+              if (cards.length <= per) return;
+              if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+              wrap.addEventListener('mouseenter', function () { paused = true; });
+              wrap.addEventListener('mouseleave', function () { paused = false; });
+              function show(from) {
+                cards.forEach(function (c, i) {
+                  var on = ((i - from + cards.length) % cards.length) < per;
+                  c.classList.toggle('is-off', !on);
+                });
+              }
+              setInterval(function () {
+                if (paused || document.hidden) return;
+                cards.forEach(function (c) { if (!c.classList.contains('is-off')) c.classList.add('is-fading'); });
+                setTimeout(function () {
+                  start = (start + per) % cards.length;
+                  show(start);
+                  cards.forEach(function (c) { c.classList.add('is-fading'); });
+                  requestAnimationFrame(function () { requestAnimationFrame(function () {
+                    cards.forEach(function (c) { c.classList.remove('is-fading'); });
+                  }); });
+                }, 600);
+              }, 9000);
+            })();
+          </script>
         </div>
       </section>
 
