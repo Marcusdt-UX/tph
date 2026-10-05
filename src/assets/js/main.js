@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // --- Chunk 11: Cookie consent + analytics ---
   function initCookieConsent() {
     function loadAnalytics() {
-      var GA_ID = 'G-XXXXXXXXXX';
+      var GA_ID = 'G-Z9JE1X8CJQ';
       if (GA_ID === 'G-XXXXXXXXXX') return;
       if (document.querySelector('script[src*="googletagmanager"]')) return;
       var script = document.createElement('script');
