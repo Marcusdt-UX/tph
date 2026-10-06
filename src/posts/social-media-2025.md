@@ -1,24 +1,24 @@
 ---
-title: "Social Media in 2025: What's Working for Small Businesses"
+title: "Social Media for Small Businesses: What's Working Now"
 date: 2026-02-28
 category: Marketing
 author: Thomas Publishing House
 thumbnail: social-media.webp
 imageAlt: "Social media platforms and engagement metrics"
 excerpt: Cut through the noise. A practical look at which platforms and strategies are delivering ROI for local businesses right now.
-description: "A practical guide to social media marketing for small businesses in 2025. Which platforms work, what content performs, and how to measure ROI."
-ogTitle: "Social Media in 2025: What's Working for Small Businesses"
+description: "A practical guide to social media marketing for small businesses. Which platforms work, what content performs, and how to measure ROI."
+ogTitle: "Social Media for Small Businesses: What's Working Now"
 ogDescription: "Cut through the noise. Which social media platforms and strategies are delivering ROI for local businesses."
 ogImage: https://thomaspublishinghouse.com/assets/images/social-media.webp
 schema: |
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Social Media in 2025: What's Working for Small Businesses",
-    "description": "A practical guide to social media marketing for small businesses in 2025. Which platforms work and how to measure ROI.",
+    "headline": "Social Media for Small Businesses: What's Working Now",
+    "description": "A practical guide to social media marketing for small businesses. Which platforms work and how to measure ROI.",
     "image": "https://thomaspublishinghouse.com/assets/images/social-media.webp",
     "datePublished": "2026-02-28",
-    "dateModified": "2026-02-28",
+    "dateModified": "2026-10-06",
     "author": { "@type": "Organization", "name": "Thomas Publishing House", "url": "https://thomaspublishinghouse.com" },
     "publisher": { "@type": "Organization", "name": "Thomas Publishing House", "logo": { "@type": "ImageObject", "url": "https://thomaspublishinghouse.com/assets/images/logo.webp" } },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://thomaspublishinghouse.com/blog/social-media-2025/" }

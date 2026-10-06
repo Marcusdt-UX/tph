@@ -1,4 +1,6 @@
 ---
+permalink: false
+eleventyExcludeFromCollections: true
 title: Digital Marketing Trends to Watch in 2024
 date: 2024-01-23
 category: Marketing
