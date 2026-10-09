@@ -28,6 +28,53 @@ schema: |
         "containedInPlace": { "@type": "State", "name": "Michigan" }
       }
     }
+faqSchema: |
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "I run a marina, charter, or boat service. What should my website include?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with what boaters need before they call: rates or a way to request them, slip or service availability, hours, directions by land and water, and real photos of your place. Add a simple contact or booking form and make sure it all works well on a phone, since that's how most people will see it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can we meet in person?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We're based in Port Huron and make the drive down to Algonac. A lot of the project can also happen by phone, text, or email, which helps during your busy season."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a website cost for a Algonac business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most small business websites start at $300 for the build, depending on how many pages and features you need. After launch, monthly plans run from $100 to $600 and cover hosting, updates, and ongoing SEO. You get a written quote before any work starts, and all of our pricing is posted on our pricing page."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to get a new website live?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A standard five-page site usually takes four to six weeks from kickoff to launch. Bigger projects with online booking, a store, or a lot of content can take eight to twelve weeks. You'll get a timeline with your proposal so you know what to expect."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you help with Google Business Profile and Google Maps?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Getting your Google Business Profile set up correctly, with the right categories, hours, photos, and service areas, is part of our local SEO work. For most local businesses it brings in more calls than the website itself, so we treat them as one project."
+        }
+      }
+    ]
+  }
 ---
 
       <!-- Hero -->
@@ -125,6 +172,98 @@ schema: |
               <h3 style="color:var(--primary);margin-bottom:0.5rem;">Content &amp; Marketing</h3>
               <p class="card-desc">Blog posts, social media strategy, and copywriting that drives local engagement.</p>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section section-bg">
+        <div class="container" style="max-width:56rem;">
+          <div class="section-header fade-in">
+            <h2>Questions From Algonac Business Owners</h2>
+            <p>Straight answers about working with us. More on our <a href="/faq.html">FAQ page</a> and <a href="/pricing.html">pricing page</a>.</p>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                <div class="faq-question-content">
+                  <div class="faq-question-meta">
+                    <span class="faq-question-num">01</span>
+                  </div>
+                  <h3>I run a marina, charter, or boat service. What should my website include?</h3>
+                </div>
+                <div class="faq-chevron"><i data-lucide="chevron-down"></i></div>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p class="faq-answer-text">Start with what boaters need before they call: rates or a way to request them, slip or service availability, hours, directions by land and water, and real photos of your place. Add a simple contact or booking form and make sure it all works well on a phone, since that's how most people will see it.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                <div class="faq-question-content">
+                  <div class="faq-question-meta">
+                    <span class="faq-question-num">02</span>
+                  </div>
+                  <h3>Can we meet in person?</h3>
+                </div>
+                <div class="faq-chevron"><i data-lucide="chevron-down"></i></div>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p class="faq-answer-text">Yes. We're based in Port Huron and make the drive down to Algonac. A lot of the project can also happen by phone, text, or email, which helps during your busy season.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                <div class="faq-question-content">
+                  <div class="faq-question-meta">
+                    <span class="faq-question-num">03</span>
+                  </div>
+                  <h3>How much does a website cost for a Algonac business?</h3>
+                </div>
+                <div class="faq-chevron"><i data-lucide="chevron-down"></i></div>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p class="faq-answer-text">Most small business websites start at $300 for the build, depending on how many pages and features you need. After launch, monthly plans run from $100 to $600 and cover hosting, updates, and ongoing SEO. You get a written quote before any work starts, and all of our pricing is posted on our pricing page.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                <div class="faq-question-content">
+                  <div class="faq-question-meta">
+                    <span class="faq-question-num">04</span>
+                  </div>
+                  <h3>How long does it take to get a new website live?</h3>
+                </div>
+                <div class="faq-chevron"><i data-lucide="chevron-down"></i></div>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p class="faq-answer-text">A standard five-page site usually takes four to six weeks from kickoff to launch. Bigger projects with online booking, a store, or a lot of content can take eight to twelve weeks. You'll get a timeline with your proposal so you know what to expect.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-question" aria-expanded="false">
+                <div class="faq-question-content">
+                  <div class="faq-question-meta">
+                    <span class="faq-question-num">05</span>
+                  </div>
+                  <h3>Do you help with Google Business Profile and Google Maps?</h3>
+                </div>
+                <div class="faq-chevron"><i data-lucide="chevron-down"></i></div>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p class="faq-answer-text">Yes. Getting your Google Business Profile set up correctly, with the right categories, hours, photos, and service areas, is part of our local SEO work. For most local businesses it brings in more calls than the website itself, so we treat them as one project.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
