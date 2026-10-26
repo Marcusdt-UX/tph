@@ -22,12 +22,26 @@ const PATTERN = new RegExp(
   "g"
 );
 
+// href="contact.html", href="portfolio/roskeys.html#top" (no scheme, no leading slash)
+const RELATIVE = /href="(?![a-z]+:)([a-z][-a-z0-9/]*)\.html([#?][^"]*)?"/g;
+
 module.exports = function cleanLinks(content) {
   if (!this.page.outputPath || !this.page.outputPath.endsWith(".html")) return content;
   if (this.page.outputPath.replace(/\\/g, "/").includes("/anke")) return content;
 
-  return content.replace(PATTERN, (m, prefix, origin, path) => {
+  let out = content.replace(PATTERN, (m, prefix, origin, path) => {
     const clean = path === "index" ? "" : path;
     return `${prefix}${origin}/${clean}`;
   });
+
+  // Relative links (href="contact.html", href="st-clair-county.html") are
+  // resolved against this page's URL, then cleaned the same way.
+  const base = SITE + (this.page.url || "/");
+  out = out.replace(RELATIVE, (m, path, suffix) => {
+    const resolved = new URL(path + ".html", base).pathname.replace(/\.html$/, "");
+    if (resolved.startsWith("/anke")) return m;
+    const clean = resolved === "/index" ? "/" : resolved;
+    return `href="${clean}${suffix || ""}"`;
+  });
+  return out;
 };

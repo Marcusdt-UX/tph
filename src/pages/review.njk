@@ -1,0 +1,29 @@
+---
+title: Leave a Review | Thomas Publishing House
+description: "Leave Thomas Publishing House a Google review."
+robots: noindex, follow
+canonical: https://thomaspublishinghouse.com/review
+mainStyle: "padding-top:9rem;"
+eleventyExcludeFromCollections: true
+reviewUrl: https://search.google.com/local/writereview?placeid=ChIJV2VDzx-dJYgR2UmJ4d0LD98
+---
+
+      <!-- Short link for review requests: thomaspublishinghouse.com/review
+           Sends people straight to the Google review form for TPH's Business Profile.
+           Used on the printed QR card and in review-request texts. -->
+      <meta http-equiv="refresh" content="0; url={{ reviewUrl }}">
+      <script>location.replace("{{ reviewUrl }}");</script>
+
+      <section class="section section-light">
+        <div class="container text-center" style="max-width:40rem;">
+          <h1 style="font-family:var(--font-serif);font-weight:700;font-size:2.25rem;margin-bottom:1rem;">Thanks for taking a minute</h1>
+          <p style="font-size:1.125rem;line-height:1.7;margin-bottom:2rem;">
+            You should be on Google's review page now. If it didn't open, use the button below.
+            A few honest sentences about working with us helps other local businesses find us.
+          </p>
+          <a href="{{ reviewUrl }}" class="btn btn-primary">
+            <span>Leave a Google review</span>
+            <i data-lucide="star"></i>
+          </a>
+        </div>
+      </section>
