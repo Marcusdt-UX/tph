@@ -112,6 +112,15 @@
       padding: 6px 14px; border-radius: 999px;
       font-size: 0.85rem; font-weight: 600;
     }
+
+    /* The plain facts */
+    .facts .card p + p { margin-top: 8px; }
+    .facts ul { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.96rem; }
+    .facts li { margin-bottom: 6px; }
+    .facts li strong { color: var(--ink); }
+    .facts .wide { grid-column: 1 / -1; }
+    .facts a { overflow-wrap: anywhere; }
+    .legal-links { margin-top: 18px; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -192,6 +201,50 @@
         conversations about who owes what.
       </p>
     </section>
+    <section class="facts" id="about-anke">
+      <h2>The plain facts</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Who runs anke</h3>
+          <p>anke is made and operated by <strong>Thomas Publishing House, LLC</strong>,
+            a Michigan limited liability company. Questions or problems:
+            <a href="mailto:info@thomaspublishinghouse.com">info@thomaspublishinghouse.com</a>.</p>
+        </div>
+        <div class="card">
+          <h3>Who can use it</h3>
+          <p>Adults (18 and over) in the United States, invited by someone they know.
+            anke is in a small, invite-only pilot, currently in Michigan. It is for
+            families and close groups, not for the public and not for running a
+            lending business.</p>
+        </div>
+        <div class="card">
+          <h3>What it costs</h3>
+          <p>anke charges no fees during the pilot, and covers the network fees.
+            The service that turns your dollars into digital dollars, and back,
+            charges its own fee and shows it to you before you confirm.</p>
+        </div>
+        <div class="card wide">
+          <h3>What anke is not</h3>
+          <ul>
+            <li><strong>Not a bank.</strong> Money in anke is not a bank deposit and is not insured by the FDIC.</li>
+            <li><strong>Not a lender.</strong> Loans are between the members of a group. anke doesn't make loans or collect them.</li>
+            <li><strong>Not holding your money.</strong> Your money stays in a wallet only you control, or in your group's fund, which only the group's votes can move. anke has no key to either.</li>
+          </ul>
+        </div>
+        <div class="card wide">
+          <h3>What can go wrong</h3>
+          <p>A borrower may not repay, and the group shares that loss. The software
+            that runs a group's fund has been tested but not yet audited by an
+            outside firm. Digital dollars are issued by a third party and are not
+            guaranteed. Only put in what you could afford to lose, with people you
+            trust.</p>
+        </div>
+      </div>
+      <p class="legal-links">
+        <a href="/anke/terms/">Terms of Service</a> ·
+        <a href="/anke/privacy-policy/">Privacy Policy</a>
+      </p>
+    </section>
   </div>
 
   <footer>
@@ -200,10 +253,11 @@
       <a href="mailto:info@thomaspublishinghouse.com">info@thomaspublishinghouse.com</a>
     </p>
     <p>
+      <a href="/anke/terms/">Terms of Service</a> ·
       <a href="/anke/privacy-policy/">Privacy Policy</a> ·
       <a href="/anke/delete/">Delete your account</a>
     </p>
-    <p>A Thomas Publishing House project.</p>
+    <p>anke is made by Thomas Publishing House, LLC, a Michigan limited liability company.</p>
   </footer>
 </body>
 </html>
