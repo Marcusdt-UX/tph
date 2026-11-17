@@ -17,6 +17,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/.htaccess");
+  // Secure upload API (PHP). Uploaded files are stored outside public_html.
+  eleventyConfig.addPassthroughCopy("src/api");
   // anke app privacy policy (Google Play requirement) lives at
   // src/anke-privacy.html — 11ty renders it as a standalone page (no TPH
   // layout, since it's outside src/pages/) at /anke-privacy/.

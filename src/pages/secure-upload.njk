@@ -1,0 +1,160 @@
+---
+title: Secure File Upload | Thomas Publishing House
+description: "Send files to Thomas Publishing House securely. Files are encrypted in your browser before they leave your device."
+robots: noindex, nofollow
+sitemap: false
+eleventyExcludeFromCollections: true
+---
+
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="container">
+          <div class="hero-content fade-in" style="max-width:48rem;">
+            <div class="hero-label">
+              <div class="hero-label-line"></div>
+              <span>Secure Upload</span>
+            </div>
+            <h1 class="hero-title">
+              Send Us Your Files<br>
+              <span class="gradient-text">Privately</span>
+            </h1>
+            <p class="hero-subtitle">
+              Logos, photos, documents, logins, anything. Your files are locked on your own device before they're sent, and only TPH can open them.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-light">
+        <div class="container">
+          <div class="contact-grid">
+            <!-- How it works -->
+            <div class="fade-in-left">
+              <h2 class="contact-info-title">How It Works</h2>
+              <p class="contact-info-desc">
+                You'll need the upload code we gave you. If you don't have one, text or call <a href="tel:+18106899762" style="color:var(--accent);">(810) 689-9762</a>.
+              </p>
+
+              <div class="contact-detail">
+                <div class="icon-box icon-box-primary" style="border-radius:0.75rem;">
+                  <i data-lucide="lock" style="width:1.5rem;height:1.5rem;color:white;"></i>
+                </div>
+                <div>
+                  <h3>Encrypted on your device</h3>
+                  <p>Each file is encrypted in this browser tab with TPH's public key before upload. Our web server never sees the contents, the file names, or your note.</p>
+                </div>
+              </div>
+
+              <div class="contact-detail">
+                <div class="icon-box icon-box-primary" style="border-radius:0.75rem;">
+                  <i data-lucide="shield-check" style="width:1.5rem;height:1.5rem;color:white;"></i>
+                </div>
+                <div>
+                  <h3>Only TPH holds the key</h3>
+                  <p>The matching private key lives on TPH's computer, not on the server. Files are stored in end-to-end encrypted cloud storage after we receive them.</p>
+                </div>
+              </div>
+
+              <div class="contact-detail">
+                <div class="icon-box icon-box-primary" style="border-radius:0.75rem;">
+                  <i data-lucide="upload" style="width:1.5rem;height:1.5rem;color:white;"></i>
+                </div>
+                <div>
+                  <h3>Upload only</h3>
+                  <p>Nobody can browse or download from this page, including you. Up to 25 files and 2 GB per upload.</p>
+                </div>
+              </div>
+
+              <p class="su-fingerprint">Key fingerprint: <code>{{ secureUpload.fingerprint }}</code></p>
+            </div>
+
+            <!-- Upload form -->
+            <div class="fade-in-right">
+              <div class="contact-form-card">
+                <h2>Upload Files</h2>
+
+                <div class="form-success" id="su-success">
+                  <div class="success-icon"><i data-lucide="check"></i></div>
+                  <h3>Got It!</h3>
+                  <p id="su-success-text">Your files were encrypted and delivered. We'll reach out if we need anything else.</p>
+                  <button type="button" class="btn btn-outline" id="su-again" style="margin-top:1.25rem;">Send more files</button>
+                </div>
+
+                <noscript><p class="su-alert">This page needs JavaScript to encrypt your files. Please turn it on or call us.</p></noscript>
+
+                <form id="su-form" novalidate>
+                  <div class="form-group">
+                    <label for="su-code">Upload Code *</label>
+                    <input type="text" id="su-code" name="code" required autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABCD-EFGH-JKLM" aria-describedby="su-code-error">
+                    <span id="su-code-error" class="form-error" role="alert">Enter the upload code TPH gave you.</span>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="su-name">Your Name *</label>
+                      <input type="text" id="su-name" name="name" required autocomplete="name" placeholder="Jane Smith" aria-describedby="su-name-error">
+                      <span id="su-name-error" class="form-error" role="alert">Please enter your name.</span>
+                    </div>
+                    <div class="form-group">
+                      <label for="su-email">Email</label>
+                      <input type="email" id="su-email" name="email" autocomplete="email" placeholder="jane@example.com">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="su-note">Note</label>
+                    <textarea id="su-note" name="note" rows="3" placeholder="What are these files for?" style="min-height:6rem;"></textarea>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="su-files">Files *</label>
+                    <label class="su-drop" id="su-drop" for="su-files">
+                      <i data-lucide="upload" style="width:2rem;height:2rem;"></i>
+                      <span><strong>Choose files</strong> or drag them here</span>
+                      <input type="file" id="su-files" multiple>
+                    </label>
+                    <ul class="su-list" id="su-list" aria-live="polite"></ul>
+                    <span id="su-files-error" class="form-error" role="alert">Add at least one file.</span>
+                  </div>
+
+                  <div class="su-progress" id="su-progress" hidden>
+                    <div class="su-bar"><div class="su-bar-fill" id="su-bar-fill"></div></div>
+                    <p id="su-status">Encrypting...</p>
+                  </div>
+                  <p class="su-alert" id="su-error" role="alert" hidden></p>
+
+                  <button type="submit" class="btn btn-primary btn-full" id="su-submit" style="font-size:1.125rem;">
+                    <i data-lucide="lock" style="width:1.1rem;height:1.1rem;"></i>
+                    <span>Encrypt &amp; Send</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style>
+        .su-drop{display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:2rem 1rem;border:2px dashed rgba(45,62,95,.25);border-radius:.75rem;text-align:center;cursor:pointer;color:var(--muted-foreground);transition:all .2s}
+        .su-drop:hover,.su-drop.over{border-color:var(--accent);background:rgba(0,150,184,.06);color:var(--foreground)}
+        .su-drop strong{color:var(--accent)}
+        .su-drop input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+        .dark .su-drop{border-color:var(--border)}
+        .su-list{list-style:none;margin:.75rem 0 0;padding:0;font-size:.9rem}
+        .su-list li{display:flex;justify-content:space-between;align-items:center;gap:.75rem;padding:.5rem .75rem;border:1px solid var(--border);border-radius:.5rem;margin-bottom:.4rem}
+        .su-list .su-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .su-list .su-size{color:var(--muted-foreground);white-space:nowrap}
+        .su-list button{background:none;border:0;color:var(--muted-foreground);cursor:pointer;font-size:1.1rem;line-height:1}
+        .su-list li.done .su-size{color:var(--accent)}
+        .su-progress{margin:0 0 1.25rem}
+        .su-bar{height:.5rem;border-radius:999px;background:var(--muted);overflow:hidden}
+        .su-bar-fill{height:100%;width:0;background:var(--accent);transition:width .2s}
+        .su-progress p{margin-top:.5rem;font-size:.9rem;color:var(--muted-foreground)}
+        .su-alert{padding:.75rem 1rem;border-radius:.75rem;background:rgba(229,62,62,.08);border:1px solid rgba(229,62,62,.3);color:#c53030;margin-bottom:1.25rem;font-size:.95rem}
+        .su-fingerprint{margin-top:1.5rem;font-size:.8rem;color:var(--muted-foreground);word-break:break-all}
+        .su-fingerprint code{font-size:.75rem}
+        #su-submit{display:inline-flex;align-items:center;justify-content:center;gap:.5rem}
+        #su-submit[disabled]{opacity:.6;cursor:wait}
+      </style>
+
+      <script type="text/plain" id="su-key">{{ secureUpload.publicKey }}</script>
+      <script type="module" src="/assets/js/secure-upload.js?v=1"></script>
