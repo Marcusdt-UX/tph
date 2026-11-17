@@ -10,6 +10,9 @@
 
 declare(strict_types=1);
 
+// Not a page: 404 if opened directly.
+if (realpath((string)($_SERVER['SCRIPT_FILENAME'] ?? '')) === __FILE__) { http_response_code(404); exit; }
+
 require __DIR__ . '/config.php';
 
 const SU_MAX_FILES       = 25;
