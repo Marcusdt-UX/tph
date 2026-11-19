@@ -25,7 +25,7 @@
 </head>
 <body>
   <h1>anke — Terms of Service</h1>
-  <p class="muted">Effective: 11 November 2026</p>
+  <p class="muted">Effective: 19 November 2026</p>
 
   <p>
     anke is operated by Thomas Publishing House, LLC, a Michigan limited liability
@@ -36,10 +36,11 @@
 
   <div class="box">
     <strong>The short version.</strong> anke is software that helps a group you trust
-    pool money and lend to each other. We are not a bank, a lender or a custodian. We
-    never hold your money. Your money is not insured. Loans are between you and the
-    other members of your group, and a loan that isn't repaid is your group's loss,
-    not ours.
+    pool money and lend to each other. We are not a bank or a lender. We have no key
+    to your wallet and cannot move the money in it. A group fund is different: for its
+    first 365 days we hold an emergency key that can move that fund's money (see
+    section 5). Your money is not insured. Loans are between you and the other members
+    of your group, and a loan that isn't repaid is your group's loss, not ours.
   </div>
 
   <h2>1. Who can use anke</h2>
@@ -59,7 +60,7 @@
   <ul>
     <li><strong>Not a bank.</strong> Money in your wallet or in a group fund is not a deposit and is not insured by the FDIC or anyone else.</li>
     <li><strong>Not a lender.</strong> We don't make loans, set a group's terms, collect debts or report to credit bureaus.</li>
-    <li><strong>Not a custodian.</strong> We never hold your money and have no key to your wallet or to a group fund.</li>
+    <li><strong>Not the holder of your wallet.</strong> We have no key to your wallet and cannot move the money in it. A group fund is different: see the emergency key in section 5.</li>
     <li><strong>Not an adviser.</strong> Nothing in anke is financial, legal or tax advice.</li>
   </ul>
 
@@ -77,18 +78,38 @@
 
   <h2>4. Adding money and cashing out</h2>
   <p>
-    Buying USDC with a card or bank account, and turning USDC back into dollars in
-    your bank account, is done by our payment partner, not by us. They will ask you to
+    Buying USDC is done by our payment partner, not by us. They will ask you to
     confirm your identity and you will agree to their terms. They set their own fees
-    and limits and can decline a transaction. We never receive or hold your dollars.
+    and limits and can decline a transaction. What you buy is delivered straight to
+    your own wallet. We never receive or hold your dollars.
+  </p>
+  <p>
+    Cashing out, which means turning USDC back into dollars in your bank account, is
+    not available in anke yet. When it is, it will also be done by a payment partner
+    under their terms.
   </p>
 
   <h2>5. Group funds</h2>
   <p>
+    Group funds are switched off in the app for now. This section describes how they
+    work when they are switched on.
+  </p>
+  <p>
     A group's pooled money sits in a smart contract on the Base network: a program
-    that follows fixed rules and that the group's members control by voting. Our own
-    roles on it are limited to pausing new activity for up to 14 days for safety, and
-    clearing a seat that is empty and unused. Neither lets us move anyone's money.
+    that follows fixed rules and that the group's members control by voting. Day to
+    day, our own roles on it are limited to pausing new activity for up to 14 days for
+    safety, and clearing a seat that is empty and unused. Neither of those lets us
+    move anyone's money.
+  </p>
+  <p>
+    <strong>The emergency key.</strong> For the first 365 days after a fund is
+    created, we also hold an emergency key. With it we can move everything the fund
+    holds to another address and close the fund, without a vote. It is there in case
+    the contract has a fault, because the contract has not been audited by an outside
+    firm. It means that for those 365 days we are able to move a group fund's money on
+    our own. If we use it, we will tell the group and return the money to the members
+    it belongs to. The key stops working by itself after 365 days. It applies to group
+    funds only, never to your own wallet.
   </p>
   <ul>
     <li><strong>Voting.</strong> Members vote in proportion to what they have in the fund beyond what they owe it. The group votes on loans, on admitting a new member's wallet, on sharing the fund's earnings and on closing the fund.</li>
@@ -109,15 +130,16 @@
 
   <h2>7. Fees</h2>
   <p>
-    anke charges no fees during the pilot. The
-    provider that sells you USDC or pays out to your bank charges its own fees, shown
-    to you before you confirm. Network fees for transactions on Base are paid by us.
+    anke charges no fees during the pilot. The provider that sells you USDC charges
+    its own fees, including a network fee for delivering it, and shows them to you
+    before you confirm. Network fees for sending money inside anke are paid by us.
   </p>
 
   <h2>8. Risks you accept</h2>
   <ul>
     <li><strong>People.</strong> A borrower may not repay. A majority of your group can approve a loan larger than the borrower's own share, and if it isn't repaid everyone shares the loss.</li>
     <li><strong>Software.</strong> The group-fund contract has been tested and reviewed by us but has not been audited by an outside firm. It may contain errors that cause loss. The pilot is small and capped for this reason.</li>
+    <li><strong>The emergency key.</strong> For a group fund's first 365 days we can move that fund's money without a vote (section 5). If that key were stolen or misused, the fund's money could be lost.</li>
     <li><strong>The digital dollar.</strong> USDC is issued by a third party. It could lose its one-dollar value, be frozen by its issuer, or become unavailable.</li>
     <li><strong>Access.</strong> If you lose your device and your recovery methods, and your group can't or won't help, your money may be lost for good.</li>
     <li><strong>The pause.</strong> For safety we can pause new deposits and new loans in a fund for up to 14 days at a time. You can still repay, leave and close the fund during a pause.</li>
@@ -143,8 +165,8 @@
   <p>
     You can stop using anke at any time and ask us to delete your account. Deleting
     your account does not move your money: take your share out of any group fund and
-    cash out your wallet first. We can suspend or close an account that breaks these
-    terms. Closing your account never gives us access to your wallet or to a fund.
+    move the money out of your wallet first. We can suspend or close an account that
+    breaks these terms. Closing your account never gives us access to your wallet.
   </p>
 
   <h2>12. No warranty; limit of liability</h2>
